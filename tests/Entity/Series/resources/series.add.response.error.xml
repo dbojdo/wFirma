@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api>
+    <series>
+        <series>
+            <name>SaddleBrown_56506241</name>
+            <template>FV/I/Test_967439824/[rok]/</template>
+            <initnumber>1</initnumber>
+            <type>normal</type>
+            <reset>yearly</reset>
+            <errors>
+                <error>
+                    <field>template</field>
+                    <message>Brak obligatoryjnego znacznika [numer].</message>
+                    <method>
+                        <name>require</name>
+                        <parameters></parameters>
+                    </method>
+                </error>
+            </errors>
+        </series>
+    </series>
+    <status>
+        <code>ERROR</code>
+    </status>
+</api>

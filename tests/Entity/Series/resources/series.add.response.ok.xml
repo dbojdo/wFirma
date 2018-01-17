@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api>
+    <series>
+        <series>
+            <id>5466745</id>
+            <name>BurlyWood_7522</name>
+            <template>FV/I/Test_9551340/[rok]/[numer]</template>
+            <initnumber>1</initnumber>
+            <visibility>visible</visibility>
+            <type>normal</type>
+            <reset>yearly</reset>
+            <created>2018-01-22 15:59:07</created>
+            <modified>2018-01-22 15:59:07</modified>
+        </series>
+        <parameters>
+            <limit>20</limit>
+            <page>1</page>
+            <total>1</total>
+        </parameters>
+    </series>
+    <status>
+        <code>OK</code>
+    </status>
+</api>

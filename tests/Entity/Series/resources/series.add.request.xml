@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api>
+    <series>
+        <series>
+            <name>BurlyWood_7522</name>
+            <template>FV/I/Test_9551340/[rok]/[numer]</template>
+            <initnumber>1</initnumber>
+            <type>normal</type>
+            <reset>yearly</reset>
+        </series>
+    </series>
+</api>
