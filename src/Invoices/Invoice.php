@@ -151,7 +151,7 @@ final class Invoice extends DateAwareEntity
     /**
      * @var float
      * @JMS\Type("double")
-     * @JMS\SerializedName("alreadypaidinitial")
+     * @JMS\SerializedName("alreadypaid_initial")
      * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
      */
