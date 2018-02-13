@@ -52,5 +52,8 @@ abstract class ApiException extends \RuntimeException
      * @param Response $response
      * @return string
      */
-    abstract protected static function message(Request $request, Response $response = null);
+    protected static function message(Request $request, Response $response = null)
+    {
+        throw new \RuntimeException(get_class().'::message method must be implemented.');
+    }
 }
