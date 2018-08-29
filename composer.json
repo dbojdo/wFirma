@@ -5,9 +5,9 @@
     "license": "MIT",
     "keywords": ["sdk", "api", "wfirma", "w-firma"],
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.4,<=7.0",
         "jms/serializer": "^1.0.0",
-        "kriswallsmith/buzz": ">=0.12.0 <1.0.0",
+        "kriswallsmith/buzz": ">=0.12.0,<0.17",
         "psr/log": "^1.0.2"
     },
     "require-dev": {
@@ -27,7 +27,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev"
+            "dev-1.x": "1.x-dev",
+            "dev-master": "2.x-dev"
         }
     }
 }

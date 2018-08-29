@@ -3,9 +3,10 @@
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
 use Buzz\Message\Factory\Factory;
+use GuzzleHttp\Psr7\Request;
 use Webit\WFirmaSDK\AbstractTestCase;
 
-class CompanyIdListenerTest extends AbstractTestCase
+class CompanyIdMiddlewareTest extends AbstractTestCase
 {
     /**
      * @test
@@ -13,14 +14,13 @@ class CompanyIdListenerTest extends AbstractTestCase
      */
     public function it_adds_company_id_to_the_resource($resource, $companyId, $expectedResource)
     {
-        $listener = new CompanyIdListener($companyId);
+        $listener = new CompanyIdMiddleware($companyId);
 
-        $factory = new Factory();
-        $request = $factory->createRequest('POST', $resource);
+        $newRequest = $listener->handleRequest(
+            $request = new Request('POST', $resource), function ($r) {return $r;}
+        );
 
-        $listener->preSend($request);
-
-        $this->assertEquals($expectedResource, $request->getResource());
+        $this->assertEquals($expectedResource, (string)$newRequest->getUri());
     }
 
     public function resources()
