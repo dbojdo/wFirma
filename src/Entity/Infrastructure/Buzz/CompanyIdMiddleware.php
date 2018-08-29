@@ -3,7 +3,7 @@
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
 use Buzz\Middleware\MiddlewareInterface;
-use GuzzleHttp\Psr7\Uri;
+use Nyholm\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

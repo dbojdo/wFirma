@@ -7,8 +7,10 @@ High level implementation of [wFirma API](https://doc.wfirma.pl). Provides objec
 Use composer
 
 ```bash
-composer require webit/w-firma-api ^1.0
+composer require webit/w-firma-api ^2.0
 ```
+
+For PHP 5.4 and 7.0 use ^1.0 version
 
 ## Usage
 

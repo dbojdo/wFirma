@@ -3,6 +3,7 @@
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
 use Buzz\Browser;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Webit\WFirmaSDK\Entity\Exception\ApiCallExecutionException;
@@ -45,7 +46,7 @@ final class BuzzRequestExecutor implements RequestExecutor
     public function execute(Request $request)
     {
         try {
-            $input = $this->serialiser->serialise($request);
+            $input = (string)$this->serialiser->serialise($request);
 
             $this->logger->debug(
                 $input,
@@ -54,7 +55,7 @@ final class BuzzRequestExecutor implements RequestExecutor
                 )
             );
 
-            /** @var \Buzz\Message\Response $response */
+            /** @var ResponseInterface $response */
             $response = $this->browser->post(
                 $url = $request->requestUrl(),
                 array(),
@@ -65,7 +66,7 @@ final class BuzzRequestExecutor implements RequestExecutor
         }
 
         $this->logger->debug(
-            $response->getContent(),
+            (string)$response->getBody(),
             array(
                 'response' => $request->requestUrl()
             )
@@ -73,7 +74,7 @@ final class BuzzRequestExecutor implements RequestExecutor
 
         $this->responseValidator->validate(
             $request,
-            $apiResponse = $this->serialiser->deserialise($response->getContent(), $request)
+            $apiResponse = $this->serialiser->deserialise((string)$response->getBody(), $request)
         );
 
         return $apiResponse;

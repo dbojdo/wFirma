@@ -2,7 +2,7 @@
 
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
-use GuzzleHttp\Psr7\Request;
+use Nyholm\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Webit\WFirmaSDK\AbstractTestCase;
 

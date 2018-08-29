@@ -2,8 +2,7 @@
 
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
-use Buzz\Message\Factory\Factory;
-use GuzzleHttp\Psr7\Request;
+use Nyholm\Psr7\Request;
 use Webit\WFirmaSDK\AbstractTestCase;
 
 class CompanyIdMiddlewareTest extends AbstractTestCase

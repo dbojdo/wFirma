@@ -90,6 +90,8 @@ class BuzzRequestExecutorIntegrationTest extends AbstractApiTestCase
             ));
 
         $this->entityApi->edit($series);
+
+        $this->assertTrue(true);
     }
 
     /**
