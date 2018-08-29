@@ -32,22 +32,6 @@ class BasicAuthTest extends AbstractTestCase
         $this->assertEquals($isEmpty, $auth->isEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function it_generates_authorisation_http_header()
-    {
-        $auth = new BasicAuth(
-            $user = $this->faker()->userName,
-            $password = $this->faker()->password
-        );
-
-        $this->assertEquals(
-            sprintf('Authorization: Basic %s', base64_encode(sprintf('%s:%s', $user, $password))),
-            $auth->toHttpHeader()
-        );
-    }
-
     public function basicAuthEmpty()
     {
         return array(

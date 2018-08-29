@@ -4,9 +4,10 @@ namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
 use Buzz\Browser;
 use Buzz\Client\Curl;
+use Buzz\Middleware\BasicAuthMiddleware;
 use Webit\WFirmaSDK\Auth\BasicAuth;
 
-class BrowserFactory
+final class BrowserFactory
 {
     /** @var string|null */
     private $baseUrl;
@@ -35,11 +36,11 @@ class BrowserFactory
             $client->setOption($option, $value);
         }
 
-        $browser->addListener(new BaseUrlListener($this->baseUrl));
-        $browser->addListener(new BasicAuthListener($auth));
+        $browser->addMiddleware(new BaseUrlMiddleware($this->baseUrl));
+        $browser->addMiddleware(new BasicAuthMiddleware($auth->username(), $auth->password()));
 
         if ($companyId = $auth->companyId()) {
-            $browser->addListener(new CompanyIdListener($companyId));
+            $browser->addMiddleware(new CompanyIdMiddleware($companyId));
         }
 
         return $browser;

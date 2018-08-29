@@ -114,7 +114,7 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
             ),
             Type::vat(),
             $seriesId,
-            $this->faker()->dateTimeBetween('-7 days', 'now')
+            date_create('now - 7 days')
         );
 
         $invoice->addInvoiceContent(
