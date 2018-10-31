@@ -30,7 +30,18 @@ The current version of the package provides full support for the following modul
  * [vat_contents](https://doc.wfirma.pl/#h3-vat-contents)
  * [vat_codes](https://doc.wfirma.pl/#h3-vat-codes)
  * [vat_moss_details](https://doc.wfirma.pl/#h3-vat-moss-details)
- 
+
+### Configure Annotation Registry
+
+This is not needed if you use AnnotationRegistry 2.0
+
+```php
+<?php
+use Doctrine\Common\Annotations\AnnotationRegistry;
+$loader = include __DIR__.'/vendor/autoload.php'; // composer's autoload.php
+AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+```
+
 ### Authentication
 
 The library supports only BasicAuth
