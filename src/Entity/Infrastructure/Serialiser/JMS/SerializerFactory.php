@@ -3,6 +3,7 @@
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Serialiser\JMS;
 
 use JMS\Serializer\EventDispatcher\EventDispatcherInterface;
+use JMS\Serializer\Handler\DateHandler;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
@@ -30,6 +31,7 @@ class SerializerFactory
         });
 
         $serializerBuilder->configureListeners(function (EventDispatcherInterface $eventDispatcher) {
+            $eventDispatcher->addSubscriber(new DateDeserializationListener());
             $eventDispatcher->addSubscriber(new RequestResponseSerializationListener());
         });
 

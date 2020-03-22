@@ -74,4 +74,19 @@ final class ContactDetails
     {
         return $this->url;
     }
+
+    /**
+     * @param string $phone
+     * @return ContactDetails
+     */
+    public function withPhone(string $phone)
+    {
+        return new self(
+            $phone,
+            $this->skype,
+            $this->fax,
+            $this->email,
+            $this->url
+        );
+    }
 }

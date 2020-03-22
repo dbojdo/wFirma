@@ -5,6 +5,7 @@ namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 use Buzz\Browser;
 use Buzz\Client\Curl;
 use Buzz\Middleware\BasicAuthMiddleware;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Webit\WFirmaSDK\Auth\BasicAuth;
 
 final class BrowserFactory
@@ -31,7 +32,9 @@ final class BrowserFactory
      */
     public function create(BasicAuth $auth)
     {
-        $browser = new Browser($client = new Curl());
+        $httpFactory = new Psr17Factory();
+
+        $browser = new Browser($client = new Curl($httpFactory), $httpFactory);
         foreach ($this->curlOptions as $option => $value) {
             $client->setOption($option, $value);
         }
