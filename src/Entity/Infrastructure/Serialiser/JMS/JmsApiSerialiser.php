@@ -30,7 +30,7 @@ final class JmsApiSerialiser implements ApiSerialiser
     public function serialise(Request $request)
     {
         $context = SerializationContext::create();
-        $context->attributes->set('module', $request->module());
+        $context->setAttribute('module', $request->module());
         $context->setGroups(array('request', sprintf('%sRequest', $request->action())));
 
         try {
@@ -47,7 +47,7 @@ final class JmsApiSerialiser implements ApiSerialiser
     public function deserialise($response, Request $request)
     {
         $context = DeserializationContext::create();
-        $context->attributes->set('module', $request->module());
+        $context->setAttribute('module', $request->module());
         $context->setGroups(array("response", sprintf('%sResponse', $request->action())));
 
         try {

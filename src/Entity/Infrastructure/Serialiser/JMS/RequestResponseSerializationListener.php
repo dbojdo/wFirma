@@ -45,7 +45,10 @@ final class RequestResponseSerializationListener implements EventSubscriberInter
     private function updateEntityWrapper($className, Context $context)
     {
         /** @var Module $module */
-        $module = $context->attributes->get('module')->getOrThrow(new \InvalidArgumentException('Missing module'));
+        $module = $context->getAttribute('module');
+        if (!$module) {
+            new \InvalidArgumentException('Missing module');
+        }
 
         $metaClass = $context->getMetadataFactory()->getMetadataForClass($className);
         $metaClass->propertyMetadata['entityWrapper']->serializedName = $module->name();

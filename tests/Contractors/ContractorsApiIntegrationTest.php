@@ -137,6 +137,9 @@ class ContractorsApiIntegrationTest extends AbstractApiTestCase
      */
     public function testFind()
     {
+        $this->contractors[] = $this->api->add($this->createContractor());
+        $this->contractors[] = $this->api->add($this->createContractor());
+
         $contractors = $this->api->find();
         foreach ($contractors as $contractor) {
             $this->assertInstanceOf(Module::contractors()->entityClass(), $contractor);
@@ -160,7 +163,13 @@ class ContractorsApiIntegrationTest extends AbstractApiTestCase
         $this->assertSame($expected->regon(), $actual->regon());
         $this->assertEquals($expected->invoiceAddress(), $actual->invoiceAddress());
         $this->assertEquals($expected->contactAddress(), $actual->contactAddress());
-        $this->assertEquals($expected->contactDetails(), $actual->contactDetails());
+
+        $expectedContactDetails = $expected->contactDetails();
+        $expectedContactDetails = $expectedContactDetails->withPhone(
+            preg_replace('/\D/', '', $expectedContactDetails->phone())
+        );
+
+        $this->assertEquals($expectedContactDetails, $actual->contactDetails());
         $this->assertSame($expected->description(), $actual->description());
         $this->assertSame($expected->buyer(), $actual->buyer());
         $this->assertSame($expected->seller(), $actual->seller());

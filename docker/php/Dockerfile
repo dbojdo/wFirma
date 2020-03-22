@@ -1,4 +1,4 @@
-FROM php:7.1
+FROM php:7.2
 
 RUN apt-get update && apt-get install -y \
        libmcrypt-dev \
@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
        git \
        subversion \
        zlib1g-dev \
-   && docker-php-ext-install iconv mcrypt zip
+   && docker-php-ext-install iconv zip
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \

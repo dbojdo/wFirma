@@ -3,7 +3,6 @@
 namespace Webit\WFirmaSDK\Invoices;
 
 use Webit\WFirmaSDK\Contractors\ContactAddress;
-use Webit\WFirmaSDK\Contractors\ContractorId;
 use Webit\WFirmaSDK\Contractors\ContractorsApi;
 use Webit\WFirmaSDK\Contractors\TaxIdType;
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
@@ -52,6 +51,10 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
         $this->assertInstanceOf('Webit\WFirmaSDK\Invoices\Invoice', $createdInvoice);
     }
 
+
+    /**
+     * @test
+     */
     public function testEdit()
     {
         $this->invoices[] = $createdInvoice = $this->api->add(
