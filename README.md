@@ -100,9 +100,9 @@ use Webit\WFirmaSDK\Entity\Parameters\Pagination;
 use Webit\WFirmaSDK\Entity\Parameters\Fields;
 
 $parameters = Parameters::findParameters(
-    null, // filtering by conditions is not supported yes
+    null, // filtering by conditions is not supported yet
     Order::ascending("name")->thenDescending("created"), // optional - ordering
-    Pagination::create(20, 2), // optional - limit, page no 
+    Pagination::create(20, 2), // optional - limit, page no
     Fields::fromArray(array("id", "name")) // optional - subset of fields to select
 );
 
@@ -112,7 +112,7 @@ $series = $seriesApi->find($parameters); // returns array of 20 Series (page 2)
 
 // returns EntityIterator, allows to iterate over all the matching Series loaded in batches of 20
 $series = $seriesApi->findAll($parameters);
-/** 
+/**
 * @var int $i
 * @var \Webit\WFirmaSDK\Series\Series $seriesItem */
 foreach ($series as $i => $seriesItem) {
@@ -149,7 +149,7 @@ $invoice = \Webit\WFirmaSDK\Invoices\Invoice::forContractor(
             'Warszawa',
             'PL'
         )
-    )    
+    )
 );
 
 $invoice->addInvoiceContent(
@@ -218,7 +218,7 @@ $contractor = $api->get(\Webit\WFirmaSDK\Contractors\ContractorId::create(123));
 
 ## Further development
 
-Feel free to add any other modules support. Also filtering by Conditions is not supported yet - any help is welcome. 
+Feel free to add any other modules support. Also filtering by Conditions is not supported yet - any help is welcome.
 
 ## Tests
 
