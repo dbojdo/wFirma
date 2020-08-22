@@ -4,13 +4,13 @@ High level implementation of [wFirma API](https://doc.wfirma.pl). Provides objec
 
 ## Installation
 
-Use composer
+Use composer:
 
 ```bash
-composer require webit/w-firma-api ^2.0
+composer require webit/w-firma-api
 ```
 
-For PHP 5.4 and 7.0 use ^1.0 version
+For PHP 5.4 and 7.0 use ^1.0 version.
 
 ## Usage
 
@@ -33,7 +33,7 @@ The current version of the package provides full support for the following modul
 
 ### Configure Annotation Registry
 
-This is not needed if you use AnnotationRegistry 2.0
+This is not needed if you use AnnotationRegistry 2.0.
 
 ```php
 <?php
@@ -44,7 +44,7 @@ AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
 ### Authentication
 
-The library supports only BasicAuth
+The library supports only BasicAuth.
 
 #### BasicAuth
 
@@ -57,7 +57,7 @@ $auth = new BasicAuth('your-user-name', 'your-password', $companyId = 1123); // 
 
 ### ApiFactory
 
-In order to create API for given module use ***ModuleApiFactory***
+In order to create API for given module use ***ModuleApiFactory***.
 
 ```php
 <?php
@@ -100,9 +100,9 @@ use Webit\WFirmaSDK\Entity\Parameters\Pagination;
 use Webit\WFirmaSDK\Entity\Parameters\Fields;
 
 $parameters = Parameters::findParameters(
-    null, // filtering by conditions is not supported yes
+    null, // filtering by conditions is not supported yet
     Order::ascending("name")->thenDescending("created"), // optional - ordering
-    Pagination::create(20, 2), // optional - limit, page no 
+    Pagination::create(20, 2), // optional - limit, page no
     Fields::fromArray(array("id", "name")) // optional - subset of fields to select
 );
 
@@ -112,7 +112,7 @@ $series = $seriesApi->find($parameters); // returns array of 20 Series (page 2)
 
 // returns EntityIterator, allows to iterate over all the matching Series loaded in batches of 20
 $series = $seriesApi->findAll($parameters);
-/** 
+/**
 * @var int $i
 * @var \Webit\WFirmaSDK\Series\Series $seriesItem */
 foreach ($series as $i => $seriesItem) {
@@ -127,7 +127,6 @@ $seriesCount = $seriesApi->count($parameters); // return number of matching seri
 
 ```php
 <?php
-
 use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Contractors\InvoiceAddress;
 use Webit\WFirmaSDK\Invoices\InvoicesContent;
@@ -149,7 +148,7 @@ $invoice = \Webit\WFirmaSDK\Invoices\Invoice::forContractor(
             'Warszawa',
             'PL'
         )
-    )    
+    )
 );
 
 $invoice->addInvoiceContent(
@@ -177,13 +176,11 @@ $invoice = $api->add($invoice);
 $invoice = $api->get(\Webit\WFirmaSDK\Invoices\InvoiceId::create(123));
 
 // edit the invoice
-
 $invoice->changePayment(
     $invoice->payment()->withPaymentDate(new \DateTime())
 );
 
 // do some more edits
-
 $invoice = $api->edit($invoice);
 
 // delete the invoice
@@ -218,7 +215,7 @@ $contractor = $api->get(\Webit\WFirmaSDK\Contractors\ContractorId::create(123));
 
 ## Further development
 
-Feel free to add any other modules support. Also filtering by Conditions is not supported yet - any help is welcome. 
+Feel free to add any other modules support. Also filtering by Conditions is not supported yet - any help is welcome.
 
 ## Tests
 
