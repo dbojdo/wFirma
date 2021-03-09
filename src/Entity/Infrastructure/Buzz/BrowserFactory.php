@@ -36,13 +36,32 @@ final class BrowserFactory
             $client->setOption($option, $value);
         }
 
+        if (class_exists('Buzz\Middleware\MiddlewareInterface')) {
+            $this->configureBuzzWithMiddleware($browser, $auth);
+        } else {
+            $this->configureBuzzWithListener($browser, $auth);
+        }
+
+        return $browser;
+    }
+
+    private function configureBuzzWithMiddleware(Browser $browser, BasicAuth $auth)
+    {
         $browser->addMiddleware(new BaseUrlMiddleware($this->baseUrl));
         $browser->addMiddleware(new BasicAuthMiddleware($auth->username(), $auth->password()));
 
         if ($companyId = $auth->companyId()) {
             $browser->addMiddleware(new CompanyIdMiddleware($companyId));
         }
+    }
 
-        return $browser;
+    private function configureBuzzWithListener(Browser $browser, BasicAuth $auth)
+    {
+        $browser->addListener(new BaseUrlListener($this->baseUrl));
+        $browser->addListener(new BasicAuthListener($auth));
+
+        if ($companyId = $auth->companyId()) {
+            $browser->addListener(new CompanyIdListener($companyId));
+        }
     }
 }
