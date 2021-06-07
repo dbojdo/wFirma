@@ -7,6 +7,7 @@ use Webit\WFirmaSDK\Contractors\ContractorId;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\Series\SeriesId;
 use JMS\Serializer\Annotation as JMS;
+use Webit\WFirmaSDK\Payments\PaymentMethod;
 use Webit\WFirmaSDK\Tags\TagIds;
 
 /**

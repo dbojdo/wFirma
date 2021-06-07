@@ -2,6 +2,8 @@
 
 namespace Webit\WFirmaSDK\Invoices;
 
+use Webit\WFirmaSDK\Payments\PaymentMethod;
+
 final class Payment
 {
     /** @var PaymentMethod */
