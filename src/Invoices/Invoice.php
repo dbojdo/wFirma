@@ -802,12 +802,15 @@ final class Invoice extends DateAwareEntity
 
     /**
      * @param Payment $payment
+     * @return Invoice
      */
     public function changePayment(Payment $payment)
     {
         $this->paymentMethod = $payment->paymentMethod();
         $this->paymentDate = $payment->paymentDate();
         $this->alreadyPaidInitial = $payment->alreadyPaidInitial();
+
+        return $this;
     }
 
     /**
