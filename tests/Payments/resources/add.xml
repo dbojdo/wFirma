@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api>
+    <invoices>
+        <invoice>
+            <contractor>
+                <name>Spółdzielnia Szulc</name>
+                <tax_id_type>nip</tax_id_type>
+                <nip>1234563218</nip>
+                <street><![CDATA[Rodzinna 15/85]]></street>
+                <zip>87-807</zip>
+                <city>Świdwin</city>
+                <country>PL</country>
+                <different_contact_address>1</different_contact_address>
+                <contact_name>Błaszczyk</contact_name>
+                <contact_street>Niemcewicza Juliana Ursyna 08A/64</contact_street>
+                <contact_zip>57-833</contact_zip>
+                <contact_city>Łowicz</contact_city>
+                <contact_country>PL</contact_country>
+                <contact_person>Urszula Sobczak</contact_person>
+                <buyer>1</buyer>
+                <seller>0</seller>
+            </contractor>
+            <paymentmethod>transfer</paymentmethod>
+            <paymentdate>2018-02-13</paymentdate>
+            <date>2018-01-23</date>
+            <type>normal</type>
+            <auto_send>0</auto_send>
+            <auto_send_postivo>0</auto_send_postivo>
+            <auto_sms>0</auto_sms>
+            <schema_bill>0</schema_bill>
+            <schema_canceled>0</schema_canceled>
+            <invoicecontents>
+                <invoicecontent>
+                    <name>DarkSlateBlue</name>
+                    <unit>szt.</unit>
+                    <count>4</count>
+                    <price>657.95</price>
+                    <vat>23</vat>
+                </invoicecontent>
+                <invoicecontent>
+                    <name>Aquamarine</name>
+                    <unit>szt.</unit>
+                    <count>1</count>
+                    <price>892.05</price>
+                    <vat>23</vat>
+                </invoicecontent>
+            </invoicecontents>
+            <series>
+                <id>5415136</id>
+            </series>
+        </invoice>
+    </invoices>
+</api>  {"request":"/invoices/add"} []
+        [2018-01-26 14:14:30] API.DEBUG: <?xml version="1.0" encoding="UTF-8"?> <api>
+<invoices>
+    <invoice>
+        <id>32361257</id>
+        <interest_status></interest_status>
+        <warehouse_type>extended</warehouse_type>
+        <paymentmethod>transfer</paymentmethod>
+        <paymentdate>2018-02-13</paymentdate>
+        <paymentstate>unpaid</paymentstate>
+        <disposaldate_format>day</disposaldate_format>
+        <disposaldate_empty>0</disposaldate_empty>
+        <disposaldate>2018-01-26</disposaldate>
+        <date>2018-01-23</date>
+        <total>4334.34</total>
+        <total_composed>4334.34</total_composed>
+        <alreadypaid>0.00</alreadypaid>
+        <alreadypaid_initial></alreadypaid_initial>
+        <remaining>4334.34</remaining>
+        <number>4</number>
+        <day>23</day>
+        <month>1</month>
+        <year>2018</year>
+        <day_year>23</day_year>
+        <fullnumber>FV/I/Test/2018/4</fullnumber>
+        <semitemplatenumber>FV/I/Test/2018/[numer]</semitemplatenumber>
+        <type>normal</type>
+        <correction_type></correction_type>
+        <corrections>0</corrections>
+        <formal_data_corrections>0</formal_data_corrections>
+        <currency>PLN</currency>
+        <currency_exchange>1.0000</currency_exchange>
+        <currency_label></currency_label>
+        <currency_date></currency_date>
+        <price_currency_exchange>1.0000</price_currency_exchange>
+        <good_price_group_currency_exchange>1.0000</good_price_group_currency_exchange>
+        <auto_send_postivo>0</auto_send_postivo>
+        <auto_send>0</auto_send>
+        <auto_sms>0</auto_sms>
+        <account_type></account_type>
+        <account_date></account_date>
+        <template>3</template>
+        <description></description>
+        <header></header>
+        <footer></footer>
+        <user_name></user_name>
+        <schema>normal</schema>
+        <schema_vat_cashbox>0</schema_vat_cashbox>
+        <schema_vat_cashbox_limit></schema_vat_cashbox_limit>
+        <schema_vat_cashbox_small_taxpayer>0</schema_vat_cashbox_small_taxpayer>
+        <schema_bill>0</schema_bill>
+        <schema_receipt_book>0</schema_receipt_book>
+        <schema_cancelled>0</schema_cancelled>
+        <margin_tax_schema></margin_tax_schema>
+        <margin_description_schema></margin_description_schema>
+        <register_description></register_description>
+        <income_lumpcode></income_lumpcode>
+        <income_correction>0</income_correction>
+        <bill_legal_description></bill_legal_description>
+        <netto>3523.85</netto>
+        <tax>810.49</tax>
+        <receipt_fiscal_printed>0</receipt_fiscal_printed>
+        <vindicat_sent>0</vindicat_sent>
+        <invipay_sent>0</invipay_sent>
+        <courier_shipments>0</courier_shipments>
+        <hash>49d94ee5fa391adcd2d4c5dd29763c66</hash>
+        <id_external></id_external>
+        <tags></tags>
+        <notes>0</notes>
+        <documents>0</documents>
+        <created>2018-01-26 15:12:56</created>
+        <modified>2018-01-26 15:12:56</modified>
+        <price_type>netto</price_type>
+        <series>
+            <id>5415136</id>
+        </series>
+        <contractor>
+            <id>0</id>
+        </contractor>
+        <contractor_detail>
+            <id>56292983</id>
+            <tax_id_type>nip</tax_id_type>
+            <name>Spółdzielnia Szulc</name>
+            <nip>1234563218</nip>
+            <street>Rodzinna 15/85</street>
+            <zip>87-807</zip>
+            <city>Świdwin</city>
+            <country>PL</country>
+            <phone></phone>
+            <email></email>
+            <discount_percent>0.00</discount_percent>
+            <empty>0</empty>
+            <simple>0</simple>
+            <created>2018-01-26 15:12:56</created>
+            <modified>2018-01-26 15:12:56</modified>
+        </contractor_detail>
+        <contractor_receiver>
+            <id>0</id>
+        </contractor_receiver>
+        <contractor_detail_receiver>
+            <id>0</id>
+        </contractor_detail_receiver>
+        <company_detail>
+            <id>43890023</id>
+            <name>Daniel Bojdo Web-It</name>
+            <altname>Daniel Bojdo Web-It</altname>
+            <nip>6792775374</nip>
+            <street>ul. Christo Botewa</street>
+            <building_number>1c</building_number>
+            <flat_number></flat_number>
+            <zip>30-798</zip>
+            <post></post>
+            <city>Kraków</city>
+            <country>Polska</country>
+            <phone></phone>
+            <email></email>
+            <bank_name></bank_name>
+            <bank_account></bank_account>
+            <bank_swift></bank_swift>
+            <bank_address></bank_address>
+            <created>2018-01-26 15:12:56</created>
+            <modified>2018-01-26 15:12:56</modified>
+        </company_detail>
+        <parent>
+            <id>0</id>
+        </parent>
+        <order>
+            <id>0</id>
+        </order>
+        <email>
+            <id>0</id>
+        </email>
+        <email2>
+            <id>0</id>
+        </email2>
+        <expense>
+            <id>0</id>
+        </expense>
+        <company_account>
+            <id>0</id>
+        </company_account>
+        <payment_cashbox>
+            <id>168780</id>
+        </payment_cashbox>
+        <translation_language>
+            <id>0</id>
+        </translation_language>
+        <postivo_shipment>
+            <id>0</id>
+        </postivo_shipment>
+        <postivo_shipment_content>
+            <id>0</id>
+        </postivo_shipment_content>
+        <good_price_group>
+            <id>0</id>
+        </good_price_group>
+        <vat_contents>
+            <vat_content>
+                <id>100609496</id>
+                <object_name>Invoice</object_name>
+                <object_id>32361257</object_id>
+                <netto>3523.85</netto>
+                <tax>810.49</tax>
+                <brutto>4334.34</brutto>
+                <created>2018-01-26 15:12:56</created>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+            </vat_content>
+        </vat_contents>
+        <invoicecontents>
+            <invoicecontent>
+                <id>122035211</id>
+                <name>DarkSlateBlue</name>
+                <classification></classification>
+                <unit>szt.</unit>
+                <count>4.0000</count>
+                <price>657.95</price>
+                <price_modified>0</price_modified>
+                <discount>1</discount>
+                <discount_percent>0.00</discount_percent>
+                <netto>2631.80</netto>
+                <brutto>3237.11</brutto>
+                <lumpcode></lumpcode>
+                <created>2018-01-26 15:12:56</created>
+                <modified>2018-01-26 15:12:56</modified>
+                <good>
+                    <id>0</id>
+                </good>
+                <invoice>
+                    <id>32361257</id>
+                </invoice>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+                <fixed_asset>
+                    <id>0</id>
+                </fixed_asset>
+                <equipment>
+                    <id>0</id>
+                </equipment>
+                <warehouse_document_content>
+                    <id>0</id>
+                </warehouse_document_content>
+                <parent>
+                    <id>0</id>
+                </parent>
+            </invoicecontent>
+            <invoicecontent>
+                <id>122035214</id>
+                <name>Aquamarine</name>
+                <classification></classification>
+                <unit>szt.</unit>
+                <count>1.0000</count>
+                <price>892.05</price>
+                <price_modified>0</price_modified>
+                <discount>1</discount>
+                <discount_percent>0.00</discount_percent>
+                <netto>892.05</netto>
+                <brutto>1097.22</brutto>
+                <lumpcode></lumpcode>
+                <created>2018-01-26 15:12:56</created>
+                <modified>2018-01-26 15:12:56</modified>
+                <good>
+                    <id>0</id>
+                </good>
+                <invoice>
+                    <id>32361257</id>
+                </invoice>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+                <fixed_asset>
+                    <id>0</id>
+                </fixed_asset>
+                <equipment>
+                    <id>0</id>
+                </equipment>
+                <warehouse_document_content>
+                    <id>0</id>
+                </warehouse_document_content>
+                <parent>
+                    <id>0</id>
+                </parent>
+            </invoicecontent>
+        </invoicecontents>
+    </invoice>
+    <parameters>
+        <limit>20</limit>
+        <page>1</page>
+        <total>1</total>
+    </parameters>
+</invoices>
+<status>
+    <code>OK</code>
+</status>
+</api>  {"response":"/invoices/add"} []
+        [2018-01-26 14:14:30] API.DEBUG: <?xml version="1.0" encoding="UTF-8"?> <api>
+<contractors>
+    <contractor>
+        <name>Olszewska P.P.O.F</name>
+        <tax_id_type>nip</tax_id_type>
+        <nip>1234563218</nip>
+        <street><![CDATA[Partyzantów 98A]]></street>
+        <zip>54-149</zip>
+        <city>Jawor</city>
+        <country>PL</country>
+        <different_contact_address>1</different_contact_address>
+        <contact_name>Kaczmarczyk i syn</contact_name>
+        <contact_street>Kosynierów 37</contact_street>
+        <contact_zip>53-069</contact_zip>
+        <contact_city>Chorzów</contact_city>
+        <contact_country>PL</contact_country>
+        <contact_person>mgr Artur Wieczorek</contact_person>
+        <buyer>1</buyer>
+        <seller>0</seller>
+    </contractor>
+</contractors>
+</api>  {"request":"/contractors/add"} []
+        [2018-01-26 14:14:31] API.DEBUG: <?xml version="1.0" encoding="UTF-8"?> <api>
+<contractors>
+    <contractor>
+        <id>13791025</id>
+        <tax_id_type>nip</tax_id_type>
+        <name>Olszewska P.P.O.F</name>
+        <altname>Olszewska P.P.O.F</altname>
+        <nip>1234563218</nip>
+        <regon></regon>
+        <street>Partyzantów 98A</street>
+        <zip>54-149</zip>
+        <city>Jawor</city>
+        <country>PL</country>
+        <different_contact_address>1</different_contact_address>
+        <contact_name>Kaczmarczyk i syn</contact_name>
+        <contact_street>Kosynierów 37</contact_street>
+        <contact_zip>53-069</contact_zip>
+        <contact_city>Chorzów</contact_city>
+        <contact_country>PL</contact_country>
+        <contact_person>mgr Artur Wieczorek</contact_person>
+        <phone></phone>
+        <skype></skype>
+        <fax></fax>
+        <email></email>
+        <url></url>
+        <description></description>
+        <buyer>1</buyer>
+        <seller>0</seller>
+        <discount_percent>0.00</discount_percent>
+        <payment_days>7</payment_days>
+        <payment_method></payment_method>
+        <account_number></account_number>
+        <remind>1</remind>
+        <hash>0f7e0c7c38f225f1e6f1983ad14bc723</hash>
+        <avatar_filename></avatar_filename>
+        <source>Własne</source>
+        <tags></tags>
+        <notes>0</notes>
+        <documents>0</documents>
+        <created>2018-01-26 15:12:57</created>
+        <modified>2018-01-26 15:12:57</modified>
+        <reference_company>
+            <id>0</id>
+        </reference_company>
+        <translation_language>
+            <id>0</id>
+        </translation_language>
+        <company_account>
+            <id>0</id>
+        </company_account>
+        <good_price_group>
+            <id>0</id>
+        </good_price_group>
+        <invoice_description>
+            <id>0</id>
+        </invoice_description>
+        <shop_buyer>
+            <id>0</id>
+        </shop_buyer>
+    </contractor>
+    <parameters>
+        <limit>20</limit>
+        <page>1</page>
+        <total>1</total>
+    </parameters>
+</contractors>
+<status>
+    <code>OK</code>
+</status>
+</api>  {"response":"/contractors/add"} []
+        [2018-01-26 14:14:31] API.DEBUG: <?xml version="1.0" encoding="UTF-8"?> <api>
+<invoices>
+    <invoice>
+        <contractor>
+            <id>13791025</id>
+        </contractor>
+        <paymentmethod>transfer</paymentmethod>
+        <paymentdate>2018-02-13</paymentdate>
+        <disposaldate_format>day</disposaldate_format>
+        <disposaldate_empty>0</disposaldate_empty>
+        <disposaldate><![CDATA[2018-01-26]]></disposaldate>
+        <date>2018-01-23</date>
+        <number>4</number>
+        <day>23</day>
+        <month>1</month>
+        <year>2018</year>
+        <type>normal</type>
+        <currency>PLN</currency>
+        <template>3</template>
+        <auto_send>0</auto_send>
+        <auto_send_postivo>0</auto_send_postivo>
+        <auto_sms>0</auto_sms>
+        <description><![CDATA[]]></description>
+        <schema_bill>0</schema_bill>
+        <register_description><![CDATA[]]></register_description>
+        <id_external><![CDATA[]]></id_external>
+        <price_type><![CDATA[netto]]></price_type>
+        <invoicecontents>
+            <invoicecontent>
+                <name>Aquamarine</name>
+                <classification></classification>
+                <unit>szt.</unit>
+                <count>1</count>
+                <price>892.05</price>
+                <discount>1</discount>
+                <discount_percent>0</discount_percent>
+                <discount>1</discount>
+                <discount>1</discount>
+                <lumpcode></lumpcode>
+                <good>
+                    <id>0</id>
+                </good>
+            </invoicecontent>
+            <invoicecontent>
+                <name>IndianRed</name>
+                <unit>szt.</unit>
+                <count>2</count>
+                <price>904.47</price>
+                <vat>23</vat>
+            </invoicecontent>
+        </invoicecontents>
+        <series>
+            <id>5415136</id>
+        </series>
+    </invoice>
+</invoices>
+</api>  {"request":"/invoices/edit/32361257"} []
+        [2018-01-26 14:14:32] API.DEBUG: <?xml version="1.0" encoding="UTF-8"?> <api>
+<invoices>
+    <invoice>
+        <id>32361257</id>
+        <interest_status></interest_status>
+        <warehouse_type>extended</warehouse_type>
+        <paymentmethod>transfer</paymentmethod>
+        <paymentdate>2018-02-13</paymentdate>
+        <paymentstate>unpaid</paymentstate>
+        <disposaldate_format>day</disposaldate_format>
+        <disposaldate_empty>0</disposaldate_empty>
+        <disposaldate>2018-01-26</disposaldate>
+        <date>2018-01-23</date>
+        <total>3322.22</total>
+        <total_composed>3322.22</total_composed>
+        <alreadypaid>0.00</alreadypaid>
+        <alreadypaid_initial></alreadypaid_initial>
+        <remaining>3322.22</remaining>
+        <number>4</number>
+        <day>23</day>
+        <month>1</month>
+        <year>2018</year>
+        <day_year>23</day_year>
+        <fullnumber>FV/I/Test/2018/4</fullnumber>
+        <semitemplatenumber>FV/I/Test/2018/[numer]</semitemplatenumber>
+        <type>normal</type>
+        <correction_type></correction_type>
+        <corrections>0</corrections>
+        <formal_data_corrections>0</formal_data_corrections>
+        <currency>PLN</currency>
+        <currency_exchange>1.0000</currency_exchange>
+        <currency_label></currency_label>
+        <currency_date></currency_date>
+        <price_currency_exchange>1.0000</price_currency_exchange>
+        <good_price_group_currency_exchange>1.0000</good_price_group_currency_exchange>
+        <auto_send_postivo>0</auto_send_postivo>
+        <auto_send>0</auto_send>
+        <auto_sms>0</auto_sms>
+        <account_type></account_type>
+        <account_date></account_date>
+        <template>3</template>
+        <description></description>
+        <header></header>
+        <footer></footer>
+        <user_name></user_name>
+        <schema>normal</schema>
+        <schema_vat_cashbox>0</schema_vat_cashbox>
+        <schema_vat_cashbox_limit></schema_vat_cashbox_limit>
+        <schema_vat_cashbox_small_taxpayer>0</schema_vat_cashbox_small_taxpayer>
+        <schema_bill>0</schema_bill>
+        <schema_receipt_book>0</schema_receipt_book>
+        <schema_cancelled>0</schema_cancelled>
+        <margin_tax_schema></margin_tax_schema>
+        <margin_description_schema></margin_description_schema>
+        <register_description></register_description>
+        <income_lumpcode></income_lumpcode>
+        <income_correction>0</income_correction>
+        <bill_legal_description></bill_legal_description>
+        <netto>2700.99</netto>
+        <tax>621.23</tax>
+        <receipt_fiscal_printed>0</receipt_fiscal_printed>
+        <vindicat_sent>0</vindicat_sent>
+        <invipay_sent>0</invipay_sent>
+        <courier_shipments>0</courier_shipments>
+        <hash>49d94ee5fa391adcd2d4c5dd29763c66</hash>
+        <id_external></id_external>
+        <tags></tags>
+        <notes>0</notes>
+        <documents>0</documents>
+        <created>2018-01-26 15:12:56</created>
+        <modified>2018-01-26 15:12:58</modified>
+        <price_type>netto</price_type>
+        <series>
+            <id>5415136</id>
+        </series>
+        <contractor>
+            <id>13791025</id>
+        </contractor>
+        <contractor_detail>
+            <id>56292983</id>
+            <tax_id_type>nip</tax_id_type>
+            <name>Olszewska P.P.O.F</name>
+            <nip>1234563218</nip>
+            <street>Partyzantów 98A</street>
+            <zip>54-149</zip>
+            <city>Jawor</city>
+            <country>PL</country>
+            <phone></phone>
+            <email></email>
+            <discount_percent>0.00</discount_percent>
+            <empty>0</empty>
+            <simple>0</simple>
+            <created>2018-01-26 15:12:57</created>
+            <modified>2018-01-26 15:12:57</modified>
+        </contractor_detail>
+        <contractor_receiver>
+            <id>0</id>
+        </contractor_receiver>
+        <contractor_detail_receiver>
+            <id>0</id>
+        </contractor_detail_receiver>
+        <company_detail>
+            <id>43890023</id>
+            <name>Daniel Bojdo Web-It</name>
+            <altname>Daniel Bojdo Web-It</altname>
+            <nip>6792775374</nip>
+            <street>ul. Christo Botewa</street>
+            <building_number>1c</building_number>
+            <flat_number></flat_number>
+            <zip>30-798</zip>
+            <post></post>
+            <city>Kraków</city>
+            <country>Polska</country>
+            <phone></phone>
+            <email></email>
+            <bank_name></bank_name>
+            <bank_account></bank_account>
+            <bank_swift></bank_swift>
+            <bank_address></bank_address>
+            <created>2018-01-26 15:12:56</created>
+            <modified>2018-01-26 15:12:58</modified>
+        </company_detail>
+        <parent>
+            <id>0</id>
+        </parent>
+        <order>
+            <id>0</id>
+        </order>
+        <email>
+            <id>0</id>
+        </email>
+        <email2>
+            <id>0</id>
+        </email2>
+        <expense>
+            <id>0</id>
+        </expense>
+        <company_account>
+            <id>0</id>
+        </company_account>
+        <payment_cashbox>
+            <id>168780</id>
+        </payment_cashbox>
+        <translation_language>
+            <id>0</id>
+        </translation_language>
+        <postivo_shipment>
+            <id>0</id>
+        </postivo_shipment>
+        <postivo_shipment_content>
+            <id>0</id>
+        </postivo_shipment_content>
+        <good_price_group>
+            <id>0</id>
+        </good_price_group>
+        <vat_contents>
+            <vat_content>
+                <id>100609501</id>
+                <object_name>Invoice</object_name>
+                <object_id>32361257</object_id>
+                <netto>2700.99</netto>
+                <tax>621.23</tax>
+                <brutto>3322.22</brutto>
+                <created>2018-01-26 15:12:58</created>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+            </vat_content>
+        </vat_contents>
+        <invoicecontents>
+            <invoicecontent>
+                <id>122035216</id>
+                <name>Aquamarine</name>
+                <classification></classification>
+                <unit>szt.</unit>
+                <count>1.0000</count>
+                <price>892.05</price>
+                <price_modified>0</price_modified>
+                <discount>1</discount>
+                <discount_percent>0.00</discount_percent>
+                <netto>892.05</netto>
+                <brutto>1097.22</brutto>
+                <lumpcode></lumpcode>
+                <created>2018-01-26 15:12:58</created>
+                <modified>2018-01-26 15:12:58</modified>
+                <good>
+                    <id>0</id>
+                </good>
+                <invoice>
+                    <id>32361257</id>
+                </invoice>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+                <fixed_asset>
+                    <id>0</id>
+                </fixed_asset>
+                <equipment>
+                    <id>0</id>
+                </equipment>
+                <warehouse_document_content>
+                    <id>0</id>
+                </warehouse_document_content>
+                <parent>
+                    <id>0</id>
+                </parent>
+            </invoicecontent>
+            <invoicecontent>
+                <id>122035219</id>
+                <name>IndianRed</name>
+                <classification></classification>
+                <unit>szt.</unit>
+                <count>2.0000</count>
+                <price>904.47</price>
+                <price_modified>0</price_modified>
+                <discount>1</discount>
+                <discount_percent>0.00</discount_percent>
+                <netto>1808.94</netto>
+                <brutto>2225.00</brutto>
+                <lumpcode></lumpcode>
+                <created>2018-01-26 15:12:58</created>
+                <modified>2018-01-26 15:12:58</modified>
+                <good>
+                    <id>0</id>
+                </good>
+                <invoice>
+                    <id>32361257</id>
+                </invoice>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+                <fixed_asset>
+                    <id>0</id>
+                </fixed_asset>
+                <equipment>
+                    <id>0</id>
+                </equipment>
+                <warehouse_document_content>
+                    <id>0</id>
+                </warehouse_document_content>
+                <parent>
+                    <id>0</id>
+                </parent>
+            </invoicecontent>
+        </invoicecontents>
+    </invoice>
+    <parameters>
+        <limit>20</limit>
+        <page>1</page>
+        <total>1</total>
+    </parameters>
+</invoices>
+<status>
+    <code>OK</code>
+</status>
+</api>  {"response":"/invoices/edit/32361257"} []
+        [2018-01-26 14:14:32] API.DEBUG:  {"request":"/invoices/delete/32361257"} []
+        [2018-01-26 14:14:33] API.DEBUG: <?xml version="1.0" encoding="UTF-8"?> <api>
+<invoices>
+    <invoice>
+        <id>32361257</id>
+        <interest_status></interest_status>
+        <warehouse_type>extended</warehouse_type>
+        <paymentmethod>transfer</paymentmethod>
+        <paymentdate>2018-02-13</paymentdate>
+        <paymentstate>unpaid</paymentstate>
+        <disposaldate_format>day</disposaldate_format>
+        <disposaldate_empty>0</disposaldate_empty>
+        <disposaldate>2018-01-26</disposaldate>
+        <date>2018-01-23</date>
+        <total>3322.22</total>
+        <total_composed>3322.22</total_composed>
+        <alreadypaid>0.00</alreadypaid>
+        <alreadypaid_initial></alreadypaid_initial>
+        <remaining>3322.22</remaining>
+        <number>4</number>
+        <day>23</day>
+        <month>1</month>
+        <year>2018</year>
+        <day_year>23</day_year>
+        <fullnumber>FV/I/Test/2018/4</fullnumber>
+        <semitemplatenumber>FV/I/Test/2018/[numer]</semitemplatenumber>
+        <type>normal</type>
+        <correction_type></correction_type>
+        <corrections>0</corrections>
+        <formal_data_corrections>0</formal_data_corrections>
+        <currency>PLN</currency>
+        <currency_exchange>1.0000</currency_exchange>
+        <currency_label></currency_label>
+        <currency_date></currency_date>
+        <price_currency_exchange>1.0000</price_currency_exchange>
+        <good_price_group_currency_exchange>1.0000</good_price_group_currency_exchange>
+        <auto_send_postivo>0</auto_send_postivo>
+        <auto_send>0</auto_send>
+        <auto_sms>0</auto_sms>
+        <account_type></account_type>
+        <account_date></account_date>
+        <template>3</template>
+        <description></description>
+        <header></header>
+        <footer></footer>
+        <user_name></user_name>
+        <schema>normal</schema>
+        <schema_vat_cashbox>0</schema_vat_cashbox>
+        <schema_vat_cashbox_limit></schema_vat_cashbox_limit>
+        <schema_vat_cashbox_small_taxpayer>0</schema_vat_cashbox_small_taxpayer>
+        <schema_bill>0</schema_bill>
+        <schema_receipt_book>0</schema_receipt_book>
+        <schema_cancelled>0</schema_cancelled>
+        <margin_tax_schema></margin_tax_schema>
+        <margin_description_schema></margin_description_schema>
+        <register_description></register_description>
+        <income_lumpcode></income_lumpcode>
+        <income_correction>0</income_correction>
+        <bill_legal_description></bill_legal_description>
+        <netto>2700.99</netto>
+        <tax>621.23</tax>
+        <receipt_fiscal_printed>0</receipt_fiscal_printed>
+        <vindicat_sent>0</vindicat_sent>
+        <invipay_sent>0</invipay_sent>
+        <courier_shipments>0</courier_shipments>
+        <hash>49d94ee5fa391adcd2d4c5dd29763c66</hash>
+        <id_external></id_external>
+        <tags></tags>
+        <notes>0</notes>
+        <documents>0</documents>
+        <created>2018-01-26 15:12:56</created>
+        <modified>2018-01-26 15:12:58</modified>
+        <price_type>netto</price_type>
+        <series>
+            <id>5415136</id>
+        </series>
+        <contractor>
+            <id>13791025</id>
+        </contractor>
+        <contractor_detail>
+            <id>56292983</id>
+            <tax_id_type>nip</tax_id_type>
+            <name>Olszewska P.P.O.F</name>
+            <nip>1234563218</nip>
+            <street>Partyzantów 98A</street>
+            <zip>54-149</zip>
+            <city>Jawor</city>
+            <country>PL</country>
+            <phone></phone>
+            <email></email>
+            <discount_percent>0.00</discount_percent>
+            <empty>0</empty>
+            <simple>0</simple>
+            <created>2018-01-26 15:12:57</created>
+            <modified>2018-01-26 15:12:57</modified>
+        </contractor_detail>
+        <contractor_receiver>
+            <id>0</id>
+        </contractor_receiver>
+        <contractor_detail_receiver>
+            <id>0</id>
+        </contractor_detail_receiver>
+        <company_detail>
+            <id>43890023</id>
+            <name>Daniel Bojdo Web-It</name>
+            <altname>Daniel Bojdo Web-It</altname>
+            <nip>6792775374</nip>
+            <street>ul. Christo Botewa</street>
+            <building_number>1c</building_number>
+            <flat_number></flat_number>
+            <zip>30-798</zip>
+            <post></post>
+            <city>Kraków</city>
+            <country>Polska</country>
+            <phone></phone>
+            <email></email>
+            <bank_name></bank_name>
+            <bank_account></bank_account>
+            <bank_swift></bank_swift>
+            <bank_address></bank_address>
+            <created>2018-01-26 15:12:56</created>
+            <modified>2018-01-26 15:12:58</modified>
+        </company_detail>
+        <parent>
+            <id>0</id>
+        </parent>
+        <order>
+            <id>0</id>
+        </order>
+        <email>
+            <id>0</id>
+        </email>
+        <email2>
+            <id>0</id>
+        </email2>
+        <expense>
+            <id>0</id>
+        </expense>
+        <company_account>
+            <id>0</id>
+        </company_account>
+        <payment_cashbox>
+            <id>168780</id>
+        </payment_cashbox>
+        <translation_language>
+            <id>0</id>
+        </translation_language>
+        <postivo_shipment>
+            <id>0</id>
+        </postivo_shipment>
+        <postivo_shipment_content>
+            <id>0</id>
+        </postivo_shipment_content>
+        <good_price_group>
+            <id>0</id>
+        </good_price_group>
+        <vat_contents>
+            <vat_content>
+                <id>100609501</id>
+                <object_name>Invoice</object_name>
+                <object_id>32361257</object_id>
+                <netto>2700.99</netto>
+                <tax>621.23</tax>
+                <brutto>3322.22</brutto>
+                <created>2018-01-26 15:12:58</created>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+            </vat_content>
+        </vat_contents>
+        <invoicecontents>
+            <invoicecontent>
+                <id>122035216</id>
+                <name>Aquamarine</name>
+                <classification></classification>
+                <unit>szt.</unit>
+                <count>1.0000</count>
+                <price>892.05</price>
+                <price_modified>0</price_modified>
+                <discount>1</discount>
+                <discount_percent>0.00</discount_percent>
+                <netto>892.05</netto>
+                <brutto>1097.22</brutto>
+                <lumpcode></lumpcode>
+                <created>2018-01-26 15:12:58</created>
+                <modified>2018-01-26 15:12:58</modified>
+                <good>
+                    <id>0</id>
+                </good>
+                <invoice>
+                    <id>32361257</id>
+                </invoice>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+                <fixed_asset>
+                    <id>0</id>
+                </fixed_asset>
+                <equipment>
+                    <id>0</id>
+                </equipment>
+                <warehouse_document_content>
+                    <id>0</id>
+                </warehouse_document_content>
+                <parent>
+                    <id>0</id>
+                </parent>
+            </invoicecontent>
+            <invoicecontent>
+                <id>122035219</id>
+                <name>IndianRed</name>
+                <classification></classification>
+                <unit>szt.</unit>
+                <count>2.0000</count>
+                <price>904.47</price>
+                <price_modified>0</price_modified>
+                <discount>1</discount>
+                <discount_percent>0.00</discount_percent>
+                <netto>1808.94</netto>
+                <brutto>2225.00</brutto>
+                <lumpcode></lumpcode>
+                <created>2018-01-26 15:12:58</created>
+                <modified>2018-01-26 15:12:58</modified>
+                <good>
+                    <id>0</id>
+                </good>
+                <invoice>
+                    <id>32361257</id>
+                </invoice>
+                <vat_code>
+                    <id>222</id>
+                </vat_code>
+                <fixed_asset>
+                    <id>0</id>
+                </fixed_asset>
+                <equipment>
+                    <id>0</id>
+                </equipment>
+                <warehouse_document_content>
+                    <id>0</id>
+                </warehouse_document_content>
+                <parent>
+                    <id>0</id>
+                </parent>
+            </invoicecontent>
+        </invoicecontents>
+    </invoice>
+    <parameters>
+        <limit>20</limit>
+        <page>1</page>
+        <total>1</total>
+    </parameters>
+</invoices>
+<status>
+    <code>OK</code>
+    <message>Faktura FV/I/Test/2018/4 została usunięta.</message>
+</status>
+</api>
