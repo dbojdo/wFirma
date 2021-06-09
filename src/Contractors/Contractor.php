@@ -6,7 +6,7 @@ use JMS\Serializer\Annotation as JMS;
 use Webit\WFirmaSDK\CompanyAccounts\CompanyAccountId;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\InvoiceDescriptions\InvoiceDescriptionId;
-use Webit\WFirmaSDK\Invoices\PaymentMethod;
+use Webit\WFirmaSDK\Payments\PaymentMethod;
 use Webit\WFirmaSDK\Tags\TagIds;
 use Webit\WFirmaSDK\TranslationLanguages\TranslationLanguageId;
 

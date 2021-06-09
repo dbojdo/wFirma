@@ -9,6 +9,7 @@ use Webit\WFirmaSDK\InvoiceDeliveries\InvoiceDeliveriesApi;
 use Webit\WFirmaSDK\InvoiceDescriptions\InvoiceDescriptionsApi;
 use Webit\WFirmaSDK\Invoices\InvoicesApi;
 use Webit\WFirmaSDK\Notes\NotesApi;
+use Webit\WFirmaSDK\Payments\PaymentsApi;
 use Webit\WFirmaSDK\Series\SeriesApi;
 use Webit\WFirmaSDK\Tags\TagsApi;
 use Webit\WFirmaSDK\TranslationLanguages\TranslationLanguagesApi;
@@ -86,6 +87,14 @@ class ModuleApiFactory
     public function notesApi()
     {
         return new NotesApi($this->entityApi);
+    }
+
+    /**
+     * @return PaymentsApi
+     */
+    public function paymentsApi()
+    {
+        return new PaymentsApi($this->entityApi);
     }
 
     /**

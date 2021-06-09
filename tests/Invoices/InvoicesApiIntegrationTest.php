@@ -9,6 +9,7 @@ use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
 use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Contractors\InvoiceAddress;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
+use Webit\WFirmaSDK\Payments\PaymentMethod;
 use Webit\WFirmaSDK\Series\SeriesId;
 
 class InvoicesApiIntegrationTest extends AbstractApiTestCase
