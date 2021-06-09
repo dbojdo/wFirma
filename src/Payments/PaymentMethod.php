@@ -1,6 +1,6 @@
 <?php
 
-namespace Webit\WFirmaSDK\Invoices;
+namespace Webit\WFirmaSDK\Payments;
 
 final class PaymentMethod
 {

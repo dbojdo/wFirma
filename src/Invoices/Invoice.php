@@ -7,6 +7,7 @@ use Webit\WFirmaSDK\Contractors\ContractorId;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\Series\SeriesId;
 use JMS\Serializer\Annotation as JMS;
+use Webit\WFirmaSDK\Payments\PaymentMethod;
 use Webit\WFirmaSDK\Tags\TagIds;
 
 /**
@@ -312,6 +313,15 @@ final class Invoice extends DateAwareEntity
      * @JMS\Groups({"request", "response"})
      */
     private $template;
+
+    /**
+     * @var string
+     * @JMS\Type("string")
+     * @JMS\SerializedName("type_of_sale")
+     * @JMS\XmlElement(cdata=false)
+     * @JMS\Groups({"request", "response"})
+     */
+    private $typeOfSale;
 
     /**
      * @var int
@@ -801,12 +811,15 @@ final class Invoice extends DateAwareEntity
 
     /**
      * @param Payment $payment
+     * @return Invoice
      */
     public function changePayment(Payment $payment)
     {
         $this->paymentMethod = $payment->paymentMethod();
         $this->paymentDate = $payment->paymentDate();
         $this->alreadyPaidInitial = $payment->alreadyPaidInitial();
+
+        return $this;
     }
 
     /**
@@ -937,6 +950,41 @@ final class Invoice extends DateAwareEntity
     public function correction()
     {
         return new Correction($this->correctionType, $this->corrections, $this->formalDataCorrections);
+    }
+
+    /**
+     * @return TypeOfSale[]
+     */
+    public function typesOfSale()
+    {
+        $typesOfSale = json_decode($this->typeOfSale, true);
+        $typesOfSale = array_map(
+            function($typeOfSale) {
+                return TypeOfSale::fromString($typeOfSale);
+            },
+            is_array($typesOfSale) ? $typesOfSale : []
+        );
+        sort($typesOfSale);
+        return array_values($typesOfSale);
+    }
+
+    /**
+     * @param TypeOfSale[] $typesOfSale
+     */
+    public function changeTypesOfSale(TypeOfSale ...$typesOfSale)
+    {
+        $typesOfSale = array_unique(
+            array_map(
+                function($typeOfSale) {
+                    return (string)$typeOfSale;
+                },
+                $typesOfSale
+            )
+        );
+        sort($typesOfSale);
+        $typesOfSale = array_values($typesOfSale);
+
+        $this->typeOfSale = count($typesOfSale) > 0 ? json_encode($typesOfSale) : '';
     }
 
     /**
