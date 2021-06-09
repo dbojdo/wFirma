@@ -147,6 +147,14 @@ final class Module
     /**
      * @return Module
      */
+    public static function payments()
+    {
+        return self::module('payments');
+    }
+
+    /**
+     * @return Module
+     */
     public static function notes()
     {
         return self::module('notes');
@@ -293,6 +301,18 @@ final class Module
             'invoice_deliveries',
             'invoice_delivery',
             'Webit\WFirmaSDK\InvoiceDeliveries\InvoiceDelivery',
+            array(
+                'find',
+                'get',
+                'add',
+                'delete'
+            )
+        );
+
+        self::$modules['payments'] = new self(
+            'payments',
+            'payment',
+            'Webit\WFirmaSDK\Payments\Payment',
             array(
                 'find',
                 'get',

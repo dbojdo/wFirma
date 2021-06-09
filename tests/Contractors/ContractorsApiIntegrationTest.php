@@ -4,7 +4,7 @@ namespace Webit\WFirmaSDK\Contractors;
 
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
-use Webit\WFirmaSDK\Invoices\PaymentMethod;
+use Webit\WFirmaSDK\Payments\PaymentMethod;
 use Webit\WFirmaSDK\Module;
 use Webit\WFirmaSDK\TranslationLanguages\TranslationLanguageId;
 

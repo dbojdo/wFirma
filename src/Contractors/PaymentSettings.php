@@ -2,7 +2,7 @@
 
 namespace Webit\WFirmaSDK\Contractors;
 
-use Webit\WFirmaSDK\Invoices\PaymentMethod;
+use Webit\WFirmaSDK\Payments\PaymentMethod;
 
 final class PaymentSettings
 {
