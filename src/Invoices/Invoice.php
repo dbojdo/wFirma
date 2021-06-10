@@ -384,6 +384,7 @@ final class Invoice extends DateAwareEntity
      * @JMS\Type("string")
      * @JMS\SerializedName("schema")
      * @JMS\XmlElement(cdata=false)
+     * @JMS\Groups({"request", "response"})
      */
     private $schema;
 
@@ -489,6 +490,7 @@ final class Invoice extends DateAwareEntity
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("price_type")
+     * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
      */
     private $priceType;
@@ -528,7 +530,7 @@ final class Invoice extends DateAwareEntity
      * @param bool $schemaCanceled
      * @param string $registerDescription
      * @param string $idExternal
-     * @param string $priceType
+     * @param ?PriceType|string $priceType
      * @param TagIds $tags
      */
     private function __construct(
@@ -581,7 +583,7 @@ final class Invoice extends DateAwareEntity
         $this->registerDescription = $registerDescription;
         $this->idExternal = $idExternal;
         $this->tags = $tags;
-        $this->priceType = $priceType;
+        $this->priceType = (string)$priceType;
         $this->invoiceContents = array();
         $this->seriesId = $seriesId;
     }
@@ -603,7 +605,7 @@ final class Invoice extends DateAwareEntity
      * @param bool $schemaCanceled
      * @param null $registerDescription
      * @param null $idExternal
-     * @param null $priceType
+     * @param ?PriceType|string $priceType
      * @param TagIds|null $tags
      * @return Invoice
      */
@@ -666,7 +668,7 @@ final class Invoice extends DateAwareEntity
      * @param bool $schemaCanceled
      * @param null $registerDescription
      * @param null $idExternal
-     * @param null $priceType
+     * @param ?PriceType|string $priceType
      * @param TagIds|null $tags
      * @return Invoice
      */
@@ -794,6 +796,16 @@ final class Invoice extends DateAwareEntity
     }
 
     /**
+     * @param Schema $schema
+     * @return Invoice
+     */
+    public function changeSchema(Schema $schema): Invoice
+    {
+        $this->schema = (string)$schema;
+        return $this;
+    }
+
+    /**
      * @return Payment
      */
     public function payment()
@@ -912,6 +924,24 @@ final class Invoice extends DateAwareEntity
     public function hash()
     {
         return $this->hash;
+    }
+
+    /**
+     * @return PriceType
+     */
+    public function priceType(): ?PriceType
+    {
+        return $this->priceType ? PriceType::fromString($this->priceType) : null;
+    }
+
+    /**
+     * @param PriceType $priceType
+     * @return Invoice
+     */
+    public function changePriceType(PriceType $priceType): Invoice
+    {
+        $this->priceType = (string)$priceType;
+        return $this;
     }
 
     /**
