@@ -24,7 +24,7 @@ trait InvoiceStubTrait
             ),
             Type::vat(),
             $seriesId,
-            date_create('now - 7 days'),
+            new \DateTime(),
             null,
             null,
             $currency
