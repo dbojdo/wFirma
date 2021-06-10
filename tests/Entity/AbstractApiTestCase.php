@@ -8,6 +8,8 @@ use Webit\WFirmaSDK\AbstractTestCase;
 use Webit\WFirmaSDK\Auth\BasicAuth;
 use Webit\WFirmaSDK\Auth\CompanyId;
 use Webit\WFirmaSDK\Entity\Infrastructure\Buzz\BuzzRequestExecutorFactory;
+use Webit\WFirmaSDK\Invoices\InvoicesApi;
+use Webit\WFirmaSDK\Payments\PaymentsApi;
 
 abstract class AbstractApiTestCase extends AbstractTestCase
 {
@@ -20,25 +22,25 @@ abstract class AbstractApiTestCase extends AbstractTestCase
             $factory = new EntityApiFactory(
                 new BuzzRequestExecutorFactory(
                     null,
-                    null
-//                    new Logger(
-//                        'API',
-//                        array(
-//                            new StreamHandler('php://stdout')
-//                        )
-//                    )
+                    null,
+                    new Logger(
+                        'API',
+                        array(
+                            new StreamHandler('php://stdout')
+                        )
+                    )
                 )
             );
         } catch (\Exception $e) {
             throw new \RuntimeException('Cannot create EntityApiFactory', 0, $e);
         }
 
-        return $factory->create($this->basicAuth(), $this->companyId());
+        return $factory->create($this->basicAuth());
     }
 
     private function basicAuth()
     {
-        $auth = new BasicAuth(getenv('wFirma.username'), getenv('wFirma.password'));
+        $auth = new BasicAuth(getenv('wFirma.username'), getenv('wFirma.password'), $this->companyId());
         if ($auth->isEmpty()) {
             $this->markTestSkipped('Set wFirma.username and wFirma.password in your phpunit.xml file.');
         }
@@ -47,15 +49,20 @@ abstract class AbstractApiTestCase extends AbstractTestCase
     }
 
     /**
-     * @return null|CompanyId
+     * @return null
      */
     private function companyId()
     {
-        $id = getenv('wFirma.company_id');
-        if ($id) {
-            return new CompanyId($id);
-        }
+        return getenv('wFirma.company_id') ?? null;
+    }
 
-        return null;
+    protected function invoicesApi(): InvoicesApi
+    {
+        return new InvoicesApi($this->entityApi());
+    }
+
+    protected function paymentsApi(): PaymentsApi
+    {
+        return new PaymentsApi($this->entityApi());
     }
 }

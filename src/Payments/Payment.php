@@ -7,7 +7,6 @@ use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\Expenses\ExpenseId;
 use Webit\WFirmaSDK\Invoices\Invoice;
 use Webit\WFirmaSDK\Invoices\InvoiceId;
-use Webit\WFirmaSDK\Invoices\PaymentCurrency;
 use Webit\WFirmaSDK\PaymentCashboxes\PaymentCashboxId;
 use Webit\WFirmaSDK\Series\SeriesId;
 use Webit\WFirmaSDK\Tags\TagIds;
@@ -16,7 +15,8 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\XmlRoot("payment")
  */
-final class Payment extends DateAwareEntity {
+final class Payment extends DateAwareEntity
+{
     /**
      * @var string
      * @JMS\Type("string")
@@ -34,7 +34,7 @@ final class Payment extends DateAwareEntity {
     private $objectId;
 
     /**
-     * @var float
+     * @var ?float
      * @JMS\Type("double")
      * @JMS\SerializedName("value")
      * @JMS\Groups({"request", "response"})
@@ -42,7 +42,7 @@ final class Payment extends DateAwareEntity {
     private $value;
 
     /**
-     * @var float
+     * @var ?float
      * @JMS\Type("double")
      * @JMS\SerializedName("social")
      * @JMS\Groups({"response"})
@@ -50,7 +50,7 @@ final class Payment extends DateAwareEntity {
     private $social;
 
     /**
-     * @var float
+     * @var ?float
      * @JMS\Type("double")
      * @JMS\SerializedName("health")
      * @JMS\Groups({"response"})
@@ -58,7 +58,7 @@ final class Payment extends DateAwareEntity {
     private $health;
 
     /**
-     * @var float
+     * @var ?float
      * @JMS\Type("double")
      * @JMS\SerializedName("labor_fund")
      * @JMS\Groups({"response"})
@@ -66,7 +66,7 @@ final class Payment extends DateAwareEntity {
     private $laborFund;
 
     /**
-     * @var float
+     * @var ?float
      * @JMS\Type("double")
      * @JMS\SerializedName("transitional_retiring_fund")
      * @JMS\Groups({"response"})
@@ -121,6 +121,7 @@ final class Payment extends DateAwareEntity {
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("account")
+     * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
      */
     private $account;
@@ -145,6 +146,7 @@ final class Payment extends DateAwareEntity {
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("currency_label")
+     * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"response"})
      */
     private $currencyLabel;
@@ -155,14 +157,14 @@ final class Payment extends DateAwareEntity {
      * @JMS\SerializedName("currency_date")
      * @JMS\Groups({"response"})
      */
-    private $currency_date;
+    private $currencyDate;
 
     /**
      * @var int
      * @JMS\Type("integer")
      * @JMS\SerializedName("notes")
      * @JMS\XmlElement(cdata=false)
-     * @JMS\Groups({"request", "response"})
+     * @JMS\Groups({"response"})
      */
     private $notes;
 
@@ -219,243 +221,258 @@ final class Payment extends DateAwareEntity {
      */
     private $contractorId;
 
-    /**
-     * Payment constructor.
-     * @param string $objectName
-     * @param string $objectId
-     * @param float $value
-     * @param \DateTimeInterface|null $date
-     * @param PaymentMethod|null $paymentMethod
-     * @param PaymentCurrency|null $paymentCurrency
-     * @param PaymentCashboxId|null $cashboxId
-     * @param TagIds|null $tags
-     */
     private function __construct(
         $objectName,
         $objectId,
-        $value,
-        \DateTimeInterface $date = null,
-        PaymentMethod $paymentMethod = null,
-        PaymentCurrency $paymentCurrency = null,
-        PaymentCashboxId $cashboxId = null,
+        PaymentAmount $paymentAmount,
+        \DateTime $date,
+        PaymentMethod $paymentMethod,
         TagIds $tags = null
     ) {
         $this->objectName = (string)$objectName;
         $this->objectId = (string)$objectId;
-        $this->value = (float)$value;
         $this->changeDate($date);
+        $this->changeAmount($paymentAmount);
         $this->changePaymentMethod($paymentMethod);
-        $this->changePaymentCurrency($paymentCurrency);
-        $this->changePaymentCashboxId($cashboxId);
         $this->tags = $tags;
     }
 
     /**
      * @param Invoice $invoice
-     * @param float $value
-     * @param \DateTimeInterface|null $date
-     * @param PaymentMethod|null $paymentMethod
-     * @param PaymentCurrency|null $paymentCurrency
-     * @param PaymentCashboxId|null $cashboxId
+     * @param PaymentAmount $paymentAmount
+     * @param \DateTime $date
+     * @param PaymentMethod $paymentMethod
      * @param TagIds|null $tags
      * @return Payment
      */
     public static function forInvoice(
         Invoice $invoice,
-        $value,
-        \DateTimeInterface $date = null,
-        PaymentMethod $paymentMethod = null,
-        PaymentCurrency $paymentCurrency = null,
-        PaymentCashboxId $cashboxId = null,
+        PaymentAmount $paymentAmount,
+        \DateTime $date,
+        PaymentMethod $paymentMethod,
         TagIds $tags = null
-    ) {
+    ): Payment {
         return new self(
             'invoice',
             $invoice->id(),
-            $value,
+            $paymentAmount,
             $date,
             $paymentMethod,
-            $paymentCurrency,
-            $cashboxId,
             $tags
         );
     }
 
     /**
-     * @param InvoiceId $invoice
-     * @param float $value
-     * @param \DateTimeInterface|null $date
+     * @param InvoiceId $invoiceId
+     * @param PaymentAmount $paymentAmount
+     * @param \DateTime $date
      * @param PaymentMethod|null $paymentMethod
-     * @param PaymentCurrency|null $paymentCurrency
-     * @param PaymentCashboxId|null $cashboxId
      * @param TagIds|null $tags
      * @return Payment
      */
     public static function forInvoiceOfId(
         InvoiceId $invoiceId,
-        $value,
-        \DateTimeInterface $date = null,
-        PaymentMethod $paymentMethod = null,
-        PaymentCurrency $paymentCurrency = null,
-        PaymentCashboxId $cashboxId = null,
+        PaymentAmount $paymentAmount,
+        \DateTime $date,
+        PaymentMethod $paymentMethod,
         TagIds $tags = null
-    ) {
+    ): Payment {
         return new self(
             'invoice',
             $invoiceId,
-            $value,
+            $paymentAmount,
             $date,
             $paymentMethod,
-            $paymentCurrency,
-            $cashboxId,
             $tags
         );
     }
 
     /**
-     * @param Invoice $invoice
-     * @param float $value
-     * @param \DateTimeInterface|null $date
-     * @param PaymentMethod|null $paymentMethod
-     * @param PaymentCurrency|null $paymentCurrency
-     * @param PaymentCashboxId|null $cashboxId
+     * @param ExpenseId $expenseId
+     * @param PaymentAmount $paymentAmount
+     * @param \DateTime $date
+     * @param PaymentMethod $paymentMethod
      * @param TagIds|null $tags
      * @return Payment
      */
     public static function forExpenseOfId(
         ExpenseId $expenseId,
-        $value,
-        \DateTimeInterface $date = null,
-        PaymentMethod $paymentMethod = null,
-        PaymentCurrency $paymentCurrency = null,
-        PaymentCashboxId $cashboxId = null,
+        PaymentAmount $paymentAmount,
+        \DateTime $date,
+        PaymentMethod $paymentMethod,
         TagIds $tags = null
-    ) {
+    ): Payment {
         return new self(
             'expense',
             $expenseId,
-            $value,
+            $paymentAmount,
             $date,
             $paymentMethod,
-            $paymentCurrency,
-            $cashboxId,
             $tags
         );
     }
 
     /**
-     * @return null|\Webit\WFirmaSDK\Entity\EntityId|PaymentId
+     * @return null|PaymentId
      */
-    public function id()
+    public function id(): ?PaymentId
     {
         return PaymentId::create($this->plainId());
     }
 
     /**
-     * @return float
-     */
-    public function value()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param float $value
+     * @param PaymentAmount $paymentCurrency
      * @return Payment
      */
-    public function changeValue(float $value)
+    public function changeAmount(PaymentAmount $paymentCurrency): Payment
     {
-        $this->value = (float)$value;
+        $this->value = $paymentCurrency->value();
+        $this->account = $paymentCurrency->account();
+        $this->valuePln = $paymentCurrency->valuePln();
+        $this->currencyDate = $paymentCurrency->rateDate();
+        $this->currencyExchange = $paymentCurrency->exchangeRate();
+        $this->currencyLabel = $paymentCurrency->nbpLabel();
+
+        return $this;
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTime
      */
-    public function date()
+    public function date(): \DateTime
     {
-        $date = \DateTimeImmutable::createFromInterface($this->date);
-        return $date->setTime(0, 0);
+        return $this->date->setTime(0, 0);
     }
 
     /**
-     * @param \DateTimeInterface $date
+     * @param \DateTime $date
      * @return Payment
      */
-    public function changeDate(\DateTimeInterface $date = null)
+    public function changeDate(\DateTime $date): Payment
     {
-        $this->date = \DateTime::createFromInterface($date ?: new \DateTime());
+        $this->date = $date;
         return $this;
     }
 
     /**
      * @return PaymentMethod
      */
-    public function paymentMethod()
+    public function paymentMethod(): PaymentMethod
     {
         return PaymentMethod::fromString($this->paymentMethod);
     }
 
     /**
-     * @param PaymentMethod $paymentMethod
+     * @param PaymentMethod|null $paymentMethod
      * @return Payment
      */
-    public function changePaymentMethod(PaymentMethod $paymentMethod = null)
+    public function changePaymentMethod(PaymentMethod $paymentMethod = null): Payment
     {
-        $this->paymentMethod = (string)($paymentMethod ?: PaymentMethod::cash());
+        $this->paymentMethod = $paymentMethod ? (string)$paymentMethod : null;
         return $this;
     }
 
     /**
-     * @return PaymentCurrency|null
+     * @return PaymentAmount
      */
-    public function paymentCurrency()
+    public function amount(): PaymentAmount
     {
-        if ($this->account === 'pln') {
-            return PaymentCurrency::pln($this->valuePln);
-        } elseif ($this->account === 'currency') {
-            return PaymentCurrency::foreign();
-        }
-
-        return null;
+        return new PaymentAmount(
+            (float)$this->value,
+            $this->account,
+            $this->valuePln,
+            $this->currencyExchange,
+            $this->currencyLabel,
+            $this->currencyDate
+        );
     }
 
-    /**
-     * @param PaymentCurrency|null $paymentCurrency
-     * @return Payment
-     */
-    public function changePaymentCurrency(PaymentCurrency $paymentCurrency = null)
+    public function objectName(): string
     {
-        if ($paymentCurrency) {
-            $this->account = $paymentCurrency->isCurrencyPayment() ? 'currenct' : 'pln';
-            $this->valuePln = $paymentCurrency->amountPln();
-        } else {
-            $this->account = null;
-            $this->valuePln = null;
-        }
+        return $this->objectName;
+    }
+
+    public function objectId(): ?int
+    {
+        return $this->objectId;
+    }
+
+    public function social(): ?float
+    {
+        return $this->social;
+    }
+
+    public function health(): ?float
+    {
+        return $this->health;
+    }
+
+    public function laborFund(): ?float
+    {
+        return $this->laborFund;
+    }
+
+    public function transitionalRetiringFund(): float
+    {
+        return $this->transitionalRetiringFund;
+    }
+
+    public function initial(): int
+    {
+        return $this->initial;
+    }
+
+    public function type(): string
+    {
+        return $this->type;
+    }
+
+    public function paymentType(): string
+    {
+        return $this->paymentType;
+    }
+
+    public function notes(): int
+    {
+        return $this->notes;
+    }
+
+    public function tags(): ?TagIds
+    {
+        return $this->tags;
+    }
+
+    public function changeTags(TagIds $tagIds = null): Payment
+    {
+        $this->tags = $tagIds;
         return $this;
     }
 
     /**
      * @return PaymentCashboxId|null $cashboxId
      */
-    public function paymentCashboxId()
+    public function paymentCashboxId(): ?PaymentCashboxId
     {
-        return PaymentCashboxId::create($this->paymentCashboxId);
+        return $this->paymentCashboxId->isEmpty() ? null : $this->paymentCashboxId;
     }
 
-    /**
-     * @param PaymentCashboxId|null $cashboxId
-     * @return Payment
-     */
-    public function changePaymentCashboxId(PaymentCashboxId $paymentCashboxId = null)
+    public function invoiceId(): ?InvoiceId
     {
-        if ($paymentCashboxId) {
-            $this->paymentType = 'cashbox';
-            $this->paymentCashboxId = (string)$paymentCashboxId;
-        } else {
-            $this->paymentType = 'normal';
-            $this->paymentCashboxId = null;
-        }
-        return $this;
+        return $this->invoiceId && !$this->invoiceId->isEmpty() ? $this->invoiceId : null;
+    }
+
+    public function expenseId(): ?ExpenseId
+    {
+        return $this->expenseId && !$this->expenseId->isEmpty() ? $this->expenseId : null;
+    }
+
+    public function seriesId(): ?SeriesId
+    {
+        return $this->seriesId && !$this->seriesId->isEmpty() ? $this->seriesId : null;
+    }
+
+    public function contractorId(): ?ContractorId
+    {
+        return $this->contractorId && !$this->contractorId->isEmpty() ? $this->contractorId : null;
     }
 }

@@ -2,32 +2,24 @@
 
 namespace Webit\WFirmaSDK\Payments;
 
-use DateInterval;
-use Webit\WFirmaSDK\Contractors\ContactAddress;
-use Webit\WFirmaSDK\Contractors\ContractorsApi;
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
-use Webit\WFirmaSDK\Contractors\Contractor;
-use Webit\WFirmaSDK\Contractors\InvoiceAddress;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
 use Webit\WFirmaSDK\Invoices\Invoice;
 use Webit\WFirmaSDK\Invoices\InvoicesApi;
-use Webit\WFirmaSDK\Invoices\InvoicesContent;
-use Webit\WFirmaSDK\Invoices\Type;
-use Webit\WFirmaSDK\Series\SeriesId;
+use Webit\WFirmaSDK\Invoices\InvoiceStubTrait;
 
 class PaymentsApiIntegrationTest extends AbstractApiTestCase
 {
+    use InvoiceStubTrait;
+
     /** @var PaymentsApi */
     private $api;
 
     /** @var Payment[] */
     private $payments = array();
 
-    /** @var Invoices[] */
+    /** @var Invoice[] */
     private $invoices = array();
-    
-    /** @var Contractors[] */
-    private $contractors = array();
 
     protected function setUp()
     {
@@ -44,11 +36,6 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
         foreach ($this->invoices as $invoice) {
             $invoicesApi->delete($invoice->id());
         }
-
-        $contractorsApi = new ContractorsApi($this->entityApi());
-        foreach ($this->contractors as $contractor) {
-            $contractorsApi->delete($contractor->id());
-        }
     }
 
     /**
@@ -57,12 +44,11 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
     public function testAdd()
     {
         $this->payments[] = $createdPayment = $this->api->add(
-            $invoice = $this->newPayment()
+            $this->newPayment('PLN', PaymentAmount::forPlnAccount(200))
         );
 
         $this->assertInstanceOf('Webit\WFirmaSDK\Payments\Payment', $createdPayment);
     }
-
 
     /**
      * @test
@@ -70,13 +56,13 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
     public function testEdit()
     {
         $this->payments[] = $createdPayment = $this->api->add(
-            $payment = $this->newPayment()
+            $this->newPayment()
         );
 
         $this->assertInstanceOf('Webit\WFirmaSDK\Payments\Payment', $createdPayment);
 
         /** @var Payment $createdPayment */
-        $createdPayment->value(0.01);
+        $createdPayment->changeValue(PaymentAmount::forPlnAccount($createdPayment->amount()->value() * .5));
         $createdPayment->changeDate(date_create('now +1 day'));
         $createdPayment->changePaymentMethod(PaymentMethod::paymentCard());
 
@@ -89,7 +75,7 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
     public function testDelete()
     {
         $createdPayment = $this->api->add(
-            $payment = $this->newPayment()
+            $this->newPayment()
         );
         $this->api->delete($createdPayment->id());
 
@@ -108,7 +94,7 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
      */
     public function testGet()
     {
-        $createdPayment = $this->api->add($this->newPayment());
+        $this->payments[] = $createdPayment = $this->api->add($this->newPayment());
 
         $payment = $this->api->get($createdPayment->id());
 
@@ -119,91 +105,16 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
     /**
      * @return Payment
      */
-    private function newPayment()
+    private function newPayment($invoiceCurrency = 'PLN', ?PaymentAmount $paymentAmount = null): Payment
     {
         /** @var Invoice $invoice */
-        $invoice = $this->createInvoice();
+        $this->invoices[] = $invoice = $this->invoicesApi()->add($this->newInvoice(null, $invoiceCurrency));
+
         return Payment::forInvoice(
             $invoice,
-            $invoice->totals()->original(),
-            null,
+            $paymentAmount ?? PaymentAmount::forPlnAccount($invoice->totals()->original()),
+            new \DateTime(),
             PaymentMethod::transfer()
-        );
-    }
-
-    /**
-     * @return Invoice
-     */
-    private function newInvoice(SeriesId $seriesId = null)
-    {
-        $invoice = Invoice::forContractor(
-            $this->newContractor(),
-            \Webit\WFirmaSDK\Invoices\Payment::create(
-                PaymentMethod::transfer()
-            ),
-            Type::vat(),
-            $seriesId,
-            date_create('now')
-        );
-
-        $invoice->addInvoiceContent(
-            $this->newInvoiceContent()
-        );
-
-        $invoice->addInvoiceContent(
-            $this->newInvoiceContent()
-        );
-
-        return $invoice;
-    }
-
-    /**
-     * @return InvoicesContent
-     */
-    private function newInvoiceContent()
-    {
-        return InvoicesContent::fromName(
-            $this->faker()->colorName,
-            'szt.',
-            mt_rand(1, 5),
-            $this->faker()->randomFloat(2, 100, 1000),
-            23
-        );
-    }
-
-    /**
-     * @return Invoice|\Webit\WFirmaSDK\Entity\Entity
-     */
-    private function createInvoice()
-    {
-        $i = new InvoicesApi($this->entityApi());
-        return $this->invoices[] = $i->add($this->newInvoice());
-    }
-
-    /**
-     * @return Contractor
-     */
-    private function newContractor()
-    {
-        return new Contractor(
-            $this->faker()->company,
-            null,
-            '1234563218',
-            null,
-            new InvoiceAddress(
-                $this->faker()->streetAddress,
-                $this->faker()->postcode,
-                $this->faker()->city,
-                'PL'
-            ),
-            new ContactAddress(
-                $this->faker()->company,
-                $this->faker()->streetAddress,
-                $this->faker()->postcode,
-                $this->faker()->city,
-                'PL',
-                $this->faker()->name
-            )
         );
     }
 }
