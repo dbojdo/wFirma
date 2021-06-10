@@ -23,6 +23,7 @@ The current version of the package provides full support for the following modul
  * [invoice_descriptions](https://doc.wfirma.pl/#h3-invoicecontents#h3-invoice-descriptions)
  * [invoicecontents](https://doc.wfirma.pl/#h3-invoicecontents)
  * [invoices](https://doc.wfirma.pl/#h3-invoices)
+ * [payments](https://doc.wfirma.pl/#h3-payments)
  * [notes](https://doc.wfirma.pl/#h3-notes)
  * [series](https://doc.wfirma.pl/#h3-series)
  * [tags](https://doc.wfirma.pl/#h3-tags)
@@ -82,6 +83,7 @@ Every main module has it's own instance of the API exposing supported methods.
 * **Invoice Deliveries**: add, delete, find, findAll, get, count
 * **Invoice Descriptions**: find, findAll, get, count
 * **Invoices**: add, edit, delete, find, findAll, get, count, fiscalise, unfiscalise, download, send
+* **Payments**: add, edit, delete, find, findAll, get
 * **Notes**: add, edit, delete, find, findAll, get, count
 * **Series**: add, edit, delete, find, findAll, get, count
 * **Tags**: add, edit, delete, find, findAll, get, count

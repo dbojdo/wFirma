@@ -315,6 +315,7 @@ final class Module
             'Webit\WFirmaSDK\Payments\Payment',
             array(
                 'find',
+                'edit',
                 'get',
                 'add',
                 'delete'
