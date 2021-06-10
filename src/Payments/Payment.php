@@ -321,22 +321,6 @@ final class Payment extends DateAwareEntity
     }
 
     /**
-     * @param PaymentAmount $paymentCurrency
-     * @return Payment
-     */
-    public function changeAmount(PaymentAmount $paymentCurrency): Payment
-    {
-        $this->value = $paymentCurrency->value();
-        $this->account = $paymentCurrency->account();
-        $this->valuePln = $paymentCurrency->valuePln();
-        $this->currencyDate = $paymentCurrency->rateDate();
-        $this->currencyExchange = $paymentCurrency->exchangeRate();
-        $this->currencyLabel = $paymentCurrency->nbpLabel();
-
-        return $this;
-    }
-
-    /**
      * @return \DateTime
      */
     public function date(): \DateTime
@@ -385,6 +369,22 @@ final class Payment extends DateAwareEntity
             $this->currencyLabel,
             $this->currencyDate
         );
+    }
+
+    /**
+     * @param PaymentAmount $paymentCurrency
+     * @return Payment
+     */
+    public function changeAmount(PaymentAmount $paymentCurrency): Payment
+    {
+        $this->value = $paymentCurrency->value();
+        $this->account = $paymentCurrency->account();
+        $this->valuePln = $paymentCurrency->valuePln();
+        $this->currencyDate = $paymentCurrency->rateDate();
+        $this->currencyExchange = $paymentCurrency->exchangeRate();
+        $this->currencyLabel = $paymentCurrency->nbpLabel();
+
+        return $this;
     }
 
     public function objectName(): string

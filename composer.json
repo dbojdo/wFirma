@@ -19,10 +19,7 @@
     "autoload": {
         "psr-4": {
             "Webit\\WFirmaSDK\\": "src/"
-        },
-        "files": [
-            "src/bc.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
