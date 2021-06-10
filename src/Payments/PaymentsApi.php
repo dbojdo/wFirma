@@ -3,6 +3,8 @@
 namespace Webit\WFirmaSDK\Payments;
 
 use Webit\WFirmaSDK\Entity\EntityApi;
+use Webit\WFirmaSDK\Entity\EntityIterator;
+use Webit\WFirmaSDK\Entity\Parameters\Parameters;
 use Webit\WFirmaSDK\Module;
 use Webit\WFirmaSDK\Entity\Entity;
 
@@ -52,5 +54,21 @@ class PaymentsApi
     public function get(PaymentId $id)
     {
         return $this->entityApi->get($id->id(), Module::payments());
+    }
+
+    /**
+     * @return Payment[]
+     */
+    public function find(Parameters $parameters = null): array
+    {
+        return $this->entityApi->find(Module::payments(), $parameters);
+    }
+
+    /**
+     * @return Payment[]|EntityIterator
+     */
+    public function findAll(Parameters $parameters = null): EntityIterator
+    {
+        return $this->entityApi->findAll(Module::payments(), $parameters);
     }
 }

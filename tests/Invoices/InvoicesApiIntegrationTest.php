@@ -2,18 +2,16 @@
 
 namespace Webit\WFirmaSDK\Invoices;
 
-use Webit\WFirmaSDK\Contractors\ContactAddress;
 use Webit\WFirmaSDK\Contractors\ContractorsApi;
 use Webit\WFirmaSDK\Contractors\TaxIdType;
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
 use Webit\WFirmaSDK\Contractors\Contractor;
-use Webit\WFirmaSDK\Contractors\InvoiceAddress;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
-use Webit\WFirmaSDK\Payments\PaymentMethod;
-use Webit\WFirmaSDK\Series\SeriesId;
 
 class InvoicesApiIntegrationTest extends AbstractApiTestCase
 {
+    use InvoiceStubTrait;
+
     /** @var InvoicesApi */
     private $api;
 
@@ -25,7 +23,7 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
 
     protected function setUp()
     {
-        $this->api = new InvoicesApi($this->entityApi());
+        $this->api = $this->invoicesApi();
     }
 
     protected function tearDown()
@@ -46,7 +44,7 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
     public function testAdd()
     {
         $this->invoices[] = $createdInvoice = $this->api->add(
-            $invoice = $this->newInvoice()
+            $this->newInvoice()
         );
 
         $this->assertInstanceOf('Webit\WFirmaSDK\Invoices\Invoice', $createdInvoice);
@@ -59,7 +57,7 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
     public function testEdit()
     {
         $this->invoices[] = $createdInvoice = $this->api->add(
-            $invoice = $this->newInvoice()
+            $this->newInvoice()
         );
 
         $this->assertInstanceOf('Webit\WFirmaSDK\Invoices\Invoice', $createdInvoice);
@@ -81,7 +79,7 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
     public function testDelete()
     {
         $createdInvoice = $this->api->add(
-            $invoice = $this->newInvoice()
+            $this->newInvoice()
         );
         $this->api->delete($createdInvoice->id());
 
@@ -106,80 +104,6 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
 
         $this->assertInstanceOf('Webit\WFirmaSDK\Invoices\Invoice', $gotInvoice);
         $this->assertEquals($createdInvoice->id(), $gotInvoice->id());
-    }
-
-    private function newInvoice(SeriesId $seriesId = null)
-    {
-        $invoice = Invoice::forContractor(
-            $this->newContractor(),
-            Payment::create(
-                PaymentMethod::transfer(),
-                $this->faker()->dateTimeBetween('now', '+30 days')
-            ),
-            Type::vat(),
-            $seriesId,
-            date_create('now - 7 days')
-        );
-
-        $invoice->addInvoiceContent(
-            InvoicesContent::fromName(
-                $this->faker()->colorName,
-                'szt.',
-                mt_rand(1, 5),
-                $this->faker()->randomFloat(2, 100, 1000),
-                23
-            )
-        );
-
-        $invoice->addInvoiceContent(
-            InvoicesContent::fromName(
-                $this->faker()->colorName,
-                'szt.',
-                mt_rand(1, 5),
-                $this->faker()->randomFloat(2, 100, 1000),
-                23
-            )
-        );
-
-        return $invoice;
-    }
-
-    private function newInvoiceContent()
-    {
-        return InvoicesContent::fromName(
-            $this->faker()->colorName,
-            'szt.',
-            mt_rand(1, 5),
-            $this->faker()->randomFloat(2, 100, 1000),
-            23
-        );
-    }
-
-    /**
-     * @return Contractor
-     */
-    private function newContractor()
-    {
-        return new Contractor(
-            $this->faker()->company,
-            null,
-            '1234563218',
-            null,
-            new InvoiceAddress(
-                $this->faker()->streetAddress,
-                $this->faker()->postcode,
-                $this->faker()->city,
-                'PL'
-            ),
-            new ContactAddress(
-                $this->faker()->company,
-                $this->faker()->streetAddress,
-                $this->faker()->postcode,
-                $this->faker()->city,
-                'PL',
-                $this->faker()->name
-            )
-        );
     }
 
     /**
