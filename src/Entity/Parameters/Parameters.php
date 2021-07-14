@@ -3,7 +3,6 @@
 namespace Webit\WFirmaSDK\Entity\Parameters;
 
 use JMS\Serializer\Annotation as JMS;
-use Webit\WFirmaSDK\Entity\Condition;
 
 /**
  * @JMS\XmlRoot("parameters")
@@ -11,8 +10,9 @@ use Webit\WFirmaSDK\Entity\Condition;
 final class Parameters
 {
     /**
-     * @var Condition
-     * @JMS\Exclude
+     * @var Conditions
+     * @JMS\SerializedName("conditions")
+     * @JMS\Type("Webit\WFirmaSDK\Entity\Parameters\Conditions")
      * @JMS\Groups({"findRequest"})
      */
     private $condition;
@@ -66,12 +66,13 @@ final class Parameters
     private $parameters = array();
 
     private function __construct(
-        Condition $condition = null,
+        Conditions $condition = null,
         Fields $fields = null,
         Order $order = null,
         Pagination $pagination = null,
         array $parameters = array()
     ) {
+        $this->condition = $condition;
         $this->fields = $fields;
         $this->order = $order;
         if ($pagination) {
@@ -88,14 +89,14 @@ final class Parameters
     }
 
     /**
-     * @param Condition|null $condition
+     * @param Conditions|null $condition
      * @param Order|null $order
      * @param Pagination|null $pagination
      * @param Fields|null $fields
      * @return Parameters
      */
     public static function findParameters(
-        Condition $condition = null,
+        Conditions $condition = null,
         Order $order = null,
         Pagination $pagination = null,
         Fields $fields = null
@@ -118,7 +119,7 @@ final class Parameters
     }
 
     /**
-     * @return Condition
+     * @return Conditions
      */
     public function condition()
     {

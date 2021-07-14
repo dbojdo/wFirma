@@ -100,9 +100,19 @@ use Webit\WFirmaSDK\Entity\Parameters\Parameters;
 use Webit\WFirmaSDK\Entity\Parameters\Order;
 use Webit\WFirmaSDK\Entity\Parameters\Pagination;
 use Webit\WFirmaSDK\Entity\Parameters\Fields;
+use \Webit\WFirmaSDK\Entity\Parameters\Conditions;
+use \Webit\WFirmaSDK\Entity\Parameters\Condition;
 
+$conditions = Conditions::fromOrConditions(
+    Condition::eq('id', '123'),
+    Condition::eq('id', '456'),
+    Condition::eq('id', '789')
+);
+$conditions->addAndConditions(
+    Condition::le('alreadypaid', '300')
+);
 $parameters = Parameters::findParameters(
-    null, // filtering by conditions is not supported yet
+    $conditions,
     Order::ascending("name")->thenDescending("created"), // optional - ordering
     Pagination::create(20, 2), // optional - limit, page no
     Fields::fromArray(array("id", "name")) // optional - subset of fields to select
