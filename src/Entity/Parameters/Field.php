@@ -11,6 +11,7 @@ final class Field
      * @JMS\Type("string")
      * @JMS\SerializedName("field")
      * @JMS\XmlElement(cdata=false)
+     * @JMS\XmlValue(cdata=false)
      * @JMS\Groups({"findRequest"})
      */
     private $name;

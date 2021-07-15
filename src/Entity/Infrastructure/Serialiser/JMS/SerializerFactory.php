@@ -28,6 +28,7 @@ class SerializerFactory
         $timezone = $this->timezone;
         $serializerBuilder->configureHandlers(function (HandlerRegistryInterface $registry) use ($timezone) {
             $registry->registerSubscribingHandler(new DateHandler(\DateTime::ISO8601, $timezone));
+            $registry->registerSubscribingHandler(new OrderHandler());
         });
 
         $serializerBuilder->configureListeners(function (EventDispatcherInterface $eventDispatcher) {
