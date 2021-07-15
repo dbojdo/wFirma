@@ -2,18 +2,14 @@
 
 namespace Webit\WFirmaSDK\Entity\Parameters;
 
-use JMS\Serializer\Context;
-use JMS\Serializer\XmlDeserializationVisitor;
-use JMS\Serializer\XmlSerializationVisitor;
 use JMS\Serializer\Annotation as JMS;
 
-/**
- * @JMS\XmlRoot("fields")
- */
 final class Fields
 {
     /**
      * @var Field[]
+     * @JMS\XmlList(inline=true,entry="field")
+     * @JMS\Groups({"findRequest"})
      */
     private $fields;
 
@@ -29,7 +25,7 @@ final class Fields
      * @param Field $field
      * @return Fields
      */
-    public function withField(Field $field)
+    public function withField(Field $field): Fields
     {
         $fields = $this->fields;
         $fields[] = $field;
@@ -41,35 +37,13 @@ final class Fields
      * @param string[]|Field[] $fields
      * @return Fields
      */
-    public static function fromArray(array $fields)
+    public static function fromArray(array $fields): Fields
     {
-        $arFields = array();
-        foreach ($fields as $field) {
-            $arFields[] = new Field((string)$field);
-        }
-
-        return new self($arFields);
-    }
-
-    /**
-     * @JMS\HandlerCallback("xml", direction="serialization")
-     */
-    public function serializeToXml(XmlSerializationVisitor $visitor, $type, Context $context)
-    {
-        foreach ($this->fields as $field) {
-            $context->accept($field, array('name' => 'Webit\WFirmaSDK\Entity\Parameters\Field'));
-        }
-    }
-
-    /**
-     * @JMS\HandlerCallback("xml", direction="deserialization")
-     */
-    public function deserializeFromXml(XmlDeserializationVisitor $visitor, $data, Context $context)
-    {
-        $fields = array();
-        foreach ($data->field as $field) {
-            $fields[] = new Field((string)$field);
-        }
-        $this->fields = $fields;
+        return new self(
+            array_map(function ($field) {
+                return new Field((string)$field);
+            },
+                $fields)
+        );
     }
 }
