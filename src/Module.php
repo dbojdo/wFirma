@@ -210,6 +210,7 @@ final class Module
             'Webit\WFirmaSDK\Invoices\Invoice',
             array(
                 'find',
+                'findALl',
                 'get',
                 'download',
                 'send',

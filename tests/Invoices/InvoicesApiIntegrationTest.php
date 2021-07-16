@@ -7,6 +7,11 @@ use Webit\WFirmaSDK\Contractors\TaxIdType;
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
 use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
+use Webit\WFirmaSDK\Entity\Parameters\Conditions;
+use Webit\WFirmaSDK\Entity\Parameters\Fields;
+use Webit\WFirmaSDK\Entity\Parameters\Order;
+use Webit\WFirmaSDK\Entity\Parameters\Pagination;
+use Webit\WFirmaSDK\Entity\Parameters\Parameters;
 
 class InvoicesApiIntegrationTest extends AbstractApiTestCase
 {
@@ -104,6 +109,26 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
 
         $this->assertInstanceOf('Webit\WFirmaSDK\Invoices\Invoice', $gotInvoice);
         $this->assertEquals($createdInvoice->id(), $gotInvoice->id());
+    }
+
+    /**
+     * @test
+     */
+    public function testFindWithConditions()
+    {
+        $invoices = $this->api->find(
+            Parameters::findParameters(
+                Conditions::and(
+                    Conditions::ge('date', '2021-06-27'),
+                    Conditions::le('date', '2021-06-30')
+                ),
+                Order::ascending('id'),
+                Pagination::create(10),
+                Fields::fromArray(['id', 'netto', 'date'])
+            )
+        );
+
+        $this->assertIsArray($invoices);
     }
 
     /**

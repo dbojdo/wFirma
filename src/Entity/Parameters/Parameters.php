@@ -3,7 +3,6 @@
 namespace Webit\WFirmaSDK\Entity\Parameters;
 
 use JMS\Serializer\Annotation as JMS;
-use Webit\WFirmaSDK\Entity\Condition;
 
 /**
  * @JMS\XmlRoot("parameters")
@@ -11,11 +10,12 @@ use Webit\WFirmaSDK\Entity\Condition;
 final class Parameters
 {
     /**
-     * @var Condition
-     * @JMS\Exclude
+     * @var Conditions
+     * @JMS\SerializedName("conditions")
+     * @JMS\Type("Webit\WFirmaSDK\Entity\Parameters\Conditions")
      * @JMS\Groups({"findRequest"})
      */
-    private $condition;
+    private $conditions;
 
     /**
      * @var Fields
@@ -63,15 +63,16 @@ final class Parameters
      * @JMS\Type("array<Webit\WFirmaSDK\Entity\Parameters\Parameter>")
      * @JMS\Groups({"request"})
      */
-    private $parameters = array();
+    private $parameters = [];
 
     private function __construct(
-        Condition $condition = null,
+        Conditions $conditions = null,
         Fields $fields = null,
         Order $order = null,
         Pagination $pagination = null,
-        array $parameters = array()
+        array $parameters = []
     ) {
+        $this->conditions = $conditions ? $conditions->ensureContainer() : null;
         $this->fields = $fields;
         $this->order = $order;
         if ($pagination) {
@@ -82,24 +83,24 @@ final class Parameters
         $this->parameters = $parameters;
     }
 
-    public static function defaultParameters()
+    public static function defaultParameters(): Parameters
     {
         return new self();
     }
 
     /**
-     * @param Condition|null $condition
+     * @param Conditions|null $condition
      * @param Order|null $order
      * @param Pagination|null $pagination
      * @param Fields|null $fields
      * @return Parameters
      */
     public static function findParameters(
-        Condition $condition = null,
+        Conditions $condition = null,
         Order $order = null,
         Pagination $pagination = null,
         Fields $fields = null
-    ) {
+    ): Parameters {
         return new self(
             $condition,
             $fields,
@@ -112,23 +113,32 @@ final class Parameters
      * @param Parameter[] $parameters
      * @return Parameters
      */
-    public static function actionParameters(array $parameters)
+    public static function actionParameters(array $parameters): Parameters
     {
         return new self(null, null, null, null, $parameters);
     }
 
     /**
-     * @return Condition
+     * @deprecated Use `conditions()` instead
+     * @return Conditions
      */
-    public function condition()
+    public function condition(): ?Conditions
     {
-        return $this->condition;
+        return $this->conditions();
+    }
+
+    /**
+     * @return Conditions
+     */
+    public function conditions(): ?Conditions
+    {
+        return $this->conditions;
     }
 
     /**
      * @return Fields
      */
-    public function fields()
+    public function fields(): ?Fields
     {
         return $this->fields;
     }
@@ -136,7 +146,7 @@ final class Parameters
     /**
      * @return Order
      */
-    public function order()
+    public function order(): ?Order
     {
         return $this->order;
     }
@@ -144,7 +154,7 @@ final class Parameters
     /**
      * @return Pagination
      */
-    public function pagination()
+    public function pagination(): Pagination
     {
         return new Pagination($this->limit, $this->page, $this->total);
     }
@@ -152,19 +162,19 @@ final class Parameters
     /**
      * @return Parameter[]
      */
-    public function parameters()
+    public function parameters(): array
     {
-        return $this->parameters ?: array();
+        return $this->parameters ?: [];
     }
 
     /**
      * @param Pagination $pagination
      * @return Parameters
      */
-    public function withPagination(Pagination $pagination)
+    public function withPagination(Pagination $pagination): Parameters
     {
         return new self(
-            $this->condition,
+            $this->conditions,
             $this->fields,
             $this->order,
             $pagination,
@@ -177,6 +187,6 @@ final class Parameters
      */
     public function isEmpty()
     {
-        return !($this->condition || $this->fields || $this->order || $this->limit || $this->page || $this->parameters);
+        return !($this->conditions || $this->fields || $this->order || $this->limit || $this->page || $this->parameters);
     }
 }
