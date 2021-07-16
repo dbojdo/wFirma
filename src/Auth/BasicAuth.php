@@ -56,4 +56,15 @@ final class BasicAuth
     {
         return ! ($this->username || $this->password);
     }
+
+    /**
+     * @return string
+     */
+    public function toHttpHeader()
+    {
+        return sprintf(
+            'Authorization: Basic %s',
+            base64_encode($this->username().':'.$this->password())
+        );
+    }
 }

@@ -20,10 +20,7 @@ final class BasicAuthListener implements ListenerInterface
     public function preSend(RequestInterface $request)
     {
         $request->addHeader(
-            sprintf(
-                'Authorization: Basic %s',
-                base64_encode($this->auth->username().':'.$this->auth->password())
-            )
+            $this->auth->toHttpHeader()
         );
     }
 

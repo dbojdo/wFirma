@@ -6,12 +6,6 @@ use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Webit\WFirmaSDK\AbstractTestCase;
-use Webit\WFirmaSDK\Entity\Parameters\Field;
-use Webit\WFirmaSDK\Entity\Parameters\Fields;
-use Webit\WFirmaSDK\Entity\Parameters\Order;
-use Webit\WFirmaSDK\Entity\Parameters\Pagination;
-use Webit\WFirmaSDK\Entity\Parameters\Parameter;
-use Webit\WFirmaSDK\Entity\Parameters\Parameters;
 
 class ParametersSerializerTest extends AbstractTestCase
 {
@@ -26,21 +20,95 @@ class ParametersSerializerTest extends AbstractTestCase
     /**
      * @test
      */
+    public function it_serialises_nested_conditions()
+    {
+        $parameters = Parameters::findParameters(
+            Conditions::orCondition(
+                array(
+                    Conditions::andCondition(
+                        array(
+                            Conditions::eq('field1', 'value1'),
+                            Conditions::eq('field2', 'value2')
+                        )
+                    ),
+                    Conditions::andCondition(
+                        array(
+                            Conditions::eq('field3', 'value3'),
+                            Conditions::eq('field4', 'value4')
+                        )
+                    )
+                )
+            )
+        );
+        $expectedXml = <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<parameters>
+  <conditions>
+    <or>
+      <condition>
+        <and>
+          <condition>
+            <field>field1</field>
+            <operator>eq</operator>
+            <value><![CDATA[value1]]></value>
+          </condition>
+          <condition>
+            <field>field2</field>
+            <operator>eq</operator>
+            <value><![CDATA[value2]]></value>
+          </condition>
+        </and>
+      </condition>
+      <condition>
+        <and>
+          <condition>
+            <field>field3</field>
+            <operator>eq</operator>
+            <value><![CDATA[value3]]></value>
+          </condition>
+          <condition>
+            <field>field4</field>
+            <operator>eq</operator>
+            <value><![CDATA[value4]]></value>
+          </condition>
+        </and>
+      </condition>
+    </or>
+  </conditions>
+</parameters>
+
+XML;
+
+        $context = SerializationContext::create();
+        $context->setGroups(array('request', 'findRequest'));
+        $this->assertEquals($expectedXml, $this->serializer->serialize($parameters, 'xml', $context));
+    }
+
+    /**
+     * @test
+     */
     public function it_serialises_find_parameters()
     {
         $parameters = Parameters::findParameters(
-            null,
+            Conditions::eq('field', 'value'),
             Order::descending('abc')->thenAscending('cba'),
             new Pagination(10, 2),
-            Fields::fromArray(array(
-                new Field('abc'),
-                new Field('cba')
-            ))
+            Fields::fromArray([
+                'abc',
+                'cba'
+            ])
         );
 
         $expectedXml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <parameters>
+  <conditions>
+    <condition>
+      <field>field</field>
+      <operator>eq</operator>
+      <value><![CDATA[value]]></value>
+    </condition>
+  </conditions>
   <fields>
     <field>abc</field>
     <field>cba</field>
@@ -58,7 +126,6 @@ XML;
         $context->setGroups(array('request', 'findRequest'));
         $this->assertEquals($expectedXml, $this->serializer->serialize($parameters, 'xml', $context));
     }
-
 
     /**
      * @test

@@ -6,6 +6,7 @@
     "keywords": ["sdk", "api", "wfirma", "w-firma"],
     "require": {
         "php": ">=5.4,<=7.0",
+        "ext-curl": "*",
         "jms/serializer": "^1.0.0",
         "kriswallsmith/buzz": ">=0.12.0,<0.17",
         "psr/log": "^1.0.2"

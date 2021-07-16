@@ -83,11 +83,17 @@ APIs exposing **find** / **findAll** / **count** method takes and optional **Par
 <?php
 use Webit\WFirmaSDK\Entity\Parameters\Parameters;
 use Webit\WFirmaSDK\Entity\Parameters\Order;
+use Webit\WFirmaSDK\Entity\Parameters\Conditions;
 use Webit\WFirmaSDK\Entity\Parameters\Pagination;
 use Webit\WFirmaSDK\Entity\Parameters\Fields;
 
 $parameters = Parameters::findParameters(
-    null, // filtering by conditions is not supported yes
+    Conditions::or(
+        array(
+            Conditions::eq('name', 'FA/'),
+            Conditions::gt('id', '20')
+        )
+    ),
     Order::ascending("name")->thenDescending("created"), // optional - ordering
     Pagination::create(20, 2), // optional - limit, page no 
     Fields::fromArray(array("id", "name")) // optional - subset of fields to select
@@ -205,7 +211,7 @@ $contractor = $api->get(\Webit\WFirmaSDK\Contractors\ContractorId::create(123));
 
 ## Further development
 
-Feel free to add any other modules support. Also filtering by Conditions is not supported yet - any help is welcome. 
+Feel free to add any other modules support. 
 
 ## Tests
 

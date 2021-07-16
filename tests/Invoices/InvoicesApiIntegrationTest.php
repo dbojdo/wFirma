@@ -10,6 +10,11 @@ use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
 use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Contractors\InvoiceAddress;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
+use Webit\WFirmaSDK\Entity\Parameters\Conditions;
+use Webit\WFirmaSDK\Entity\Parameters\Fields;
+use Webit\WFirmaSDK\Entity\Parameters\Order;
+use Webit\WFirmaSDK\Entity\Parameters\Pagination;
+use Webit\WFirmaSDK\Entity\Parameters\Parameters;
 use Webit\WFirmaSDK\Series\SeriesId;
 
 class InvoicesApiIntegrationTest extends AbstractApiTestCase
@@ -102,6 +107,28 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
 
         $this->assertInstanceOf('Webit\WFirmaSDK\Invoices\Invoice', $gotInvoice);
         $this->assertEquals($createdInvoice->id(), $gotInvoice->id());
+    }
+
+    /**
+     * @test
+     */
+    public function testFindWithConditions()
+    {
+        $this->invoices[] = $createdInvoice = $this->api->add(
+            $invoice = $this->newInvoice()
+        );
+
+        $invoices = $this->api->find(
+            Parameters::findParameters(
+                Conditions::eq('fullnumber', $createdInvoice->number()->fullNumber()),
+                Order::ascending('id'),
+                Pagination::create(10),
+                Fields::fromArray(['id', 'netto', 'date'])
+            )
+        );
+
+        $this->assertCount(1, $invoices);
+        $this->assertEquals($createdInvoice->totals()->netto(), $invoices[0]->totals()->netto());
     }
 
     private function newInvoice(SeriesId $seriesId = null)

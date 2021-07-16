@@ -36,7 +36,7 @@ final class BrowserFactory
             $client->setOption($option, $value);
         }
 
-        if (class_exists('Buzz\Middleware\MiddlewareInterface')) {
+        if (interface_exists('Buzz\\Middleware\\MiddlewareInterface')) {
             $this->configureBuzzWithMiddleware($browser, $auth);
         } else {
             $this->configureBuzzWithListener($browser, $auth);
