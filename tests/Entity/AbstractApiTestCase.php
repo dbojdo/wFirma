@@ -4,6 +4,8 @@ namespace Webit\WFirmaSDK\Entity;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Webit\WFirmaSDK\AbstractTestCase;
 use Webit\WFirmaSDK\Auth\BasicAuth;
 use Webit\WFirmaSDK\Auth\CompanyId;
@@ -23,12 +25,7 @@ abstract class AbstractApiTestCase extends AbstractTestCase
                 new BuzzRequestExecutorFactory(
                     null,
                     null,
-                    new Logger(
-                        'API',
-                        array(
-                            new StreamHandler('php://stdout')
-                        )
-                    )
+                    $this->logger((bool)getenv('debug_api_messages'))
                 )
             );
         } catch (\Exception $e) {
@@ -36,6 +33,20 @@ abstract class AbstractApiTestCase extends AbstractTestCase
         }
 
         return $factory->create($this->basicAuth());
+    }
+
+    private function logger(bool $logMessages): LoggerInterface
+    {
+        if (!$logMessages) {
+            return new NullLogger();
+        }
+
+        return new Logger(
+            'API',
+            array(
+                new StreamHandler('php://stdout')
+            )
+        );
     }
 
     private function basicAuth()

@@ -14,6 +14,7 @@
         <env name="wFirma.username" value=""/>
         <env name="wFirma.password" value=""/>
         <env name="wFirma.company_id" value=""/> <!-- optional -->
+        <env name="debug_api_messages" value="0" /> <!-- set to "1" to print request / response XML message to the console -->
     </php>
 
     <testsuites>
