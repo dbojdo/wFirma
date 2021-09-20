@@ -137,6 +137,8 @@ use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Contractors\InvoiceAddress;
 use Webit\WFirmaSDK\Invoices\InvoicesContent;
 use Webit\WFirmaSDK\Goods\GoodId;
+use Webit\WFirmaSDK\Invoices\Payment;
+use Webit\WFirmaSDK\Payments\PaymentMethod;
 
 /** @var \Webit\WFirmaSDK\Invoices\InvoicesApi $api */
 $api = $apiFactory->invoicesApi();
@@ -154,7 +156,8 @@ $invoice = \Webit\WFirmaSDK\Invoices\Invoice::forContractor(
             'Warszawa',
             'PL'
         )
-    )
+    ),
+    Payment::create(PaymentMethod::transfer())
 );
 
 $invoice->addInvoiceContent(
