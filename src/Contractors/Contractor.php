@@ -319,7 +319,7 @@ final class Contractor extends DateAwareEntity
     /**
      * @var CompanyAccountId
      * @JMS\Type("Webit\WFirmaSDK\CompanyAccounts\CompanyAccountId")
-     * @JMS\SerializedName("translation_language")
+     * @JMS\SerializedName("company_account")
      * @JMS\Groups({"response"})
      */
     private $companyAccountId;
@@ -327,7 +327,7 @@ final class Contractor extends DateAwareEntity
     /**
      * @var InvoiceDescriptionId
      * @JMS\Type("Webit\WFirmaSDK\InvoiceDescriptions\InvoiceDescriptionId")
-     * @JMS\SerializedName("translation_language")
+     * @JMS\SerializedName("invoice_description")
      * @JMS\Groups({"response"})
      */
     private $invoiceDescriptionId;

@@ -183,7 +183,7 @@ final class InvoicesContent extends DateAwareEntity
 
     /**
      * @param string $name
-     * @param float $unit
+     * @param string $unit
      * @param float $count
      * @param float $price
      * @param string $vat
