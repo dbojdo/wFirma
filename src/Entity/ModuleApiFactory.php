@@ -5,6 +5,7 @@ namespace Webit\WFirmaSDK\Entity;
 use Webit\WFirmaSDK\CompanyAccounts\CompanyAccountsApi;
 use Webit\WFirmaSDK\Contractors\ContractorsApi;
 use Webit\WFirmaSDK\DeclarationCountries\DeclarationCountriesApi;
+use Webit\WFirmaSDK\Goods\GoodsApi;
 use Webit\WFirmaSDK\InvoiceDeliveries\InvoiceDeliveriesApi;
 use Webit\WFirmaSDK\InvoiceDescriptions\InvoiceDescriptionsApi;
 use Webit\WFirmaSDK\Invoices\InvoicesApi;
@@ -31,6 +32,14 @@ class ModuleApiFactory
     public function contractorsApi()
     {
         return new ContractorsApi($this->entityApi);
+    }
+
+    /**
+     * @return GoodsApi
+     */
+    public function goodsApi()
+    {
+        return new GoodsApi($this->entityApi);
     }
 
     /**

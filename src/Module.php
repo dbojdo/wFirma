@@ -83,6 +83,14 @@ final class Module
     /**
      * @return Module
      */
+    public static function goods()
+    {
+        return self::module('goods');
+    }
+
+    /**
+     * @return Module
+     */
     public static function vatCodes()
     {
         return self::module('vat_codes');
@@ -216,6 +224,19 @@ final class Module
                 'send',
                 'fiscalize',
                 'unfiscalize',
+                'add',
+                'edit',
+                'delete'
+            )
+        );
+
+        self::$modules['goods'] = new self(
+            'goods',
+            'good',
+            'Webit\WFirmaSDK\Goods\Good',
+            array(
+                'find',
+                'get',
                 'add',
                 'edit',
                 'delete'

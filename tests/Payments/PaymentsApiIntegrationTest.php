@@ -3,6 +3,7 @@
 namespace Webit\WFirmaSDK\Payments;
 
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
+use Webit\WFirmaSDK\Entity\Exception\ApiException;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
 use Webit\WFirmaSDK\Invoices\Invoice;
 use Webit\WFirmaSDK\Invoices\InvoicesApi;
@@ -62,7 +63,7 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
         $this->assertInstanceOf('Webit\WFirmaSDK\Payments\Payment', $createdPayment);
 
         /** @var Payment $createdPayment */
-        $createdPayment->changeValue(PaymentAmount::forPlnAccount($createdPayment->amount()->value() * .5));
+        $createdPayment->changeAmount(PaymentAmount::forPlnAccount($createdPayment->amount()->value() * .5));
         $createdPayment->changeDate(date_create('now +1 day'));
         $createdPayment->changePaymentMethod(PaymentMethod::paymentCard());
 

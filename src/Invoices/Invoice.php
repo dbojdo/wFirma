@@ -723,6 +723,22 @@ final class Invoice extends DateAwareEntity
     }
 
     /**
+     * @return null|ContractorId
+     */
+    public function contractorId(): ?ContractorId
+    {
+        if ($this->contractorId) {
+            return $this->contractorId;
+        }
+
+        if ($this->contractor) {
+            return $this->contractor->id();
+        }
+
+        return null;
+    }
+
+    /**
      * @return ContractorDetail
      */
     public function contractorDetail()
