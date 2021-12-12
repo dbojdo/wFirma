@@ -46,6 +46,15 @@ class TagsApi
     }
 
     /**
+     * @param TagId $id
+     * @return \Webit\WFirmaSDK\Entity\Entity|Tag
+     */
+    public function get(TagId $id)
+    {
+        return $this->entityApi->get($id->id(), Module::tags());
+    }
+
+    /**
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|Tag[]
      */
