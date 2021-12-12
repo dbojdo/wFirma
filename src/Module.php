@@ -323,9 +323,22 @@ final class Module
             )
         );
 
-        self::$modules['tags'] = new self(
+        self::$modules['notes'] = new self(
             'notes',
             'note',
+            'Webit\WFirmaSDK\Notes\Note',
+            array(
+                'find',
+                'get',
+                'add',
+                'edit',
+                'delete'
+            )
+        );
+
+        self::$modules['tags'] = new self(
+            'tags',
+            'tag',
             'Webit\WFirmaSDK\Tags\Tag',
             array(
                 'find',
