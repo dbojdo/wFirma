@@ -80,6 +80,7 @@ Every main module has it's own instance of the API exposing supported methods.
 * **Company Accounts**: find, findAll, get, count,
 * **Contractors**: add, edit, delete, find, findAll, get, count
 * **Declaration Countries**: find, findAll, get, count
+* **Goods**: add, edit, delete, find, get
 * **Invoice Deliveries**: add, delete, find, findAll, get, count
 * **Invoice Descriptions**: find, findAll, get, count
 * **Invoices**: add, edit, delete, find, findAll, get, count, fiscalise, unfiscalise, download, send
