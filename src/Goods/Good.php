@@ -4,7 +4,6 @@ namespace Webit\WFirmaSDK\Goods;
 
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use JMS\Serializer\Annotation as JMS;
-use Webit\WFirmaSDK\Module;
 
 /**
  * @JMS\XmlRoot("good")
@@ -185,7 +184,7 @@ final class Good extends DateAwareEntity
     /**
      * @return float
      */
-    public function getBrutto(): float
+    public function brutto(): float
     {
         return $this->brutto;
     }
@@ -225,7 +224,7 @@ final class Good extends DateAwareEntity
     /**
      * @return string
      */
-    public function priceType(): string
+    public function priceType(): ?string
     {
         return $this->priceType;
     }
