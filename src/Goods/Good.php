@@ -4,6 +4,8 @@ namespace Webit\WFirmaSDK\Goods;
 
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use JMS\Serializer\Annotation as JMS;
+use Webit\WFirmaSDK\Tags\TagIds;
+use Webit\WFirmaSDK\Vat\VatCodeId;
 
 /**
  * @JMS\XmlRoot("good")
@@ -14,7 +16,7 @@ final class Good extends DateAwareEntity
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("name")
-     * @JMS\Groups("response", "addRequest")
+     * @JMS\Groups("response", "request")
      */
     private $name;
 
@@ -22,7 +24,7 @@ final class Good extends DateAwareEntity
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("code")
-     * @JMS\Groups("response", "addRequest")
+     * @JMS\Groups("response", "request")
      */
     private $code;
 
@@ -37,7 +39,7 @@ final class Good extends DateAwareEntity
     /**
      * @var float
      * @JMS\Type("double")
-     * @JMS\SerializedName("discount")
+     * @JMS\SerializedName("netto")
      * @JMS\Groups({"request", "response"})
      */
     private $netto;
@@ -54,6 +56,7 @@ final class Good extends DateAwareEntity
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("type")
+     * @JMS\XmlElement(cdata=false)
      * @JMS\Groups("response", "request")
      */
     private $type;
@@ -67,10 +70,9 @@ final class Good extends DateAwareEntity
     private $classification;
 
     /**
-     * @var float
-     * @JMS\Type("double")
+     * @var int
+     * @JMS\Type("integer")
      * @JMS\SerializedName("discount")
-     * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
      */
     private $discount;
@@ -84,6 +86,87 @@ final class Good extends DateAwareEntity
     private $description;
 
     /**
+     * @var int
+     * @JMS\Type("integer")
+     * @JMS\SerializedName("notes")
+     * @JMS\Groups({"response"})
+     */
+    private $notes;
+
+    /**
+     * @var int
+     * @JMS\Type("integer")
+     * @JMS\SerializedName("documents")
+     * @JMS\Groups({"response"})
+     */
+    private $documents;
+
+    /**
+     * @var TagIds
+     * @JMS\Type("Webit\WFirmaSDK\Tags\TagIds")
+     * @JMS\SerializedName("tags")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $tags;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("count")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $count;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("reserved")
+     * @JMS\Groups({"response"})
+     */
+    private $reserved;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("min")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $min;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("max")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $max;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("secure")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $secure;
+
+    /**
+     * @var int
+     * @JMS\Type("integer")
+     * @JMS\SerializedName("visibility")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $visibility;
+
+    /**
+     * @var string
+     * @JMS\Type("string")
+     * @JMS\SerializedName("warehouse_type")
+     * @JMS\XmlElement(cdata=false)
+     * @JMS\Groups({"response"})
+     */
+    private $warehouseType;
+
+    /**
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("price_type")
@@ -93,8 +176,8 @@ final class Good extends DateAwareEntity
     private $priceType;
 
     /**
-     * @var string
-     * @JMS\Type("string")
+     * @var int
+     * @JMS\Type("integer")
      * @JMS\SerializedName("vat")
      * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
@@ -102,43 +185,82 @@ final class Good extends DateAwareEntity
     private $vat;
 
     /**
+     * @var VatCodeId
+     * @JMS\Type("Webit\WFirmaSDK\Vat\VatCodeId")
+     * @JMS\SerializedName("vat_code")
+     * @JMS\Groups({"response"})
+     *
+     */
+    private $vatCodeId;
+
+    /**
+     * @var VatCodeId
+     * @JMS\Type("Webit\WFirmaSDK\Vat\VatCodeId")
+     * @JMS\SerializedName("vat_code_purchase")
+     * @JMS\Groups({"response"})
+     */
+    private $vatCodePurchaseId;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("weight")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $weight;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("length")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $length;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("width")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $width;
+
+    /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("height")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $height;
+
+    /**
      * @param string $name
      * @param string $unit
-     * @param string $vat
-     * @param string $code
-     * @param float  $netto
-     * @param float  $brutto
-     * @param string $type
-     * @param string $classification
-     * @param float  $discount
-     * @param string $description
-     * @param string $priceType
+     * @param Price $price
+     * @param ?string $code
+     * @param ?Type $type
+     * @param ?string $classification
+     * @param ?string $description
+     * @param ?Dimensions $dimensions
      */
     public function __construct(
         string $name,
         string $unit,
-        string $vat,
+        Price $price,
         string $code = null,
-        float $netto = null,
-        float $brutto = null,
-        string $type = null,
+        Type $type = null,
         string $classification = null,
-        float $discount = null,
         string $description = null,
-        string $priceType = null
-    )
-    {
+        Dimensions $dimensions = null
+    ) {
         $this->name = $name;
         $this->unit = $unit;
-        $this->vat = $vat;
+        $this->changePrice($price);
         $this->code = $code;
-        $this->netto = $netto;
-        $this->brutto = $brutto;
-        $this->type = $type;
+        $this->type = (string)$type;
         $this->classification = $classification;
-        $this->discount = $discount;
         $this->description = $description;
-        $this->priceType = $priceType;
+        $this->changeDimensions($dimensions ?: new Dimensions());
     }
 
     /**
@@ -190,11 +312,11 @@ final class Good extends DateAwareEntity
     }
 
     /**
-     * @return string
+     * @return ?Type
      */
-    public function type(): string
+    public function type(): ?Type
     {
-        return $this->type;
+        return $this->type ? Type::fromString($this->type) : null;
     }
 
     /**
@@ -206,11 +328,11 @@ final class Good extends DateAwareEntity
     }
 
     /**
-     * @return float
+     * @return bool
      */
-    public function discount(): float
+    public function discount(): bool
     {
-        return $this->discount;
+        return (bool)$this->discount;
     }
 
     /**
@@ -222,18 +344,209 @@ final class Good extends DateAwareEntity
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function priceType(): ?string
+    public function visibility(): bool
     {
-        return $this->priceType;
+        return (bool)$this->visibility;
     }
 
     /**
-     * @return string
+     * @return ?WarehouseType
      */
-    public function vat(): string
+    public function warehouseType(): ?WarehouseType
+    {
+        return $this->warehouseType ? WarehouseType::fromString($this->warehouseType) : null;
+    }
+
+    /**
+     * @return ?PriceType
+     */
+    public function priceType(): ?PriceType
+    {
+        return $this->priceType ? PriceType::fromString($this->priceType) : null;
+    }
+
+    /**
+     * @return float
+     */
+    public function vat(): float
     {
         return $this->vat;
+    }
+
+    /**
+     * @return int
+     */
+    public function notes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * @return int
+     */
+    public function documents()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * @return TagIds
+     */
+    public function tags()
+    {
+        return $this->tags ?: new TagIds();
+    }
+
+    /**
+     * @return ?VatCodeId
+     */
+    public function vatCodeId(): ?VatCodeId
+    {
+        return $this->vatCodeId;
+    }
+
+    /**
+     * @return ?VatCodeId
+     */
+    public function vatCodePurchaseId(): ?VatCodeId
+    {
+        return $this->vatCodePurchaseId;
+    }
+
+    /**
+     * @return Dimensions
+     */
+    public function dimensions(): Dimensions
+    {
+        return new Dimensions($this->weight, $this->length, $this->width, $this->height);
+    }
+
+    /**
+     * @param Dimensions $dimensions
+     */
+    public function changeDimensions(Dimensions $dimensions)
+    {
+        $this->weight = $dimensions->weight();
+        $this->length = $dimensions->length();
+        $this->width = $dimensions->width();
+        $this->height = $dimensions->height();
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param ?string $code
+     */
+    public function setCode(?string $code = null): void
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @param string $unit
+     */
+    public function setUnit(string $unit): void
+    {
+        $this->unit = $unit;
+    }
+
+    /**
+     * @param Type $type
+     */
+    public function setType(Type $type): void
+    {
+        $this->type = (string)$type;
+    }
+
+    /**
+     * @param ?string $classification
+     */
+    public function setClassification(?string $classification = null): void
+    {
+        $this->classification = $classification;
+    }
+
+    /**
+     * @param ?string $description
+     */
+    public function setDescription(?string $description = null): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param float $count
+     */
+    public function setCount(float $count): void
+    {
+        $this->count = $count;
+    }
+
+    /**
+     * @param float $reserved
+     */
+    public function setReserved(float $reserved): void
+    {
+        $this->reserved = $reserved;
+    }
+
+    /**
+     * @param float $min
+     */
+    public function setMin(float $min): void
+    {
+        $this->min = $min;
+    }
+
+    /**
+     * @param float $max
+     */
+    public function setMax(float $max): void
+    {
+        $this->max = $max;
+    }
+
+    /**
+     * @param float $secure
+     */
+    public function setSecure(float $secure): void
+    {
+        $this->secure = $secure;
+    }
+
+    /**
+     * @param bool $visibility
+     */
+    public function setVisibility(bool $visibility): void
+    {
+        $this->visibility = (int)$visibility;
+    }
+
+    /**
+     * @return Price
+     */
+    public function price(): Price
+    {
+        return new Price($this->netto, $this->brutto, $this->vat, $this->priceType(), $this->discount());
+    }
+
+    /**
+     * @param Price $price
+     */
+    public function changePrice(Price $price)
+    {
+        $this->netto = $price->netto();
+        $this->brutto = $price->brutto();
+        $this->vat = $price->vat();
+        $this->discount = $price->isDiscount();
+        $this->priceType = (string)$price->priceType();
     }
 }
