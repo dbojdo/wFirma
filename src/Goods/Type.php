@@ -21,4 +21,12 @@ final class Type extends AbstractEnum
     {
         return new self('service');
     }
+
+    /**
+     * @return Type
+     */
+    public static function set()
+    {
+        return new self('set');
+    }
 }
