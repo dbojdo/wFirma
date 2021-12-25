@@ -91,8 +91,8 @@ final class InvoicesContent extends DateAwareEntity
     private $brutto;
 
     /**
-     * @var string
-     * @JMS\Type("string")
+     * @var int
+     * @JMS\Type("integer")
      * @JMS\SerializedName("vat")
      * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
@@ -118,7 +118,7 @@ final class InvoicesContent extends DateAwareEntity
 
     /**
      * @param string $name
-     * @param string $vat
+     * @param int $vat
      * @param string $unit
      * @param float $count
      * @param float $price
@@ -163,11 +163,11 @@ final class InvoicesContent extends DateAwareEntity
      * @param float $count
      * @param float $price
      * @param Discount|null $discount
-     * @param string $vat
+     * @param string|null $vat
      * @param string $lumpcode
      * @return InvoicesContent
      */
-    public static function fromGoodId(GoodId $id, $count, $price, $vat, Discount $discount = null, $lumpcode = null)
+    public static function fromGoodId(GoodId $id, $count, $price, $vat = null, Discount $discount = null, $lumpcode = null)
     {
         return new self(
             null,
@@ -186,7 +186,7 @@ final class InvoicesContent extends DateAwareEntity
      * @param string $unit
      * @param float $count
      * @param float $price
-     * @param string $vat
+     * @param int $vat
      * @param Discount|null $discount
      * @param string $lumpcode
      * @param string $classification
@@ -288,7 +288,7 @@ final class InvoicesContent extends DateAwareEntity
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function vat()
     {
