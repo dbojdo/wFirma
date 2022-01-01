@@ -6,6 +6,7 @@ use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use JMS\Serializer\Annotation as JMS;
 use Webit\WFirmaSDK\Tags\TagIds;
 use Webit\WFirmaSDK\Vat\VatCodeId;
+use Webit\WFirmaSDK\Vat\VatRateCode;
 
 /**
  * @JMS\XmlRoot("good")
@@ -176,8 +177,8 @@ final class Good extends DateAwareEntity
     private $priceType;
 
     /**
-     * @var int
-     * @JMS\Type("integer")
+     * @var string
+     * @JMS\Type("string")
      * @JMS\SerializedName("vat")
      * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
@@ -298,7 +299,7 @@ final class Good extends DateAwareEntity
     /**
      * @return float
      */
-    public function netto(): float
+    public function netto(): ?float
     {
         return $this->netto;
     }
@@ -306,7 +307,7 @@ final class Good extends DateAwareEntity
     /**
      * @return float
      */
-    public function brutto(): float
+    public function brutto(): ?float
     {
         return $this->brutto;
     }
@@ -368,11 +369,11 @@ final class Good extends DateAwareEntity
     }
 
     /**
-     * @return float
+     * @return ?VatRateCode
      */
-    public function vat(): float
+    public function vat(): ?VatRateCode
     {
-        return $this->vat;
+        return $this->vat !== null ? VatRateCode::fromWFirmaCode($this->vat) : null;
     }
 
     /**
@@ -531,11 +532,26 @@ final class Good extends DateAwareEntity
     }
 
     /**
+     * @param ?VatCodeId $vatCodePurchaseId
+     */
+    public function setVatCodePurchaseId(?VatCodeId $vatCodePurchaseId)
+    {
+        $this->vatCodePurchaseId = $vatCodePurchaseId;
+    }
+
+    /**
      * @return Price
      */
     public function price(): Price
     {
-        return new Price($this->netto, $this->brutto, $this->vat, $this->priceType(), $this->discount());
+        return new Price(
+            $this->netto,
+            $this->brutto,
+            $this->vat(),
+            $this->priceType(),
+            $this->discount(),
+            $this->vatCodeId
+        );
     }
 
     /**
@@ -543,10 +559,11 @@ final class Good extends DateAwareEntity
      */
     public function changePrice(Price $price)
     {
-        $this->netto = $price->netto();
-        $this->brutto = $price->brutto();
-        $this->vat = $price->vat();
+        $this->netto = $price->netPrice();
+        $this->brutto = $price->grossPrice();
+        $this->vat = $price->vat() ? (string)$price->vat() : null;
         $this->discount = $price->isDiscount();
         $this->priceType = (string)$price->priceType();
+        $this->vatCodeId = $price->vatCodeId();
     }
 }

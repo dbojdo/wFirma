@@ -4,6 +4,7 @@ namespace Webit\WFirmaSDK\Goods;
 
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
+use Webit\WFirmaSDK\Vat\VatRateCode;
 
 class GoodsApiTest extends AbstractApiTestCase
 {
@@ -61,21 +62,26 @@ class GoodsApiTest extends AbstractApiTestCase
         $this->assertEquals($expected->name(), $actual->name());
         $this->assertEquals($expected->code(), $actual->code());
         $this->assertEquals($expected->description(), $actual->description());
-        $this->assertEquals($expected->netto(), $actual->netto());
-        $this->assertEquals($expected->brutto(), $actual->brutto());
         $this->assertEquals($expected->type(), $actual->type());
         $this->assertEquals($expected->priceType(), $actual->priceType());
+
+        if ($expected->price()->priceType() == PriceType::netto()) {
+            $this->assertEquals($expected->netto(), $actual->netto());
+            $this->assertNotNull($actual->brutto());
+        } else {
+            $this->assertEquals($expected->brutto(), $actual->brutto());
+            $this->assertNotNull($actual->netto());
+        }
     }
 
     private function createGood(): Good
     {
         $netAmount = $this->faker()->randomNumber(5);
-        $vat = 23;
 
         return new Good(
             $this->faker()->colorName,
             'usługa',
-            Price::createFromNetto($netAmount, $vat),
+            Price::createFromNetPrice($netAmount, VatRateCode::E()),
             $this->faker()->word,
             Type::service(),
             null,
