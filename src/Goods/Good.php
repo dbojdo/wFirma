@@ -243,6 +243,7 @@ final class Good extends DateAwareEntity
      * @param ?string $classification
      * @param ?string $description
      * @param ?Dimensions $dimensions
+     * @param ?Stock $stock
      */
     public function __construct(
         string $name,
@@ -252,7 +253,8 @@ final class Good extends DateAwareEntity
         Type $type = null,
         string $classification = null,
         string $description = null,
-        Dimensions $dimensions = null
+        Dimensions $dimensions = null,
+        Stock $stock = null
     ) {
         $this->name = $name;
         $this->unit = $unit;
@@ -262,6 +264,7 @@ final class Good extends DateAwareEntity
         $this->classification = $classification;
         $this->description = $description;
         $this->changeDimensions($dimensions ?: new Dimensions());
+        $this->changeStock($stock ?: new Stock());
     }
 
     /**
@@ -484,46 +487,6 @@ final class Good extends DateAwareEntity
     }
 
     /**
-     * @param float $count
-     */
-    public function setCount(float $count): void
-    {
-        $this->count = $count;
-    }
-
-    /**
-     * @param float $reserved
-     */
-    public function setReserved(float $reserved): void
-    {
-        $this->reserved = $reserved;
-    }
-
-    /**
-     * @param float $min
-     */
-    public function setMin(float $min): void
-    {
-        $this->min = $min;
-    }
-
-    /**
-     * @param float $max
-     */
-    public function setMax(float $max): void
-    {
-        $this->max = $max;
-    }
-
-    /**
-     * @param float $secure
-     */
-    public function setSecure(float $secure): void
-    {
-        $this->secure = $secure;
-    }
-
-    /**
      * @param bool $visibility
      */
     public function setVisibility(bool $visibility): void
@@ -565,5 +528,24 @@ final class Good extends DateAwareEntity
         $this->discount = $price->isDiscount();
         $this->priceType = (string)$price->priceType();
         $this->vatCodeId = $price->vatCodeId();
+    }
+
+    /**
+     * @return Stock
+     */
+    public function stock(): Stock
+    {
+        return new Stock($this->count, $this->min, $this->max, $this->secure, $this->reserved);
+    }
+
+    /**
+     * @param Stock $stock
+     */
+    public function changeStock(Stock $stock)
+    {
+        $this->count = $stock->count();
+        $this->min = $stock->min();
+        $this->max = $stock->max();
+        $this->secure = $stock->secure();
     }
 }
