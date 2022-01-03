@@ -10,4 +10,7 @@ use JMS\Serializer\Annotation as JMS;
  */
 final class DeclarationCountryId extends AbstractEntityId
 {
+    public static function Poland(): self {
+        return self::create(0);
+    }
 }

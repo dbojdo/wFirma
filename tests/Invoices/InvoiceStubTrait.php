@@ -8,6 +8,7 @@ use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Contractors\InvoiceAddress;
 use Webit\WFirmaSDK\Payments\PaymentMethod;
 use Webit\WFirmaSDK\Series\SeriesId;
+use Webit\WFirmaSDK\Vat\VatCodeRepository;
 
 /**
  * @method Generator faker
@@ -36,7 +37,7 @@ trait InvoiceStubTrait
                 'szt.',
                 mt_rand(1, 5),
                 $this->faker()->randomFloat(2, 100, 1000),
-                23
+                VatCodeRepository::A()->id()
             )
         );
 
@@ -46,7 +47,7 @@ trait InvoiceStubTrait
                 'szt.',
                 mt_rand(1, 5),
                 $this->faker()->randomFloat(2, 100, 1000),
-                23
+                VatCodeRepository::A()->id()
             )
         );
 
@@ -60,7 +61,7 @@ trait InvoiceStubTrait
             'szt.',
             mt_rand(1, 5),
             $this->faker()->randomFloat(2, 100, 1000),
-            23
+            VatCodeRepository::A()->id()
         );
     }
 

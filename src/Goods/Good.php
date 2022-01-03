@@ -6,7 +6,6 @@ use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use JMS\Serializer\Annotation as JMS;
 use Webit\WFirmaSDK\Tags\TagIds;
 use Webit\WFirmaSDK\Vat\VatCodeId;
-use Webit\WFirmaSDK\Vat\VatRateCode;
 
 /**
  * @JMS\XmlRoot("good")
@@ -177,20 +176,10 @@ final class Good extends DateAwareEntity
     private $priceType;
 
     /**
-     * @var string
-     * @JMS\Type("string")
-     * @JMS\SerializedName("vat")
-     * @JMS\XmlElement(cdata=false)
-     * @JMS\Groups({"request", "response"})
-     */
-    private $vat;
-
-    /**
      * @var VatCodeId
      * @JMS\Type("Webit\WFirmaSDK\Vat\VatCodeId")
      * @JMS\SerializedName("vat_code")
-     * @JMS\Groups({"response"})
-     *
+     * @JMS\Groups({"request", "response"})
      */
     private $vatCodeId;
 
@@ -372,14 +361,6 @@ final class Good extends DateAwareEntity
     }
 
     /**
-     * @return ?VatRateCode
-     */
-    public function vat(): ?VatRateCode
-    {
-        return $this->vat !== null ? VatRateCode::fromWFirmaCode($this->vat) : null;
-    }
-
-    /**
      * @return int
      */
     public function notes()
@@ -510,7 +491,7 @@ final class Good extends DateAwareEntity
         return new Price(
             $this->netto,
             $this->brutto,
-            $this->vat(),
+            $this->vatCodeId(),
             $this->priceType(),
             $this->discount(),
             $this->vatCodeId
@@ -524,10 +505,9 @@ final class Good extends DateAwareEntity
     {
         $this->netto = $price->netPrice();
         $this->brutto = $price->grossPrice();
-        $this->vat = $price->vat() ? (string)$price->vat() : null;
+        $this->vatCodeId = $price->vatCodeId();
         $this->discount = $price->isDiscount();
         $this->priceType = (string)$price->priceType();
-        $this->vatCodeId = $price->vatCodeId();
     }
 
     /**

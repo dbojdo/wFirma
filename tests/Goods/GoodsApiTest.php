@@ -4,7 +4,7 @@ namespace Webit\WFirmaSDK\Goods;
 
 use Webit\WFirmaSDK\Entity\AbstractApiTestCase;
 use Webit\WFirmaSDK\Entity\Exception\NotFoundException;
-use Webit\WFirmaSDK\Vat\VatRateCode;
+use Webit\WFirmaSDK\Vat\VatCodeRepository;
 
 class GoodsApiTest extends AbstractApiTestCase
 {
@@ -81,7 +81,7 @@ class GoodsApiTest extends AbstractApiTestCase
         return new Good(
             $this->faker()->colorName,
             'usługa',
-            Price::createFromNetPrice($netAmount, VatRateCode::E()),
+            Price::createFromNetPrice($netAmount, VatCodeRepository::E()->id()),
             $this->faker()->word,
             Type::service(),
             null,

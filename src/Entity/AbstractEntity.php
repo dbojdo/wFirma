@@ -12,7 +12,7 @@ abstract class AbstractEntity implements Entity
      * @JMS\SerializedName("id")
      * @JMS\Groups({"response"})
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Error[]

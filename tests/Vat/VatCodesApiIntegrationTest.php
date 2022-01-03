@@ -49,6 +49,6 @@ class VatCodesApiIntegrationTest extends AbstractApiTestCase
      */
     public function testCount()
     {
-        $this->assertInternalType('integer', $this->vatCodesApi->count());
+        $this->assertIsInt($this->vatCodesApi->count());
     }
 }

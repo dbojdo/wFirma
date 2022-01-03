@@ -5,6 +5,7 @@ namespace Webit\WFirmaSDK\Invoices;
 use JMS\Serializer\Annotation as JMS;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\Goods\GoodId;
+use Webit\WFirmaSDK\Vat\VatCodeId;
 
 /**
  * @JMS\XmlRoot("invoicecontent")
@@ -92,12 +93,12 @@ final class InvoicesContent extends DateAwareEntity
 
     /**
      * @var string
-     * @JMS\Type("string")
-     * @JMS\SerializedName("vat")
+     * @JMS\Type("Webit\WFirmaSDK\Vat\VatCodeId")
+     * @JMS\SerializedName("vat_code")
      * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
      */
-    private $vat;
+    private $vatCodeId;
 
     /**
      * @var string
@@ -118,7 +119,7 @@ final class InvoicesContent extends DateAwareEntity
 
     /**
      * @param string $name
-     * @param string $vat
+     * @param string $vatCodeId
      * @param string $unit
      * @param float $count
      * @param float $price
@@ -129,7 +130,7 @@ final class InvoicesContent extends DateAwareEntity
      */
     private function __construct(
         $name,
-        $vat,
+        $vatCodeId,
         $unit,
         $count,
         $price,
@@ -139,13 +140,13 @@ final class InvoicesContent extends DateAwareEntity
         $classification = null
     ) {
         $this->name = $name;
+        $this->vatCodeId = $vatCodeId;
         $this->classification = $classification;
         $this->unit = $unit;
         $this->count = $count;
         $this->price = $price;
         $this->discount = $discount ? $discount->amount() : null;
         $this->discountPercent = $discount ? $discount->percent() : null;
-        $this->vat = $vat;
         $this->lumpcode = $lumpcode;
         $this->goodId = $good;
     }
@@ -162,16 +163,16 @@ final class InvoicesContent extends DateAwareEntity
      * @param GoodId $id
      * @param float $count
      * @param float|null $price
+     * @param VatCodeId|null $vatCodeId
      * @param Discount|null $discount
-     * @param string|null $vat
      * @param string $lumpcode
      * @return InvoicesContent
      */
-    public static function fromGoodId(GoodId $id, $count = 1, $price = null, $vat = null, Discount $discount = null, $lumpcode = null)
+    public static function fromGoodId(GoodId $id, $count = 1, $price = null, VatCodeId $vatCodeId = null, Discount $discount = null, $lumpcode = null)
     {
         return new self(
             null,
-            $vat ? (string)$vat : null,
+            $vatCodeId,
             null,
             (float)$count,
             $price,
@@ -186,7 +187,7 @@ final class InvoicesContent extends DateAwareEntity
      * @param string $unit
      * @param float $count
      * @param float $price
-     * @param string $vat
+     * @param VatCodeId $vatCodeId
      * @param Discount|null $discount
      * @param string $lumpcode
      * @param string $classification
@@ -197,14 +198,14 @@ final class InvoicesContent extends DateAwareEntity
         $unit,
         $count,
         $price,
-        $vat,
+        VatCodeId $vatCodeId,
         Discount $discount = null,
         $lumpcode = null,
         $classification = null
     ) {
         return new self(
             $name,
-            $vat,
+            $vatCodeId,
             $unit,
             $count,
             $price,
@@ -290,9 +291,9 @@ final class InvoicesContent extends DateAwareEntity
     /**
      * @return string
      */
-    public function vat()
+    public function vatCodeId()
     {
-        return $this->vat;
+        return $this->vatCodeId;
     }
 
     /**
