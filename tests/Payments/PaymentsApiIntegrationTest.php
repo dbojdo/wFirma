@@ -63,7 +63,8 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
         $this->assertInstanceOf('Webit\WFirmaSDK\Payments\Payment', $createdPayment);
 
         /** @var Payment $createdPayment */
-        $createdPayment->changeAmount(PaymentAmount::forPlnAccount($createdPayment->amount()->value() * .5));
+        $amount = $this->faker()->randomFloat(2, 0.01, $createdPayment->amount()->value());
+        $createdPayment->changeAmount(PaymentAmount::forPlnAccount($amount));
         $createdPayment->changeDate(date_create('now +1 day'));
         $createdPayment->changePaymentMethod(PaymentMethod::paymentCard());
 
