@@ -11,7 +11,7 @@ class DeclarationCountriesApiTest extends AbstractApiTestCase
      */
     private $declarationCountriesApi;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->declarationCountriesApi = new DeclarationCountriesApi(
             $this->entityApi()
@@ -52,6 +52,6 @@ class DeclarationCountriesApiTest extends AbstractApiTestCase
      */
     public function it_counts_declaration_countries()
     {
-        $this->assertInternalType('integer', $this->declarationCountriesApi->count());
+        $this->assertIsInt($this->declarationCountriesApi->count());
     }
 }

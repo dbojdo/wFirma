@@ -27,12 +27,12 @@ class BuzzRequestExecutorIntegrationTest extends AbstractApiTestCase
      */
     private $series = array();
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->entityApi = $this->entityApi();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         foreach ($this->series as $series) {
             try {

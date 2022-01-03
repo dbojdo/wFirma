@@ -16,12 +16,12 @@ class ContractorsApiIntegrationTest extends AbstractApiTestCase
     /** @var Contractor[] */
     private $contractors = array();
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = new ContractorsApi($this->entityApi());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         foreach ($this->contractors as $contractor) {
             $this->api->delete($contractor->id());

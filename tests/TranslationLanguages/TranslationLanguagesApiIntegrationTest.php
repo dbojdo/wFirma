@@ -11,7 +11,7 @@ class TranslationLanguagesApiIntegrationTest extends AbstractApiTestCase
     /** @var TranslationLanguagesApi */
     private $api;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = new TranslationLanguagesApi($this->entityApi());
     }

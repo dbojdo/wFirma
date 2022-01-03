@@ -2,7 +2,6 @@
 
 namespace Webit\WFirmaSDK\Tags;
 
-use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Webit\WFirmaSDK\AbstractTestCase;
 
@@ -11,7 +10,7 @@ class TagIdsTest extends AbstractTestCase
     /** @var SerializerInterface */
     private $serialiser;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->serialiser = $this->jmsSerializer();
     }
