@@ -3,6 +3,7 @@
 namespace Webit\WFirmaSDK\Payments;
 
 use Webit\WFirmaSDK\Contractors\ContractorId;
+use Webit\WFirmaSDK\Entity\AbstractEntityId;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\Expenses\ExpenseId;
 use Webit\WFirmaSDK\Invoices\Invoice;
@@ -392,7 +393,10 @@ final class Payment extends DateAwareEntity
         return $this->objectName;
     }
 
-    public function objectId(): ?int
+    /**
+     * @return null|InvoiceId|ExpenseId
+     */
+    public function objectId(): ?AbstractEntityId
     {
         return $this->objectId;
     }
