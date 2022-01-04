@@ -5,6 +5,8 @@ namespace Webit\WFirmaSDK\Invoices;
 use JMS\Serializer\Annotation as JMS;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\Goods\GoodId;
+use Webit\WFirmaSDK\Vat\VatCodeId;
+use Webit\WFirmaSDK\Vat\VatRate;
 
 /**
  * @JMS\XmlRoot("invoicecontent")
@@ -95,9 +97,17 @@ final class InvoicesContent extends DateAwareEntity
      * @JMS\Type("string")
      * @JMS\SerializedName("vat")
      * @JMS\XmlElement(cdata=false)
-     * @JMS\Groups({"request", "response"})
+     * @JMS\Groups({"request"})
      */
     private $vat;
+
+    /**
+     * @var VatCodeId
+     * @JMS\Type("Webit\WFirmaSDK\Vat\VatCodeId")
+     * @JMS\SerializedName("vat_code")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $vatCodeId;
 
     /**
      * @var string
@@ -118,7 +128,7 @@ final class InvoicesContent extends DateAwareEntity
 
     /**
      * @param string $name
-     * @param string $vat
+     * @param VatRate|VatCodeId|string $vat
      * @param string $unit
      * @param float $count
      * @param float $price
@@ -145,7 +155,7 @@ final class InvoicesContent extends DateAwareEntity
         $this->price = $price;
         $this->discount = $discount ? $discount->amount() : null;
         $this->discountPercent = $discount ? $discount->percent() : null;
-        $this->vat = $vat;
+        $this->setVat($vat);
         $this->lumpcode = $lumpcode;
         $this->goodId = $good;
     }
@@ -163,7 +173,7 @@ final class InvoicesContent extends DateAwareEntity
      * @param float $count
      * @param float|null $price
      * @param Discount|null $discount
-     * @param string|null $vat
+     * @param VatCodeId|VatRate|string $vat
      * @param string $lumpcode
      * @return InvoicesContent
      */
@@ -171,7 +181,7 @@ final class InvoicesContent extends DateAwareEntity
     {
         return new self(
             null,
-            $vat ? (string)$vat : null,
+            $vat,
             null,
             (float)$count,
             $price,
@@ -186,7 +196,7 @@ final class InvoicesContent extends DateAwareEntity
      * @param string $unit
      * @param float $count
      * @param float $price
-     * @param string $vat
+     * @param VatCodeId|VatRate|string $vat
      * @param Discount|null $discount
      * @param string $lumpcode
      * @param string $classification
@@ -289,10 +299,24 @@ final class InvoicesContent extends DateAwareEntity
 
     /**
      * @return string
+     * @deprecated Use vatRate instead
      */
     public function vat()
     {
         return $this->vat;
+    }
+
+    public function vatRate(): ?VatRate
+    {
+        if (!($this->vat || $this->vatCodeId)) {
+            return null;
+        }
+
+        if ($this->vatCodeId) {
+            return VatRate::fromVatCodeId($this->vatCodeId);
+        }
+
+        return VatRate::fromCode($this->vat);
     }
 
     /**
@@ -309,5 +333,41 @@ final class InvoicesContent extends DateAwareEntity
     public function goodId()
     {
         return $this->goodId;
+    }
+
+    /**
+     * @param VatCodeId|VatRate|string $vat
+     */
+    private function setVat($vat)
+    {
+        if ($vat instanceof VatCodeId) {
+            $this->setVatCodeId($vat);
+            return;
+        }
+
+        if ($vat instanceof VatRate) {
+            $vatCodeId = $vat->vatCodeId();
+            if ($vatCodeId) {
+                $this->setVatCodeId($vatCodeId);
+                return;
+            }
+
+            $this->setVatCode($vat->code());
+            return;
+        }
+
+        $this->setVatCode((string)$vat);
+    }
+
+    private function setVatCodeId(VatCodeId $vatCodeId)
+    {
+        $this->vatCodeId = $vatCodeId;
+        $this->vat = null;
+    }
+
+    private function setVatCode(string $vat)
+    {
+        $this->vat = $vat;
+        $this->vatCodeId = null;
     }
 }
