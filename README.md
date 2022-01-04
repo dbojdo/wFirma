@@ -227,6 +227,39 @@ $contractor = $api->get(\Webit\WFirmaSDK\Contractors\ContractorId::create(123));
 
 Feel free to add any other modules support.
 
+## Getting VatCodeId from VAT Rate code by VatCodeIdRepository
+
+### With custom static map provided
+
+```php
+
+use Webit\WFirmaSDK\Vat\Repository\VatCodeIdRepositoryFactory;
+
+$repository = VatCodeIdRepositoryFactory::createWithMap(
+  ['23' => 222, '8' => 223] // provide your static ID mapping
+);
+
+$repository->getByCode('23'); // returns new VatCodeId(222);
+```
+
+### With cached map provided by API
+Please note you need to add `psr/simple-cache-implementation` to your `composer.json`.
+We suggest `symfony/cache` in the example below.
+
+```php
+
+use Webit\WFirmaSDK\Vat\Repository\VatCodeIdRepositoryFactory;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Psr16Cache;
+
+$repository = VatCodeIdRepositoryFactory::createWithApi(
+  $api = $apiFactory->vatCodesApi(),
+  new Psr16Cache(new FilesystemAdapter()) // use cache adapter of your choice (no cache by default)
+);
+
+$repository->getByCode('23'); // returns new VatCodeId(222);
+```
+
 ## Tests
 
 ```bash

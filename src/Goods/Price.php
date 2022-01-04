@@ -3,7 +3,7 @@
 namespace Webit\WFirmaSDK\Goods;
 
 use Webit\WFirmaSDK\Vat\VatCodeId;
-use Webit\WFirmaSDK\Vat\VatRateCode;
+use Webit\WFirmaSDK\Vat\VatRate;
 
 /**
  * Represents the price of the Good
@@ -16,119 +16,82 @@ final class Price
     /** @var ?float */
     private $grossPrice;
 
-    /** @var ?VatRateCode */
-    private $vat;
-
     /** @var PriceType */
     private $priceType;
 
     /** @var bool */
     private $discount;
 
-    /** @var ?VatCodeId */
-    private $vatCodeId;
+    /** @var VatRate */
+    private $vatRate;
+
+    /** @var VatCodeId */
+    private $vatCodePurchaseId;
 
     /**
      * @param ?float $netPrice
      * @param ?float $grossPrice
-     * @param ?VatRateCode $vat
      * @param PriceType $priceType
+     * @param VatRate $vatRate
      * @param bool $discount
-     * @param ?VatCodeId $vatCodeId
+     * @param ?VatCodeId $vatCodePurchaseId
      * @internal To be used by Good class only. To obtain an instance use named constructors (createFrom...)
-     *
      */
     public function __construct(
         ?float $netPrice,
         ?float $grossPrice,
-        ?VatRateCode $vat,
         PriceType $priceType,
-        bool $discount,
-        ?VatCodeId $vatCodeId = null
+        VatRate $vatRate,
+        bool $discount = false,
+        ?VatCodeId $vatCodePurchaseId = null
     ) {
-        $this->netPrice = $netPrice;
-        $this->grossPrice = $grossPrice;
-        $this->vat = $vat;
+        $this->netPrice = $netPrice !== null ? round($netPrice, 2) : null;
+        $this->grossPrice = $grossPrice !== null ? round($grossPrice, 2) : null;
         $this->priceType = $priceType;
         $this->discount = $discount;
-        $this->vatCodeId = $vatCodeId;
+        $this->vatRate = $vatRate;
+        $this->vatCodePurchaseId = $vatCodePurchaseId ?: ($vatRate->vatCodeId() ?: null);
     }
 
     /**
-     * A named constructor using net price and VatRateCode
+     * A named constructor using net price
      *
      * @param float $netPrice
-     * @param VatRateCode $vat
+     * @param VatRate $vatRate
      * @param bool $discount
+     * @param ?VatCodeId $vatCodePurchaseId
      * @return Price
      */
-    public static function createFromNetPrice(float $netPrice, VatRateCode $vat, bool $discount = false): Price
+    public static function createFromNetPrice(float $netPrice, VatRate $vatRate, bool $discount = false, ?VatCodeId $vatCodePurchaseId = null): Price
     {
         return new self(
             $netPrice,
             null,
-            $vat,
             PriceType::netto(),
-            $discount
+            $vatRate,
+            $discount,
+            $vatCodePurchaseId
         );
     }
 
     /**
-     * A named constructor using gross price and VatRateCode
+     * A named constructor using gross price
      *
      * @param float $grossPrice
-     * @param VatRateCode $vat
+     * @param VatRate $vatRate
      * @param bool $discount
+     * @param ?VatCodeId $vatCodePurchaseId
      * @return Price
      */
-    public static function createFromGrossPrice(float $grossPrice, VatRateCode $vat, bool $discount = false): Price
+    public static function createFromGrossPrice(float $grossPrice, VatRate $vatRate, bool $discount = false, ?VatCodeId $vatCodePurchaseId = null): Price
     {
         return new self(
             null,
             $grossPrice,
-            $vat,
             PriceType::brutto(),
-            $discount
-        );
-    }
-
-    /**
-     * A named constructor using gross price and VatCodeId
-     *
-     * @param float $netPrice
-     * @param VatCodeId $vatCodeId
-     * @param bool $discount
-     * @return Price
-     */
-    public static function createFromNetPriceWithVatCode(float $netPrice, VatCodeId $vatCodeId, bool $discount = false): Price
-    {
-        return new self(
-            $netPrice,
-            null,
-            null,
-            PriceType::netto(),
+            $vatRate,
             $discount,
-            $vatCodeId
-        );
-    }
-
-    /**
-     * A named constructor using gross price and VatCodeId
-     *
-     * @param float $grossPrice
-     * @param VatCodeId $vatCodeId
-     * @param bool $discount
-     * @return Price
-     */
-    public static function createFromGrossPriceWithVatCode(float $grossPrice, VatCodeId $vatCodeId, bool $discount = false): Price
-    {
-        return new self(
-            null,
-            $grossPrice,
-            null,
-            PriceType::brutto(),
-            $discount,
-            $vatCodeId
+            $vatCodePurchaseId
         );
     }
 
@@ -149,14 +112,6 @@ final class Price
     }
 
     /**
-     * @return ?VatRateCode
-     */
-    public function vat(): ?VatRateCode
-    {
-        return $this->vat;
-    }
-
-    /**
      * @return PriceType
      */
     public function priceType(): PriceType
@@ -173,11 +128,19 @@ final class Price
     }
 
     /**
-     * @return ?VatCodeId
+     * @return VatRate
      */
-    public function vatCodeId(): ?VatCodeId
+    public function vatRate(): VatRate
     {
-        return $this->vatCodeId;
+        return $this->vatRate;
+    }
+
+    /**
+     * @return VatCodeId
+     */
+    public function vatCodePurchaseId(): VatCodeId
+    {
+        return $this->vatCodePurchaseId;
     }
 
     /**
@@ -186,7 +149,7 @@ final class Price
      */
     public function withNetPrice(float $netPrice): Price
     {
-        return new self($netPrice, null, $this->vat, PriceType::netto(), $this->discount, $this->vatCodeId);
+        return new self($netPrice, null, PriceType::netto(), $this->vatRate, $this->discount, $this->vatCodePurchaseId);
     }
 
     /**
@@ -195,19 +158,7 @@ final class Price
      */
     public function withGrossPrice(float $grossPrice): Price
     {
-        return new self(null, $grossPrice, $this->vat, PriceType::brutto(), $this->discount, $this->vatCodeId);
-    }
-
-    /**
-     * @param VatRateCode|null $vat
-     * @return Price
-     */
-    public function withVat(VatRateCode $vat): Price
-    {
-        $netPrice = $this->priceType == PriceType::netto() ? $this->netPrice : null;
-        $grossPrice = $this->priceType == PriceType::netto() ? null : $this->grossPrice;
-
-        return new self($netPrice, $grossPrice, $vat, $this->priceType, $this->discount, null);
+        return new self(null, $grossPrice, PriceType::brutto(), $this->vatRate, $this->discount, $this->vatCodePurchaseId);
     }
 
     /**
@@ -216,15 +167,24 @@ final class Price
      */
     public function withDiscount(bool $discount): Price
     {
-        return new self($this->netPrice, $this->grossPrice, $this->vat, $this->priceType, $discount, $this->vatCodeId);
+        return new self($this->netPrice, $this->grossPrice, $this->priceType, $this->vatRate, $discount, $this->vatCodePurchaseId);
     }
 
     /**
-     * @param VatCodeId $vatCodeId
+     * @param VatRate $vatRate
      * @return Price
      */
-    public function withVatCodeId(VatCodeId $vatCodeId): Price
+    public function withVatCodeId(VatRate $vatRate): Price
     {
-        return new self($this->netPrice, $this->grossPrice, null, $this->priceType, $this->discount, $vatCodeId);
+        return new self($this->netPrice, $this->grossPrice, $this->priceType, $vatRate, $this->discount, $this->vatCodePurchaseId);
+    }
+
+    /**
+     * @param VatCodeId $vatCodePurchaseId
+     * @return Price
+     */
+    public function withVatCodePurchaseId(VatCodeId $vatCodePurchaseId): Price
+    {
+        return new self($this->netPrice, $this->grossPrice, $this->priceType, $this->vatRate, $this->discount, $vatCodePurchaseId);
     }
 }

@@ -37,9 +37,9 @@ final class PaymentAmount
      */
     public function __construct(float $value, ?string $account = null, ?float $valuePln = null, ?float $exchangeRate = null, ?string $nbpLabel = null, \DateTime $rateDate = null)
     {
-        $this->value = $value;
+        $this->value = round($value, 2);
         $this->account = $account;
-        $this->valuePln = $valuePln;
+        $this->valuePln = $valuePln !== null ? round($valuePln, 2) : null;
         $this->exchangeRate = $exchangeRate;
         $this->nbpLabel = $nbpLabel;
         $this->rateDate = $rateDate;
