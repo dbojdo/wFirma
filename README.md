@@ -45,9 +45,24 @@ AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
 ### Authentication
 
-The library supports only BasicAuth.
+The library supports:
+ * `ApiKeysAuth`
+ * `BasicAuth` (deprecated)
 
-#### BasicAuth
+#### ApiKeyAuth
+
+```php
+<?php
+use Webit\WFirmaSDK\Auth\ApiKeysAuth;
+
+$auth = new ApiKeysAuth('your-access-key', 'your-secret-key', 'your-app-key', $companyId = 1123); // $companyId is optional
+```
+
+To get your API Keys follow the official documentation: [https://doc.wfirma.pl/#autoryzacja](https://doc.wfirma.pl/#autoryzacja)  
+
+#### BasicAuth (deprecated)
+
+This method will not be supported anymore by wFirma.
 
 ```php
 <?php

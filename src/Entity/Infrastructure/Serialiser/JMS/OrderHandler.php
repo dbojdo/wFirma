@@ -30,7 +30,7 @@ final class OrderHandler implements SubscribingHandlerInterface
         SerializationContext $context
     ) {
         foreach ($order->orders() as $orderByField) {
-            $context->getNavigator()->accept($orderByField);
+            $context->getNavigator()->accept($orderByField, null, $context);
         }
     }
 }

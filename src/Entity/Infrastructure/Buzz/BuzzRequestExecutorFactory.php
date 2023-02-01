@@ -3,11 +3,12 @@
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
 use Psr\Log\LoggerInterface;
-use Webit\WFirmaSDK\Entity\Infrastructure\BasicAuthBasedRequestExecutorFactory;
+use Webit\WFirmaSDK\Auth\Auth;
+use Webit\WFirmaSDK\Entity\Infrastructure\RequestExecutor;
+use Webit\WFirmaSDK\Entity\Infrastructure\RequestExecutorFactory;
 use Webit\WFirmaSDK\Entity\Infrastructure\Serialiser\ApiSerialiserFactory;
-use Webit\WFirmaSDK\Auth\BasicAuth;
 
-final class BuzzRequestExecutorFactory implements BasicAuthBasedRequestExecutorFactory
+final class BuzzRequestExecutorFactory implements RequestExecutorFactory
 {
     /** @var BrowserFactory */
     private $browserFactory;
@@ -29,13 +30,12 @@ final class BuzzRequestExecutorFactory implements BasicAuthBasedRequestExecutorF
     }
 
     /**
-     * @param BasicAuth $basicAuth
-     * @return BuzzRequestExecutor
+     * @inheritDoc
      */
-    public function create(BasicAuth $basicAuth)
+    public function create(Auth $auth): RequestExecutor
     {
         return new BuzzRequestExecutor(
-            $this->browserFactory->create($basicAuth),
+            $this->browserFactory->create($auth),
             $this->apiSerialiserFactory->create(),
             $this->logger
         );

@@ -21,23 +21,4 @@ class BasicAuthTest extends AbstractTestCase
         $this->assertEquals($password, $auth->password());
         $this->assertEquals($companyId, $auth->companyId());
     }
-
-    /**
-     * @param BasicAuth $auth
-     * @param bool $isEmpty
-     * @dataProvider basicAuthEmpty
-     */
-    public function it_checks_if_is_empty(BasicAuth $auth, $isEmpty)
-    {
-        $this->assertEquals($isEmpty, $auth->isEmpty());
-    }
-
-    public function basicAuthEmpty()
-    {
-        return array(
-            'empty user' => array(new BasicAuth($this->faker()->userName, ''), true),
-            'empty password' => array(new BasicAuth('', $this->faker()->password), true),
-            'non empty' => array(new BasicAuth('', $this->faker()->password), false)
-        );
-    }
 }
