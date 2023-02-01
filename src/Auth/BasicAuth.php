@@ -2,7 +2,10 @@
 
 namespace Webit\WFirmaSDK\Auth;
 
-final class BasicAuth
+/**
+ * @deprecated this method is deprecated, and it won't be supported by wFirma anymore. Use ApiKeyAuth instead.
+ */
+final class BasicAuth implements Auth
 {
     /** @var string */
     private $username;
@@ -42,18 +45,10 @@ final class BasicAuth
     }
 
     /**
-     * @return int
+     * @return null|int
      */
-    public function companyId()
+    public function companyId(): ?int
     {
         return $this->companyId;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEmpty()
-    {
-        return ! ($this->username || $this->password);
     }
 }
