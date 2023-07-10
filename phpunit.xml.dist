@@ -12,8 +12,9 @@
         bootstrap                   = "tests/bootstrap.php" >
 
     <php>
-        <env name="wFirma.username" value=""/>
-        <env name="wFirma.password" value=""/>
+        <env name="wFirma.access_key" value=""/>
+        <env name="wFirma.secret_key" value=""/>
+        <env name="wFirma.app_key" value=""/>
         <env name="wFirma.company_id" value=""/> <!-- optional -->
         <env name="debug_api_messages" value="0" /> <!-- set to "1" to print request / response XML message to the console -->
         <env name="disable_ssl_check" value="0" />

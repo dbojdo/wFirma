@@ -2,13 +2,13 @@
 
 namespace Webit\WFirmaSDK\Entity\Infrastructure;
 
-use Webit\WFirmaSDK\Auth\BasicAuth;
+use Webit\WFirmaSDK\Auth\Auth;
 
 interface BasicAuthBasedRequestExecutorFactory
 {
     /**
-     * @param BasicAuth $auth
+     * @param Auth $auth
      * @return RequestExecutor
      */
-    public function create(BasicAuth $auth);
+    public function create(Auth $auth);
 }

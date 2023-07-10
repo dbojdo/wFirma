@@ -5,6 +5,8 @@ namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 use Buzz\Browser;
 use Buzz\Client\Curl;
 use Buzz\Middleware\BasicAuthMiddleware;
+use Webit\WFirmaSDK\Auth\ApiKeysAuth;
+use Webit\WFirmaSDK\Auth\Auth;
 use Webit\WFirmaSDK\Auth\BasicAuth;
 
 final class BrowserFactory
@@ -26,10 +28,10 @@ final class BrowserFactory
     }
 
     /**
-     * @param BasicAuth $auth
+     * @param Auth $auth
      * @return Browser
      */
-    public function create(BasicAuth $auth)
+    public function create(Auth $auth)
     {
         $browser = new Browser($client = new Curl());
         foreach ($this->curlOptions as $option => $value) {
@@ -45,20 +47,43 @@ final class BrowserFactory
         return $browser;
     }
 
-    private function configureBuzzWithMiddleware(Browser $browser, BasicAuth $auth)
+    private function configureBuzzWithMiddleware(Browser $browser, Auth $auth)
     {
         $browser->addMiddleware(new BaseUrlMiddleware($this->baseUrl));
-        $browser->addMiddleware(new BasicAuthMiddleware($auth->username(), $auth->password()));
+        switch(true) {
+            case $auth instanceof BasicAuth:
+                $browser->addMiddleware(new BasicAuthMiddleware($auth->username(), $auth->password()));
+                break;
+            case $auth instanceof ApiKeysAuth:
+                $browser->addMiddleware(new ApiKeysAuthMiddleware($auth));
+                break;
+            default:
+                throw new \OutOfBoundsException(
+                    sprintf("Unsupported auth of class \"%s\"", get_class($auth))
+                );
+        }
+
 
         if ($companyId = $auth->companyId()) {
             $browser->addMiddleware(new CompanyIdMiddleware($companyId));
         }
     }
 
-    private function configureBuzzWithListener(Browser $browser, BasicAuth $auth)
+    private function configureBuzzWithListener(Browser $browser, Auth $auth)
     {
         $browser->addListener(new BaseUrlListener($this->baseUrl));
-        $browser->addListener(new BasicAuthListener($auth));
+        switch(true) {
+            case $auth instanceof BasicAuth:
+                $browser->addListener(new BasicAuthListener($auth));
+                break;
+            case $auth instanceof ApiKeysAuth:
+                $browser->addMiddleware(new ApiKeysAuthListener($auth));
+                break;
+            default:
+                throw new \OutOfBoundsException(
+                    sprintf("Unsupported auth of class \"%s\"", get_class($auth))
+                );
+        }
 
         if ($companyId = $auth->companyId()) {
             $browser->addListener(new CompanyIdListener($companyId));

@@ -7,7 +7,7 @@ use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Webit\WFirmaSDK\AbstractTestCase;
-use Webit\WFirmaSDK\Auth\BasicAuth;
+use Webit\WFirmaSDK\Auth\ApiKeysAuth;
 use Webit\WFirmaSDK\Entity\Infrastructure\Buzz\BrowserFactory;
 use Webit\WFirmaSDK\Entity\Infrastructure\Buzz\BuzzRequestExecutorFactory;
 
@@ -35,17 +35,19 @@ abstract class AbstractApiTestCase extends AbstractTestCase
             throw new \RuntimeException('Cannot create EntityApiFactory', 0, $e);
         }
 
-        return $factory->create($this->basicAuth());
+        return $factory->create($this->apiKeyAuth());
     }
 
-    private function basicAuth()
+    private function apiKeyAuth()
     {
-        $auth = new BasicAuth(getenv('wFirma.username'), getenv('wFirma.password'), getenv('wFirma.company_id'));
-        if ($auth->isEmpty()) {
-            $this->markTestSkipped('Set wFirma.username and wFirma.password in your phpunit.xml file.');
+        $accessKey = getenv('wFirma.access_key');
+        $secretKey = getenv('wFirma.secret_key');
+        $appKey = getenv('wFirma.app_key');
+        if (!($accessKey && $secretKey && $appKey)) {
+            $this->markTestSkipped('Set wFirma.access_key, wFirma.secret_key and wFirma.app_key in your phpunit.xml file.');
         }
 
-        return $auth;
+        return new ApiKeysAuth($accessKey, $secretKey, $appKey);
     }
 
     /**

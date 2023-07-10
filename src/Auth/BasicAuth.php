@@ -2,7 +2,10 @@
 
 namespace Webit\WFirmaSDK\Auth;
 
-final class BasicAuth
+/**
+ * @deprecated
+ */
+final class BasicAuth implements Auth
 {
     /** @var string */
     private $username;
