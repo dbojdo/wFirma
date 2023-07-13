@@ -77,7 +77,7 @@ final class BrowserFactory
                 $browser->addListener(new BasicAuthListener($auth));
                 break;
             case $auth instanceof ApiKeysAuth:
-                $browser->addMiddleware(new ApiKeysAuthListener($auth));
+                $browser->addListener(new ApiKeysAuthListener($auth));
                 break;
             default:
                 throw new \OutOfBoundsException(

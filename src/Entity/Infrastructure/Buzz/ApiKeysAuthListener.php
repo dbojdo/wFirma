@@ -19,10 +19,11 @@ final class ApiKeysAuthListener implements ListenerInterface
 
     public function preSend(RequestInterface $request)
     {
-        $request->addHeader('accessKey', $this->auth->accessKey());
-        $request->addHeader('secretKey', $this->auth->secretKey());
-        $request->addHeader('appKey', $this->auth->appKey());
-
+        $request->addHeaders([
+            'accessKey' => $this->auth->accessKey(),
+            'secretKey' => $this->auth->secretKey(),
+            'appKey' => $this->auth->appKey()
+        ]);
     }
 
     public function postSend(RequestInterface $request, MessageInterface $response)
