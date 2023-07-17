@@ -7,6 +7,7 @@ use JMS\Serializer\EventDispatcher\Events;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
 use JMS\Serializer\EventDispatcher\PreSerializeEvent;
+use JMS\Serializer\SerializationContext;
 use Webit\WFirmaSDK\Module;
 
 final class RequestResponseSerializationListener implements EventSubscriberInterface
@@ -59,7 +60,7 @@ final class RequestResponseSerializationListener implements EventSubscriberInter
             'name' => 'array',
             'params' => array(
                 array(
-                    'name' => $module->entityClass()
+                    'name' => $context instanceof SerializationContext ? $module->entityClass() : $module->serialiserType()
                 )
             )
         );

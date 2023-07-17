@@ -1,0 +1,88 @@
+<contractor>
+    <id>68108794</id>
+    <tax_id_type>nip</tax_id_type>
+    <name>Firma testowa</name>
+    <altname>Alt name</altname>
+    <nip>8220936400</nip>
+    <regon></regon>
+    <street>ul. Królewska 23</street>
+    <zip>32-332</zip>
+    <city>Kraków</city>
+    <country>PL</country>
+    <different_contact_address>0</different_contact_address>
+    <contact_name>Contact Name</contact_name>
+    <contact_street>ul. Królewska 23</contact_street>
+    <contact_zip>32-332</contact_zip>
+    <contact_city>Kraków</contact_city>
+    <contact_country>PL</contact_country>
+    <contact_person></contact_person>
+    <phone></phone>
+    <skype></skype>
+    <fax></fax>
+    <email></email>
+    <url></url>
+    <description></description>
+    <buyer>1</buyer>
+    <seller>1</seller>
+    <discount_percent>0.00</discount_percent>
+    <payment_days>0</payment_days>
+    <payment_method></payment_method>
+    <account_number></account_number>
+    <affiliated_entity>0</affiliated_entity>
+    <remind>0</remind>
+    <hash>78ab6c896192f590c9562ef79dfdf2cb</hash>
+    <avatar_filename></avatar_filename>
+    <source>Własne</source>
+    <ledger_analytic_number>1</ledger_analytic_number>
+    <tags></tags>
+    <notes>0</notes>
+    <documents>0</documents>
+    <created>2022-01-05 20:43:03</created>
+    <modified>2022-01-05 21:43:25</modified>
+    <reference_company>
+        <id>0</id>
+    </reference_company>
+    <translation_language>
+        <id>0</id>
+    </translation_language>
+    <company_account>
+        <id>0</id>
+    </company_account>
+    <good_price_group>
+        <id>0</id>
+    </good_price_group>
+    <vat_code>
+        <id>0</id>
+    </vat_code>
+    <invoice_description>
+        <id>0</id>
+    </invoice_description>
+    <shop_buyer>
+        <id>0</id>
+    </shop_buyer>
+    <field_value49645>
+        <value>34564364554</value>
+    </field_value49645>
+    <field_value_zip49648>
+        <value>32-433</value>
+    </field_value_zip49648>
+    <field_value_city49648>
+        <value>Lubień</value>
+    </field_value_city49648>
+    <field_value_street49648>
+        <value>ul. Mokra</value>
+    </field_value_street49648>
+    <field_value_house49648>
+        <value>32</value>
+    </field_value_house49648>
+    <field_value_flat49648>
+        <value>322</value>
+    </field_value_flat49648>
+    <field_value49651>
+        <value>www.strona-internetowa.pl</value>
+    </field_value49651>
+    <field_value49654>
+        <value>test</value>
+    </field_value49654>
+    <field/>
+</contractor>

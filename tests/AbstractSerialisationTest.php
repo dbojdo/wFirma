@@ -48,12 +48,12 @@ XML;
     protected function deserialiseEntity($xml)
     {
         $context = DeserializationContext::create();
-        $context->setGroups(array('response'));
+        $context->setGroups(['response']);
 
         /** @var Entity $translationLanguage */
         return $this->jmsSerializer()->deserialize(
             $xml,
-            $this->module()->entityClass(),
+            $this->module()->serialiserType(),
             'xml',
             $context
         );

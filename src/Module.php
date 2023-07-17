@@ -18,21 +18,26 @@ final class Module
     /** @var string[] */
     private $actions;
 
+    /** @var string */
+    private $serialiserType;
+    
     /** @var Module[] */
     private static $modules;
-
+    
     /**
      * @param string $name
      * @param string $recordName
      * @param string $entityClass
      * @param string[] $actions
+     * @param string $serialiserType
      */
-    private function __construct($name, $recordName, $entityClass, array $actions)
+    private function __construct($name, $recordName, $entityClass, array $actions, $serialiserType = null)
     {
         $this->name = $name;
         $this->recordName = $recordName;
         $this->entityClass = $entityClass;
         $this->actions = $actions;
+        $this->serialiserType = $serialiserType ?: $entityClass;
     }
 
     /**
@@ -57,6 +62,14 @@ final class Module
     public function entityClass()
     {
         return $this->entityClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function serialiserType()
+    {
+        return $this->serialiserType;
     }
 
     /**
@@ -286,7 +299,8 @@ final class Module
                 'delete',
                 'find',
                 'get'
-            )
+            ),
+            'Contractor'
         );
 
         self::$modules['company_accounts'] = new self(

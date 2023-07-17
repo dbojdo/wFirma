@@ -332,6 +332,16 @@ final class Contractor extends DateAwareEntity
      */
     private $invoiceDescriptionId;
 
+
+//  add the annotation below when custom fields writing is supported be the API
+//  @JMS\Type("array<string,string>")
+//  @JMS\XmlKeyValuePairs()
+//  @JMS\Groups({"request", "response"})
+    /**
+     * @var string[]
+     */
+    private $customFields = [];
+
     public function __construct(
         $name,
         $altName = null,
@@ -718,5 +728,24 @@ final class Contractor extends DateAwareEntity
     public function invoiceDescriptionId()
     {
         return $this->invoiceDescriptionId;
+    }
+
+    /**
+     * Gets custom fields
+     * @return string[]
+     */
+    public function customFields(): array
+    {
+        return $this->customFields;
+    }
+
+    /**
+     * @param string[] $customFields
+     * @return void
+     * @internal This method should be used only by Serializer. Custom fields are read-only
+     */
+    public function setCustomFields(array $customFields)
+    {
+        $this->customFields = $customFields;
     }
 }
