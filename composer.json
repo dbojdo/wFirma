@@ -5,7 +5,7 @@
     "license": "MIT",
     "keywords": ["sdk", "api", "wfirma", "w-firma"],
     "require": {
-        "php": ">=7.1",
+        "php": "^8.0",
         "jms/serializer": "^1.0.0|^2.0.0|^3.0.0",
         "kriswallsmith/buzz": "^1.0.0",
         "nyholm/psr7": "^1.0.0",
