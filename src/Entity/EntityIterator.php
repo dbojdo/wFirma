@@ -34,7 +34,7 @@ final class EntityIterator implements \Iterator
     /**
      * @inheritdoc
      */
-    public function current()
+    public function current(): mixed
     {
         if (!isset($this->currentBatch[$this->batchIndex])) {
             $this->loadNextBatch(true);
@@ -46,7 +46,7 @@ final class EntityIterator implements \Iterator
     /**
      * @inheritdoc
      */
-    public function next()
+    public function next(): void
     {
         $this->batchIndex++;
         $this->totalIndex++;
@@ -55,7 +55,7 @@ final class EntityIterator implements \Iterator
     /**
      * @inheritdoc
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->totalIndex;
     }
@@ -63,7 +63,7 @@ final class EntityIterator implements \Iterator
     /**
      * @inheritdoc
      */
-    public function valid()
+    public function valid(): bool
     {
         if ($this->totalCount === null) {
             $this->totalCount = $this->entityApi->count($this->request->module(), $this->request->parameters());
@@ -75,7 +75,7 @@ final class EntityIterator implements \Iterator
     /**
      * @inheritdoc
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->currentBatch = null;
         $this->batchIndex = 0;
