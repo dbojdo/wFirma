@@ -14,6 +14,7 @@ final class TagIds implements \IteratorAggregate, \Countable
      * @JMS\Type("string")
      * @JMS\XmlValue
      * @JMS\XmlElement(cdata=false)
+     * @JMS\Groups({"request", "response"})
      */
     private $ids;
 
