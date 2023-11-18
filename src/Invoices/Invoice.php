@@ -400,11 +400,11 @@ final class Invoice extends DateAwareEntity
     /**
      * @var int
      * @JMS\Type("integer")
-     * @JMS\SerializedName("schema_canceled")
+     * @JMS\SerializedName("schema_cancelled")
      * @JMS\XmlElement(cdata=false)
      * @JMS\Groups({"request", "response"})
      */
-    private $schemaCanceled;
+    private $schemaCancelled;
 
     /**
      * @var string
@@ -527,7 +527,7 @@ final class Invoice extends DateAwareEntity
      * @param string $description
      * @param Schema $schema
      * @param bool $schemaBill
-     * @param bool $schemaCanceled
+     * @param bool $schemaCancelled
      * @param string $registerDescription
      * @param string $idExternal
      * @param ?PriceType|string $priceType
@@ -547,7 +547,7 @@ final class Invoice extends DateAwareEntity
         $description = null,
         Schema $schema = null,
         $schemaBill = false,
-        $schemaCanceled = false,
+        $schemaCancelled = false,
         $registerDescription = null,
         $idExternal = null,
         $priceType = null,
@@ -579,7 +579,7 @@ final class Invoice extends DateAwareEntity
         $this->description = $description;
         $this->schema = (string)($schema ?: Schema::normal());
         $this->schemaBill = (int)$schemaBill;
-        $this->schemaCanceled = (int)$schemaCanceled;
+        $this->schemaCancelled = (int)$schemaCancelled;
         $this->registerDescription = $registerDescription;
         $this->idExternal = $idExternal;
         $this->tags = $tags;
@@ -602,7 +602,7 @@ final class Invoice extends DateAwareEntity
      * @param null $description
      * @param Schema|null $schema
      * @param bool $schemaBill
-     * @param bool $schemaCanceled
+     * @param bool $schemaCancelled
      * @param null $registerDescription
      * @param null $idExternal
      * @param ?PriceType|string $priceType
@@ -623,7 +623,7 @@ final class Invoice extends DateAwareEntity
         $description = null,
         Schema $schema = null,
         $schemaBill = false,
-        $schemaCanceled = false,
+        $schemaCancelled = false,
         $registerDescription = null,
         $idExternal = null,
         $priceType = null,
@@ -643,7 +643,7 @@ final class Invoice extends DateAwareEntity
             $description,
             $schema,
             $schemaBill,
-            $schemaCanceled,
+            $schemaCancelled,
             $registerDescription,
             $idExternal,
             $priceType,
@@ -665,7 +665,7 @@ final class Invoice extends DateAwareEntity
      * @param null $description
      * @param Schema|null $schema
      * @param bool $schemaBill
-     * @param bool $schemaCanceled
+     * @param bool $schemaCancelled
      * @param null $registerDescription
      * @param null $idExternal
      * @param ?PriceType|string $priceType
@@ -686,7 +686,7 @@ final class Invoice extends DateAwareEntity
         $description = null,
         Schema $schema = null,
         $schemaBill = false,
-        $schemaCanceled = false,
+        $schemaCancelled = false,
         $registerDescription = null,
         $idExternal = null,
         $priceType = null,
@@ -706,7 +706,7 @@ final class Invoice extends DateAwareEntity
             $description,
             $schema,
             $schemaBill,
-            $schemaCanceled,
+            $schemaCancelled,
             $registerDescription,
             $idExternal,
             $priceType,
@@ -820,6 +820,15 @@ final class Invoice extends DateAwareEntity
         $this->schema = (string)$schema;
         return $this;
     }
+
+    /**
+     * @param bool $cancelled
+     */
+    public function changeSchemaCancelled($cancelled)
+    {
+        $this->schemaCancelled = (int)$cancelled;
+    }
+
 
     /**
      * @return Payment
