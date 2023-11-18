@@ -919,6 +919,14 @@ final class Invoice extends DateAwareEntity
     }
 
     /**
+     * @return Type
+     */
+    public function type()
+    {
+        return $this->type;
+    }
+
+    /**
      * @param InvoiceNumber $invoiceNumber
      * @return Invoice
      */
