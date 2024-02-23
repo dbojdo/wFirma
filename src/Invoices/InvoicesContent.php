@@ -79,7 +79,7 @@ final class InvoicesContent extends DateAwareEntity
     /**
      * @var float
      * @JMS\Type("double")
-     * @JMS\SerializedName("discount")
+     * @JMS\SerializedName("netto")
      * @JMS\Groups({"request", "response"})
      */
     private $netto;
@@ -87,7 +87,7 @@ final class InvoicesContent extends DateAwareEntity
     /**
      * @var float
      * @JMS\Type("double")
-     * @JMS\SerializedName("discount")
+     * @JMS\SerializedName("brutto")
      * @JMS\Groups({"request", "response"})
      */
     private $brutto;
