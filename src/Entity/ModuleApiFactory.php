@@ -13,6 +13,7 @@ use Webit\WFirmaSDK\Notes\NotesApi;
 use Webit\WFirmaSDK\Payments\PaymentsApi;
 use Webit\WFirmaSDK\Series\SeriesApi;
 use Webit\WFirmaSDK\Tags\TagsApi;
+use Webit\WFirmaSDK\TaxRegisters\TaxRegistersApi;
 use Webit\WFirmaSDK\TranslationLanguages\TranslationLanguagesApi;
 use Webit\WFirmaSDK\Vat\VatCodesApi;
 
@@ -128,5 +129,13 @@ class ModuleApiFactory
     public function vatCodesApi()
     {
         return new VatCodesApi($this->entityApi);
+    }
+
+    /**
+     * @return TaxRegistersApi
+     */
+    public function taxRegistersApi()
+    {
+        return new TaxRegistersApi($this->entityApi);
     }
 }
