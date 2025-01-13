@@ -6,9 +6,12 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\SimpleCache\CacheInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class VatCodeIdCachingMapProviderTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var VatCodeIdMapProvider|ObjectProphecy */
     private $innerProvider;
 
@@ -18,7 +21,7 @@ class VatCodeIdCachingMapProviderTest extends TestCase
     /** @var VatCodeIdCachingMapProvider */
     private $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->innerProvider = $this->prophesize(VatCodeIdMapProvider::class);
         $this->cache = $this->prophesize(CacheInterface::class);

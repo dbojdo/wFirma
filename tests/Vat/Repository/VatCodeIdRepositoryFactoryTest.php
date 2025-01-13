@@ -8,9 +8,12 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Psr\SimpleCache\CacheInterface;
 use Webit\WFirmaSDK\Vat\VatCodeId;
 use Webit\WFirmaSDK\Vat\VatCodesApi;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class VatCodeIdRepositoryFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

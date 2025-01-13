@@ -9,7 +9,7 @@ class VatCodesApiIntegrationTest extends AbstractApiTestCase
     /** @var VatCodesApi */
     private $vatCodesApi;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->vatCodesApi = new VatCodesApi($this->entityApi());
     }

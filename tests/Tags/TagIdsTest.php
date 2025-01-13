@@ -11,7 +11,7 @@ class TagIdsTest extends AbstractTestCase
     /** @var SerializerInterface */
     private $serialiser;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->serialiser = $this->jmsSerializer();
     }

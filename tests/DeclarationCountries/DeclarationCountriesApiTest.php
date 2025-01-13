@@ -11,7 +11,7 @@ class DeclarationCountriesApiTest extends AbstractApiTestCase
      */
     private $declarationCountriesApi;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->declarationCountriesApi = new DeclarationCountriesApi(
             $this->entityApi()
