@@ -73,7 +73,7 @@ final class TagIds implements \IteratorAggregate, \Countable
     /**
      * @inheritdoc
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->ids());
     }
@@ -101,7 +101,7 @@ final class TagIds implements \IteratorAggregate, \Countable
     /**
      * @inheritdoc
      */
-    public function count()
+    public function count(): int
     {
         $ids = $this->ids();
 
