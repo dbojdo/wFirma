@@ -10,7 +10,8 @@
         "kriswallsmith/buzz": "^1.2",
         "nyholm/psr7": "^1.0",
         "psr/log": "^2.0|^3.0",
-        "psr/simple-cache": "^2.0|^3.0"
+        "psr/simple-cache": "^2.0|^3.0",
+        "doctrine/annotations": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
