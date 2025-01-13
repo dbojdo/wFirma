@@ -16,7 +16,7 @@ class VatCodeIdRepositoryTest extends TestCase
     /** @var VatCodeIdRepository */
     private $repository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->repository = new VatCodeIdRepository(self::CODE_MAP);
     }

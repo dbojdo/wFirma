@@ -22,12 +22,12 @@ class PaymentsApiIntegrationTest extends AbstractApiTestCase
     /** @var Invoice[] */
     private $invoices = array();
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = new PaymentsApi($this->entityApi());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         foreach($this->payments as $payment) {
             $this->api->delete($payment->id());

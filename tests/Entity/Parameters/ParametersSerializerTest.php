@@ -12,7 +12,7 @@ class ParametersSerializerTest extends AbstractTestCase
     /** @var SerializerInterface */
     private $serializer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->serializer = $this->jmsSerializer();
     }

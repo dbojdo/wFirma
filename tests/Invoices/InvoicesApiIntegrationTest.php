@@ -26,12 +26,12 @@ class InvoicesApiIntegrationTest extends AbstractApiTestCase
     /** @var Contractor[] */
     private $contractors = array();
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = $this->invoicesApi();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         foreach ($this->invoices as $invoice) {
             $this->api->delete($invoice->id());
