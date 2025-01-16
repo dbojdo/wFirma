@@ -11,6 +11,7 @@ composer require webit/w-firma-api
 ```
 
 | Version | PHP Version | Known issues |
+|---------|-------------|--------------|
 | 1.x     | <= 7.0      |              |
 | 2.x     | >= 7.1      | [#50 Call to a member function code() on null](https://github.com/dbojdo/wFirma/issues/50) |
 | 3.x     | >= 8.1      |              |
