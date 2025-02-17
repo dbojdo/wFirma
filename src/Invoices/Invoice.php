@@ -171,7 +171,7 @@ final class Invoice extends DateAwareEntity
      * @JMS\Type("integer")
      * @JMS\SerializedName("number")
      * @JMS\XmlElement(cdata=false)
-     * @JMS\Groups({"editRequest", "response"})
+     * @JMS\Groups({"addRequest", "editRequest", "response"})
      */
     private $number;
 
@@ -179,7 +179,7 @@ final class Invoice extends DateAwareEntity
      * @var int
      * @JMS\Type("integer")
      * @JMS\SerializedName("day")
-     * @JMS\Groups({"editRequest", "response"})
+     * @JMS\Groups({"addRequest", "editRequest", "response"})
      */
     private $day;
 
@@ -187,7 +187,7 @@ final class Invoice extends DateAwareEntity
      * @var string
      * @JMS\Type("integer")
      * @JMS\SerializedName("month")
-     * @JMS\Groups({"editRequest", "response"})
+     * @JMS\Groups({"addRequest", "editRequest", "response"})
      */
     private $month;
 
@@ -195,7 +195,7 @@ final class Invoice extends DateAwareEntity
      * @var int
      * @JMS\Type("integer")
      * @JMS\SerializedName("year")
-     * @JMS\Groups({"editRequest", "response"})
+     * @JMS\Groups({"addRequest", "editRequest", "response"})
      */
     private $year;
 
