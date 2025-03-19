@@ -177,10 +177,10 @@ final class InvoicesContent extends DateAwareEntity
      * @param string $lumpcode
      * @return InvoicesContent
      */
-    public static function fromGoodId(GoodId $id, $count = 1, $price = null, $vat = null, Discount $discount = null, $lumpcode = null)
+    public static function fromGoodId(GoodId $id, $count = 1, $price = null, $vat = null, Discount $discount = null, $lumpcode = null, $name = null)
     {
         return new self(
-            null,
+            $name,
             $vat,
             null,
             (float)$count,
