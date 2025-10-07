@@ -35,6 +35,10 @@ The current version of the package provides full support for the following modul
  * [vat_contents](https://doc.wfirma.pl/#h3-vat-contents)
  * [vat_codes](https://doc.wfirma.pl/#h3-vat-codes)
  * [vat_moss_details](https://doc.wfirma.pl/#h3-vat-moss-details)
+ 
+Basic support for the following modules:
+
+ * [expenses](https://doc.wfirma.pl/#7ba17d49-5ebc-4bef-adaa-e2256fe1c7ed) ([details](#expensesapi))
 
 ### Configure Annotation Registry
 
@@ -109,6 +113,7 @@ Every main module has it's own instance of the API exposing supported methods.
 * **Tags**: add, edit, delete, find, findAll, get, count
 * **TranslationLanguages**: find, findAll, get, count
 * **VatCodes**: find, findAll, get, count
+* **Expenses**: find, get
 
 ### Find / FindAll / Count APIs
 
@@ -239,6 +244,32 @@ $api->delete($contractor->id());
 
 // get contractor by id
 $contractor = $api->get(\Webit\WFirmaSDK\Contractors\ContractorId::create(123));
+
+```
+
+### ExpensesApi
+
+```php
+
+<?php
+
+$entityApiFactory = new EntityApiFactory();
+$entityApi = $entityApiFactory->create($auth);
+$apiFactory = new ModuleApiFactory($entityApi);
+$expenseApi = $apiFactory->expensesApi();
+
+$parameters = Parameters::findParameters(
+    Conditions::and(
+        Conditions::ge('date', $start->format('Y-m-d')),
+        Conditions::le('date', $end->format('Y-m-d'))
+    ),
+    Order::ascending('date'),
+    Pagination::create(30, 1)
+);
+try {
+    $expenses = $expenseApi->find($parameters);
+}
+catch (\Throwable $e) {}
 
 ```
 

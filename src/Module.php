@@ -177,6 +177,14 @@ final class Module
     }
 
     /**
+     * @return Module
+     */
+    public static function expenses()
+    {
+        return self::module('expenses');
+    }
+
+    /**
      * @param string $module
      * @return Module
      */
@@ -367,6 +375,16 @@ final class Module
                 'add',
                 'edit',
                 'delete'
+            )
+        );
+        
+        self::$modules['expenses'] = new self(
+            'expenses',
+            'expense',
+            'Webit\WFirmaSDK\Expenses\Expense',
+            array(
+                'find',
+                'get'
             )
         );
     }
