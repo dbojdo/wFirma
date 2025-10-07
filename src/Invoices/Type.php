@@ -112,6 +112,14 @@ final class Type
     }
 
     /**
+     * @return Type
+     */
+    public static function draftVat()
+    {
+        return new self('normal_draft');
+    }
+
+    /**
      * @param string $type
      * @return Type
      * @internal
