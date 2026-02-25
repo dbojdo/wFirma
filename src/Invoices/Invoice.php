@@ -522,6 +522,14 @@ final class Invoice extends DateAwareEntity
     private $companyAccountId;
 
     /**
+     * @var TranslationLanguageId
+     * @JMS\Type("Webit\WFirmaSDK\TranslationLanguages\TranslationLanguageId")
+     * @JMS\SerializedName("translation_language")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $translationLanguageId;
+
+    /**
      * Invoice constructor.
      * @param Contractor $contractor
      * @param Payment $payment
@@ -984,6 +992,24 @@ final class Invoice extends DateAwareEntity
     public function changeCompanyAccountId(?CompanyAccountId $companyAccountId): Invoice
     {
         $this->companyAccountId = $companyAccountId;
+        return $this;
+    }
+
+    /**
+     * @return TranslationLanguageId|null
+     */
+    public function translationLanguageId(): ?TranslationLanguageId
+    {
+        return $this->translationLanguageId;
+    }
+
+    /**
+     * @param TranslationLanguageId|null $translationLanguageId
+     * @return Invoice
+     */
+    public function changeTranslationLanguageId(?TranslationLanguageId $translationLanguageId): Invoice
+    {
+        $this->translationLanguageId = $translationLanguageId;
         return $this;
     }
 
