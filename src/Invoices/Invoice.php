@@ -2,6 +2,7 @@
 
 namespace Webit\WFirmaSDK\Invoices;
 
+use Webit\WFirmaSDK\CompanyAccounts\CompanyAccountId;
 use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Contractors\ContractorId;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
@@ -513,6 +514,14 @@ final class Invoice extends DateAwareEntity
     private $seriesId;
 
     /**
+     * @var CompanyAccountId
+     * @JMS\SerializedName("company_account")
+     * @JMS\Type("Webit\WFirmaSDK\CompanyAccounts\CompanyAccountId")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $companyAccountId;
+
+    /**
      * Invoice constructor.
      * @param Contractor $contractor
      * @param Payment $payment
@@ -957,6 +966,24 @@ final class Invoice extends DateAwareEntity
     public function changePriceType(PriceType $priceType): Invoice
     {
         $this->priceType = (string)$priceType;
+        return $this;
+    }
+
+    /**
+     * @return CompanyAccountId|null
+     */
+    public function companyAccountId(): ?CompanyAccountId
+    {
+        return $this->companyAccountId;
+    }
+
+    /**
+     * @param CompanyAccountId|null $companyAccountId
+     * @return Invoice
+     */
+    public function changeCompanyAccountId(?CompanyAccountId $companyAccountId): Invoice
+    {
+        $this->companyAccountId = $companyAccountId;
         return $this;
     }
 
