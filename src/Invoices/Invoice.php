@@ -2,14 +2,15 @@
 
 namespace Webit\WFirmaSDK\Invoices;
 
+use JMS\Serializer\Annotation as JMS;
 use Webit\WFirmaSDK\CompanyAccounts\CompanyAccountId;
 use Webit\WFirmaSDK\Contractors\Contractor;
 use Webit\WFirmaSDK\Contractors\ContractorId;
 use Webit\WFirmaSDK\Entity\DateAwareEntity;
-use Webit\WFirmaSDK\Series\SeriesId;
-use JMS\Serializer\Annotation as JMS;
 use Webit\WFirmaSDK\Payments\PaymentMethod;
+use Webit\WFirmaSDK\Series\SeriesId;
 use Webit\WFirmaSDK\Tags\TagIds;
+use Webit\WFirmaSDK\TranslationLanguages\TranslationLanguageId;
 
 /**
  * @JMS\XmlRoot("invoice")
@@ -549,6 +550,8 @@ final class Invoice extends DateAwareEntity
      * @param string $idExternal
      * @param ?PriceType|string $priceType
      * @param TagIds $tags
+     * @param CompanyAccountId|null $companyAccountId
+     * @param TranslationLanguageId|null $translationLanguageId
      */
     private function __construct(
         $contractor,
@@ -568,7 +571,9 @@ final class Invoice extends DateAwareEntity
         $registerDescription = null,
         $idExternal = null,
         $priceType = null,
-        TagIds $tags = null
+        TagIds $tags = null,
+        CompanyAccountId $companyAccountId = null,
+        TranslationLanguageId $translationLanguageId = null
     ) {
         $this->setContractor($contractor);
 
@@ -603,6 +608,8 @@ final class Invoice extends DateAwareEntity
         $this->priceType = (string)$priceType;
         $this->invoiceContents = array();
         $this->seriesId = $seriesId;
+        $this->companyAccountId = $companyAccountId;
+        $this->translationLanguageId = $translationLanguageId;
     }
 
     /**
@@ -624,6 +631,8 @@ final class Invoice extends DateAwareEntity
      * @param null $idExternal
      * @param ?PriceType|string $priceType
      * @param TagIds|null $tags
+     * @param CompanyAccountId|null $companyAccountId
+     * @param TranslationLanguageId|null $translationLanguageId
      * @return Invoice
      */
     public static function forContractor(
@@ -644,7 +653,9 @@ final class Invoice extends DateAwareEntity
         $registerDescription = null,
         $idExternal = null,
         $priceType = null,
-        TagIds $tags = null
+        TagIds $tags = null,
+        CompanyAccountId $companyAccountId = null,
+        TranslationLanguageId $translationLanguageId = null
     ) {
         return new self(
             $contractor,
@@ -664,7 +675,9 @@ final class Invoice extends DateAwareEntity
             $registerDescription,
             $idExternal,
             $priceType,
-            $tags
+            $tags,
+            $companyAccountId,
+            $translationLanguageId
         );
     }
 
@@ -687,6 +700,8 @@ final class Invoice extends DateAwareEntity
      * @param null $idExternal
      * @param ?PriceType|string $priceType
      * @param TagIds|null $tags
+     * @param CompanyAccountId|null $companyAccountId
+     * @param TranslationLanguageId|null $translationLanguageId
      * @return Invoice
      */
     public static function forContractorOfId(
@@ -707,7 +722,9 @@ final class Invoice extends DateAwareEntity
         $registerDescription = null,
         $idExternal = null,
         $priceType = null,
-        TagIds $tags = null
+        TagIds $tags = null,
+        CompanyAccountId $companyAccountId = null,
+        TranslationLanguageId $translationLanguageId = null
     ) {
         return new self(
             $contractorId,
@@ -727,7 +744,9 @@ final class Invoice extends DateAwareEntity
             $registerDescription,
             $idExternal,
             $priceType,
-            $tags
+            $tags,
+            $companyAccountId,
+            $translationLanguageId
         );
     }
 
