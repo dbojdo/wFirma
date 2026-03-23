@@ -922,7 +922,7 @@ final class Invoice extends DateAwareEntity
      */
     public function disposal()
     {
-        if ($this->disposalDateEmpty) {
+        if ($this->disposalDateEmpty || $this->disposalDate === null) {
             return Disposal::withEmptyDate();
         }
 
