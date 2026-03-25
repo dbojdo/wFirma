@@ -36,6 +36,10 @@ The current version of the package provides full support for the following modul
  * [vat_codes](https://doc.wfirma.pl/#h3-vat-codes)
  * [vat_moss_details](https://doc.wfirma.pl/#h3-vat-moss-details)
 
+Basic support for the following modules:
+
+ * [taxregisters](https://doc.wfirma.pl/#030217b9-8adf-489e-86d4-ed3f50249dac) ([details](#taxregistersapi))
+
 ### Configure Annotation Registry
 
 This is not needed if you use AnnotationRegistry 2.0.
@@ -109,6 +113,7 @@ Every main module has it's own instance of the API exposing supported methods.
 * **Tags**: add, edit, delete, find, findAll, get, count
 * **TranslationLanguages**: find, findAll, get, count
 * **VatCodes**: find, findAll, get, count
+* **TaxRegisters**: get
 
 ### Find / FindAll / Count APIs
 
@@ -239,6 +244,31 @@ $api->delete($contractor->id());
 
 // get contractor by id
 $contractor = $api->get(\Webit\WFirmaSDK\Contractors\ContractorId::create(123));
+
+```
+
+### TaxRegistersApi
+
+```php
+
+<?php
+use Webit\WFirmaSDK\TaxRegisters\TaxRegistersId;
+
+$entityApiFactory = new EntityApiFactory();
+$entityApi = $entityApiFactory->create($auth);
+$apiFactory = new ModuleApiFactory($entityApi);
+$taxRegisterApi = $apiFactory->taxRegistersApi();
+
+// single TaxRegister doesn't have id
+// new id for specific month (February)
+$taxRegisterId = new TaxRegistersId(2024, 2);
+
+// or new id for a year
+$taxRegisterId = new TaxRegistersId(2024);
+
+// get tax registers
+/** @var \Webit\WFirmaSDK\TaxRegisters\TaxRegister[] $taxRegisters */
+$taxRegisters = $taxRegisterApi->get($taxRegisterId);
 
 ```
 

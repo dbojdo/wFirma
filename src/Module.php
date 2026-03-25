@@ -177,6 +177,14 @@ final class Module
     }
 
     /**
+     * @return Module
+     */
+    public static function taxregisters()
+    {
+        return self::module('taxregisters');
+    }
+
+    /**
      * @param string $module
      * @return Module
      */
@@ -367,6 +375,15 @@ final class Module
                 'add',
                 'edit',
                 'delete'
+            )
+        );
+
+        self::$modules['taxregisters'] = new self(
+            'taxregisters',
+            'taxregister',
+            'Webit\WFirmaSDK\TaxRegisters\TaxRegister',
+            array(
+                'get'
             )
         );
     }
