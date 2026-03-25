@@ -498,6 +498,30 @@ final class Invoice extends DateAwareEntity
     private $priceType;
 
     /**
+     * @var string|null
+     * @JMS\Type("string")
+     * @JMS\SerializedName("ksef_reference_number")
+     * @JMS\Groups({"response"})
+     */
+    private $ksefReferenceNumber;
+
+    /**
+     * @var string|null
+     * @JMS\Type("string")
+     * @JMS\SerializedName("ksef_status")
+     * @JMS\Groups({"response"})
+     */
+    private $ksefStatus;
+
+    /**
+     * @var \DateTime|null
+     * @JMS\Type("DateTime<'Y-m-d H:i:s.v'>")
+     * @JMS\SerializedName("ksef_registration_date")
+     * @JMS\Groups({"response"})
+     */
+    private $ksefRegistrationDate;
+
+    /**
      * @var InvoicesContent[]
      * @JMS\SerializedName("invoicecontents")
      * @JMS\Type("array<Webit\WFirmaSDK\Invoices\InvoicesContent>")
@@ -976,6 +1000,30 @@ final class Invoice extends DateAwareEntity
     public function hash()
     {
         return $this->hash;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function ksefReferenceNumber(): ?string
+    {
+        return $this->ksefReferenceNumber;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function ksefStatus(): ?string
+    {
+        return $this->ksefStatus;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function ksefRegistrationDate(): ?\DateTime
+    {
+        return $this->ksefRegistrationDate;
     }
 
     /**
