@@ -411,6 +411,30 @@ final class Expense extends DateAwareEntity
     }
 
     /**
+     * @return null|\Webit\WFirmaSDK\Invoices\ContractorDetail
+     */
+    public function contractorDetail()
+    {
+        return $this->contractorDetail;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function description()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function type()
+    {
+        return $this->type;
+    }
+
+    /**
      * @return null|ContractorId
      */
     public function contractorId(): ?ContractorId
