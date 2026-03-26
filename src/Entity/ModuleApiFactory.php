@@ -5,6 +5,7 @@ namespace Webit\WFirmaSDK\Entity;
 use Webit\WFirmaSDK\CompanyAccounts\CompanyAccountsApi;
 use Webit\WFirmaSDK\Contractors\ContractorsApi;
 use Webit\WFirmaSDK\DeclarationCountries\DeclarationCountriesApi;
+use Webit\WFirmaSDK\Expenses\ExpensesApi;
 use Webit\WFirmaSDK\Goods\GoodsApi;
 use Webit\WFirmaSDK\InvoiceDeliveries\InvoiceDeliveriesApi;
 use Webit\WFirmaSDK\InvoiceDescriptions\InvoiceDescriptionsApi;
@@ -128,5 +129,13 @@ class ModuleApiFactory
     public function vatCodesApi()
     {
         return new VatCodesApi($this->entityApi);
+    }
+
+    /**
+     * @return ExpensesApi
+     */
+    public function expensesApi()
+    {
+        return new ExpensesApi($this->entityApi);
     }
 }
