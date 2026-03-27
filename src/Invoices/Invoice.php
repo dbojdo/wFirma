@@ -235,6 +235,14 @@ final class Invoice extends DateAwareEntity
     private $type;
 
     /**
+     * @var InvoiceId|null
+     * @JMS\Type("Webit\WFirmaSDK\Invoices\InvoiceId")
+     * @JMS\SerializedName("parent")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $parentId;
+
+    /**
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("correction_type")
@@ -772,6 +780,22 @@ final class Invoice extends DateAwareEntity
             $companyAccountId,
             $translationLanguageId
         );
+    }
+
+    public function parentId(): ?InvoiceId
+    {
+        return $this->parentId;
+    }
+
+    public function changeParentId(InvoiceId | int | null $parentId): Invoice
+    {
+        if (is_int($parentId)) {
+            $this->parentId = InvoiceId::create($parentId);
+        } else {
+            $this->parentId = $parentId;
+        }
+
+        return $this;
     }
 
     /**
