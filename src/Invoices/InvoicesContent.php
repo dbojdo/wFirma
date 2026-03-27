@@ -127,6 +127,15 @@ final class InvoicesContent extends DateAwareEntity
     private $goodId;
 
     /**
+     * @var int|null
+     * @JMS\Type("integer")
+     * @JMS\SerializedName("parent_id")
+     * @JMS\XmlElement(cdata=false)
+     * @JMS\Groups({"request", "response"})
+     */
+    private $parentId;
+
+    /**
      * @param string $name
      * @param VatRate|VatCodeId|string $vat
      * @param string $unit
@@ -333,6 +342,22 @@ final class InvoicesContent extends DateAwareEntity
     public function goodId()
     {
         return $this->goodId;
+    }
+
+    public function parentId(): ?InvoiceContentId
+    {
+        return $this->parentId ? InvoiceContentId::create($this->parentId) : null;
+    }
+
+    public function changeParentId(InvoiceContentId | int | null $parentId): InvoicesContent
+    {
+        if ($parentId instanceof InvoiceContentId) {
+            $this->parentId = $parentId->id();
+        } else {
+            $this->parentId = $parentId;
+        }
+
+        return $this;
     }
 
     /**
