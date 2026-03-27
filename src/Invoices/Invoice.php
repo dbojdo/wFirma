@@ -235,6 +235,15 @@ final class Invoice extends DateAwareEntity
     private $type;
 
     /**
+     * @var int|null
+     * @JMS\Type("integer")
+     * @JMS\SerializedName("parent_id")
+     * @JMS\XmlElement(cdata=false)
+     * @JMS\Groups({"request", "response"})
+     */
+    private $parentId;
+
+    /**
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("correction_type")
@@ -772,6 +781,22 @@ final class Invoice extends DateAwareEntity
             $companyAccountId,
             $translationLanguageId
         );
+    }
+
+    public function parentId(): ?InvoiceId
+    {
+        return $this->parentId ? InvoiceId::create($this->parentId) : null;
+    }
+
+    public function changeParentId(InvoiceId | int | null $parentId): Invoice
+    {
+        if ($parentId instanceof InvoiceId) {
+            $this->parentId = $parentId->id();
+        } else {
+            $this->parentId = $parentId;
+        }
+
+        return $this;
     }
 
     /**
