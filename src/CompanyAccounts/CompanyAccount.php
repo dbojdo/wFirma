@@ -47,6 +47,14 @@ final class CompanyAccount extends DateAwareEntity
      */
     private $address;
 
+    /**
+     * @var string
+     * @JMS\Type("string")
+     * @JMS\SerializedName("currency")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $currency;
+
     private function __construct()
     {
     }
@@ -100,6 +108,14 @@ final class CompanyAccount extends DateAwareEntity
     }
 
     /**
+     * @return string
+     */
+    public function currency()
+    {
+        return $this->currency;
+    }
+
+    /**
      * @param string $name
      */
     public function changeName($name)
@@ -137,5 +153,13 @@ final class CompanyAccount extends DateAwareEntity
     public function changeAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @param string $currency
+     */
+    public function changeCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 }
