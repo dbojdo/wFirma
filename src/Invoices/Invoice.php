@@ -419,6 +419,15 @@ final class Invoice extends DateAwareEntity
     /**
      * @var string
      * @JMS\Type("string")
+     * @JMS\SerializedName("schema_jpk_cashbox")
+     * @JMS\XmlElement(cdata=false)
+     * @JMS\Groups({"request", "response"})
+     */
+    private $schemaJpkCashbox;
+
+    /**
+     * @var string
+     * @JMS\Type("string")
      * @JMS\SerializedName("register_description")
      * @JMS\Groups({"request", "response"})
      */
@@ -605,7 +614,8 @@ final class Invoice extends DateAwareEntity
         $priceType = null,
         TagIds $tags = null,
         CompanyAccountId $companyAccountId = null,
-        TranslationLanguageId $translationLanguageId = null
+        TranslationLanguageId $translationLanguageId = null,
+        SchemaJpkCashbox $schemaJpkCashbox = null,
     ) {
         $this->setContractor($contractor);
 
@@ -642,6 +652,7 @@ final class Invoice extends DateAwareEntity
         $this->seriesId = $seriesId;
         $this->companyAccountId = $companyAccountId;
         $this->translationLanguageId = $translationLanguageId;
+        $this->schemaJpkCashbox = $schemaJpkCashbox;
     }
 
     /**
@@ -687,7 +698,8 @@ final class Invoice extends DateAwareEntity
         $priceType = null,
         TagIds $tags = null,
         CompanyAccountId $companyAccountId = null,
-        TranslationLanguageId $translationLanguageId = null
+        TranslationLanguageId $translationLanguageId = null,
+        SchemaJpkCashbox $schemaJpkCashbox = null,
     ) {
         return new self(
             $contractor,
@@ -709,7 +721,8 @@ final class Invoice extends DateAwareEntity
             $priceType,
             $tags,
             $companyAccountId,
-            $translationLanguageId
+            $translationLanguageId,
+            $schemaJpkCashbox,
         );
     }
 
@@ -756,7 +769,8 @@ final class Invoice extends DateAwareEntity
         $priceType = null,
         TagIds $tags = null,
         CompanyAccountId $companyAccountId = null,
-        TranslationLanguageId $translationLanguageId = null
+        TranslationLanguageId $translationLanguageId = null,
+        SchemaJpkCashbox $schemaJpkCashbox = null,
     ) {
         return new self(
             $contractorId,
@@ -778,7 +792,8 @@ final class Invoice extends DateAwareEntity
             $priceType,
             $tags,
             $companyAccountId,
-            $translationLanguageId
+            $translationLanguageId,
+            $schemaJpkCashbox,
         );
     }
 
@@ -902,6 +917,24 @@ final class Invoice extends DateAwareEntity
     public function changeSchema(Schema $schema): Invoice
     {
         $this->schema = (string)$schema;
+        return $this;
+    }
+
+    /**
+     * @return null|SchemaJpkCashbox
+     */
+    public function schemaJpkCashbox()
+    {
+        return $this->schemaJpkCashbox ? SchemaJpkCashbox::fromString($this->schemaJpkCashbox) : null;
+    }
+
+    /**
+     * @param SchemaJpkCashbox $schemaJpkCashbox
+     * @return Invoice
+     */
+    public function changeSchemaJpkCashbox(SchemaJpkCashbox $schemaJpkCashbox): Invoice
+    {
+        $this->schemaJpkCashbox = (string)$schemaJpkCashbox;
         return $this;
     }
 
