@@ -15,7 +15,7 @@ final class Note extends DateAwareEntity
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("object_name")
-     * @JMS\Groups("response", "addRequest")
+     * @JMS\Groups({"response", "addRequest"})
      */
     private $objectName;
 
@@ -23,15 +23,15 @@ final class Note extends DateAwareEntity
      * @var int
      * @JMS\Type("integer")
      * @JMS\SerializedName("object_id")
-     * @JMS\Groups("response", "addRequest")
+     * @JMS\Groups({"response", "addRequest"})
      */
     private $objectId;
 
     /**
      * @var string
      * @JMS\Type("string")
-     * @JMS\SerializedName("object_name")
-     * @JMS\Groups("response", "request")
+     * @JMS\SerializedName("text")
+     * @JMS\Groups({"response", "request"})
      */
     private $text;
 
@@ -42,7 +42,7 @@ final class Note extends DateAwareEntity
      */
     public function __construct(Module $module, $objectId, $text)
     {
-        $this->objectName = (string)$module;
+        $this->objectName = $module->entityName();
         $this->objectId = $objectId;
         $this->text = $text;
     }
