@@ -573,7 +573,7 @@ final class Invoice extends DateAwareEntity
 
     /**
      * Invoice constructor.
-     * @param Contractor $contractor
+     * @param Contractor|null $contractor
      * @param Payment $payment
      * @param Type $type
      * @param SeriesId|null $seriesId
@@ -595,7 +595,7 @@ final class Invoice extends DateAwareEntity
      * @param TranslationLanguageId|null $translationLanguageId
      */
     private function __construct(
-        $contractor,
+        $contractor = null,
         Payment $payment,
         Type $type = null,
         SeriesId $seriesId = null,
@@ -656,7 +656,7 @@ final class Invoice extends DateAwareEntity
     }
 
     /**
-     * @param Contractor $contractor
+     * @param Contractor|null $contractor
      * @param Payment $payment
      * @param Type|null $type
      * @param SeriesId|null $seriesId
@@ -679,7 +679,7 @@ final class Invoice extends DateAwareEntity
      * @return Invoice
      */
     public static function forContractor(
-        Contractor $contractor,
+        ?Contractor $contractor,
         Payment $payment,
         Type $type = null,
         SeriesId $seriesId = null,
@@ -854,9 +854,9 @@ final class Invoice extends DateAwareEntity
     }
 
     /**
-     * @param Contractor $contractor
+     * @param Contractor|null $contractor
      */
-    public function changeContractor(Contractor $contractor)
+    public function changeContractor(?Contractor $contractor)
     {
         $this->contractorId = null;
         $this->contractor = $contractor;
@@ -868,9 +868,9 @@ final class Invoice extends DateAwareEntity
     }
 
     /**
-     * @param ContractorId $contractorId
+     * @param ContractorId|null $contractorId
      */
-    public function changeContractorWithId(ContractorId $contractorId)
+    public function changeContractorWithId(?ContractorId $contractorId)
     {
         $this->contractor = null;
         $this->contractorId = $contractorId;
@@ -1250,7 +1250,7 @@ final class Invoice extends DateAwareEntity
     }
 
     /**
-     * @param ContractorId|Contractor $contractor
+     * @param ContractorId|Contractor|null $contractor
      */
     private function setContractor($contractor)
     {
@@ -1259,11 +1259,12 @@ final class Invoice extends DateAwareEntity
                 $this->changeContractorWithId($contractor);
                 return;
             case $contractor instanceof Contractor:
+            case $contractor === null:
                 $this->changeContractor($contractor);
                 return;
 
         }
 
-        throw new \InvalidArgumentException('Contractor must be instance of "Contractor" or "ContractorId".');
+        throw new \InvalidArgumentException('Contractor must be instance of "Contractor" or "ContractorId" or null.');
     }
 }
