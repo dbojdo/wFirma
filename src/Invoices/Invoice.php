@@ -10,6 +10,7 @@ use Webit\WFirmaSDK\Entity\DateAwareEntity;
 use Webit\WFirmaSDK\Payments\PaymentMethod;
 use Webit\WFirmaSDK\Series\SeriesId;
 use Webit\WFirmaSDK\Tags\TagIds;
+use Webit\WFirmaSDK\Orders\OrderId;
 use Webit\WFirmaSDK\TranslationLanguages\TranslationLanguageId;
 
 /**
@@ -241,6 +242,14 @@ final class Invoice extends DateAwareEntity
      * @JMS\Groups({"request", "response"})
      */
     private $parentId;
+
+    /**
+     * @var OrderId|null
+     * @JMS\Type("Webit\WFirmaSDK\Orders\OrderId")
+     * @JMS\SerializedName("order")
+     * @JMS\Groups({"request", "response"})
+     */
+    private $orderId;
 
     /**
      * @var string
@@ -793,6 +802,22 @@ final class Invoice extends DateAwareEntity
             $this->parentId = InvoiceId::create($parentId);
         } else {
             $this->parentId = $parentId;
+        }
+
+        return $this;
+    }
+
+    public function orderId(): ?OrderId
+    {
+        return $this->orderId;
+    }
+
+    public function changeOrderId(OrderId | int | null $orderId): Invoice
+    {
+        if (is_int($orderId)) {
+            $this->orderId = OrderId::create($orderId);
+        } else {
+            $this->orderId = $orderId;
         }
 
         return $this;
