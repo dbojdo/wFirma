@@ -16,6 +16,11 @@ final class Discount
         $this->percent = $percent;
     }
 
+    public function isDiscount()
+    {
+        return $this->percent > 0;
+    }
+    
     /**
      * @param float $percent
      * @return Discount
