@@ -280,10 +280,6 @@ final class InvoicesContent extends DateAwareEntity
     public function discount()
     {
         if ($this->discount) {
-            return Discount::amountDiscount($this->discount);
-        }
-
-        if ($this->discountPercent) {
             return Discount::percentDiscount($this->discountPercent);
         }
 
