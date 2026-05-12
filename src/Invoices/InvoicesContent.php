@@ -162,7 +162,7 @@ final class InvoicesContent extends DateAwareEntity
         $this->unit = $unit;
         $this->count = $count;
         $this->price = $price;
-        $this->discount = $discount ? $discount->amount() : null;
+        $this->discount = $discount ? $discount->isDiscount() : null;
         $this->discountPercent = $discount ? $discount->percent() : null;
         $this->setVat($vat);
         $this->lumpcode = $lumpcode;
