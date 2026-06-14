@@ -29,7 +29,7 @@ final class Disposal
      * @param \DateTime $date
      * @param string $dateFormat
      */
-    private function __construct($dateEmpty, \DateTime $date = null, $dateFormat = null)
+    private function __construct($dateEmpty, ?\DateTime $date = null, $dateFormat = null)
     {
         $this->dateEmpty = $dateEmpty;
         $this->date = $date;

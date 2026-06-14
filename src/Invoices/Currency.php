@@ -35,7 +35,7 @@ final class Currency
         $currency,
         $currencyExchange = null,
         $currencyLabel = null,
-        \DateTime $currencyDate = null,
+        ?\DateTime $currencyDate = null,
         $priceCurrencyExchange = null,
         $goodPriceGroupCurrencyExchange = null
     ) {

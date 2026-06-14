@@ -15,7 +15,7 @@ class DeserialisationException extends ApiSerialiserException
      * @param \Exception|null $previous
      * @return DeserialisationException
      */
-    public static function createForRequest(Request $request, $code = 0, \Exception $previous = null)
+    public static function createForRequest(Request $request, $code = 0, ?\Exception $previous = null)
     {
         $e = new self('Error during response deserialisation', $code, $previous);
         $e->request = $request;

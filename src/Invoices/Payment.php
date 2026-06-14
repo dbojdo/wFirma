@@ -38,10 +38,10 @@ final class Payment
      * @internal
      */
     private function __construct(
-        PaymentMethod $paymentMethod = null,
-        \DateTime $paymentDate = null,
+        ?PaymentMethod $paymentMethod = null,
+        ?\DateTime $paymentDate = null,
         $alreadyPaidInitial = null,
-        PaymentState $paymentState = null,
+        ?PaymentState $paymentState = null,
         $alreadyPaid = null,
         $remaining = null,
         $interestStatus = null
@@ -63,7 +63,7 @@ final class Payment
      */
     public static function create(
         PaymentMethod $paymentMethod,
-        \DateTime $paymentDate = null,
+        ?\DateTime $paymentDate = null,
         $alreadyPaidInitial = null
     ) {
         return new self(
@@ -85,10 +85,10 @@ final class Payment
      * @internal
      */
     public static function createFull(
-        PaymentMethod $paymentMethod = null,
-        \DateTime $paymentDate = null,
+        ?PaymentMethod $paymentMethod = null,
+        ?\DateTime $paymentDate = null,
         $alreadyPaidInitial = null,
-        PaymentState $paymentState = null,
+        ?PaymentState $paymentState = null,
         $alreadyPaid = null,
         $remaining = null,
         $interestStatus = null

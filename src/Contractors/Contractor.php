@@ -337,17 +337,17 @@ final class Contractor extends DateAwareEntity
         $altName = null,
         $nip = null,
         $regon = null,
-        InvoiceAddress $invoiceAddress = null,
-        ContactAddress $contactAddress = null,
-        ContactDetails $contactDetails = null,
+        ?InvoiceAddress $invoiceAddress = null,
+        ?ContactAddress $contactAddress = null,
+        ?ContactDetails $contactDetails = null,
         $description = null,
         $buyer = true,
         $seller = false,
         $accountNumber = null,
-        PaymentSettings $paymentSettings = null,
-        TaxIdType $taxIdType = null,
-        TagIds $tags = null,
-        TranslationLanguageId $translationLanguageId = null
+        ?PaymentSettings $paymentSettings = null,
+        ?TaxIdType $taxIdType = null,
+        ?TagIds $tags = null,
+        ?TranslationLanguageId $translationLanguageId = null
     ) {
         $this->name = $name;
         $this->altName = $altName;
@@ -518,7 +518,7 @@ final class Contractor extends DateAwareEntity
         );
     }
 
-    public function changeContactAddress(ContactAddress $contactAddress = null)
+    public function changeContactAddress(?ContactAddress $contactAddress = null)
     {
         $hasAddress = (bool)$contactAddress;
         if (!$hasAddress) {

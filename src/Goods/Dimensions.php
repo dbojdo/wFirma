@@ -23,10 +23,10 @@ final class Dimensions
      * @param ?float $height
      */
     public function __construct(
-        float $weight = null,
-        float $length = null,
-        float $width = null,
-        float $height = null
+        ?float $weight = null,
+        ?float $length = null,
+        ?float $width = null,
+        ?float $height = null
     ) {
         $this->weight = $weight;
         $this->length = $length;

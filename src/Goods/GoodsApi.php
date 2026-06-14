@@ -49,7 +49,7 @@ class GoodsApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|Good[]
      */
-    public function find(Parameters $parameters = null)
+    public function find(?Parameters $parameters = null)
     {
         return $this->entityApi->find(Module::goods(), $parameters);
     }

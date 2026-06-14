@@ -40,7 +40,7 @@ interface EntityApi
      */
     public function find(
         Module $module,
-        Parameters $parameters = null
+        ?Parameters $parameters = null
     );
 
     /**
@@ -48,14 +48,14 @@ interface EntityApi
      * @param Parameters|null $parameters
      * @return Entity[]|EntityIterator
      */
-    public function findAll(Module $module, Parameters $parameters = null);
+    public function findAll(Module $module, ?Parameters $parameters = null);
 
     /**
      * @param Module $module
      * @param Parameters|null $parameters
      * @return int
      */
-    public function count(Module $module, Parameters $parameters = null);
+    public function count(Module $module, ?Parameters $parameters = null);
 
     /**
      * @param Module $module
@@ -64,5 +64,5 @@ interface EntityApi
      * @param Parameters|null $parameters
      * @return Response
      */
-    public function executeAction(Module $module, $action, $id = null, Parameters $parameters = null);
+    public function executeAction(Module $module, $action, $id = null, ?Parameters $parameters = null);
 }

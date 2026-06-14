@@ -10,7 +10,7 @@ class OutOfServiceException extends ApiException
     /**
      * @inheritdoc
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
         return 'The API is temporary out of service. Try again later.';
     }

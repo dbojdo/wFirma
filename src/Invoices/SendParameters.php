@@ -34,7 +34,7 @@ final class SendParameters
      * @param string $body
      */
     public function __construct(
-        InvoicePage $page = null,
+        ?InvoicePage $page = null,
         $leaflet = false,
         $duplicate = false,
         $email = null,

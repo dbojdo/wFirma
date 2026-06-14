@@ -17,7 +17,7 @@ abstract class ApiException extends \RuntimeException
      */
     private $apiRequest;
 
-    public static function create(Request $request, Response $response = null, \Exception $previous = null)
+    public static function create(Request $request, ?Response $response = null, ?\Exception $previous = null)
     {
         $exception = new static(
             static::message($request, $response),
@@ -52,8 +52,8 @@ abstract class ApiException extends \RuntimeException
      * @param Response $response
      * @return string
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
-        throw new \RuntimeException(get_class().'::message method must be implemented.');
+        throw new \RuntimeException(self::class.'::message method must be implemented.');
     }
 }

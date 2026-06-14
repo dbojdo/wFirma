@@ -22,7 +22,7 @@ final class ErrorMethod
      * @param string $name
      * @param Parameters $parameters
      */
-    public function __construct($name, Parameters $parameters = null)
+    public function __construct($name, ?Parameters $parameters = null)
     {
         $this->name = $name;
     }

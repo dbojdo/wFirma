@@ -10,7 +10,7 @@ class AuthException extends ApiException
     /**
      * @inheritdoc
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
         return 'This action requires credentials to be passed or given credentials are invalid.';
     }

@@ -38,7 +38,7 @@ final class Error
      * @param string $message
      * @param ErrorMethod $method
      */
-    public function __construct($field, $message, ErrorMethod $method = null)
+    public function __construct($field, $message, ?ErrorMethod $method = null)
     {
         $this->field = $field;
         $this->message = $message;

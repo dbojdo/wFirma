@@ -33,7 +33,7 @@ final class EntityWrapper
      * @param Entity $entity
      * @param Parameters $parameters
      */
-    public function __construct(Entity $entity = null, Parameters $parameters = null)
+    public function __construct(?Entity $entity = null, ?Parameters $parameters = null)
     {
         $this->entities = $entity ? array($entity) : array();
         $this->parameters = $parameters;

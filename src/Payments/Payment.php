@@ -227,7 +227,7 @@ final class Payment extends DateAwareEntity
         PaymentAmount $paymentAmount,
         \DateTime $date,
         PaymentMethod $paymentMethod,
-        TagIds $tags = null
+        ?TagIds $tags = null
     ) {
         $this->objectName = (string)$objectName;
         $this->objectId = (string)$objectId;
@@ -250,7 +250,7 @@ final class Payment extends DateAwareEntity
         PaymentAmount $paymentAmount,
         \DateTime $date,
         PaymentMethod $paymentMethod,
-        TagIds $tags = null
+        ?TagIds $tags = null
     ): Payment {
         return new self(
             'invoice',
@@ -275,7 +275,7 @@ final class Payment extends DateAwareEntity
         PaymentAmount $paymentAmount,
         \DateTime $date,
         PaymentMethod $paymentMethod,
-        TagIds $tags = null
+        ?TagIds $tags = null
     ): Payment {
         return new self(
             'invoice',
@@ -300,7 +300,7 @@ final class Payment extends DateAwareEntity
         PaymentAmount $paymentAmount,
         \DateTime $date,
         PaymentMethod $paymentMethod,
-        TagIds $tags = null
+        ?TagIds $tags = null
     ): Payment {
         return new self(
             'expense',
@@ -350,7 +350,7 @@ final class Payment extends DateAwareEntity
      * @param PaymentMethod|null $paymentMethod
      * @return Payment
      */
-    public function changePaymentMethod(PaymentMethod $paymentMethod = null): Payment
+    public function changePaymentMethod(?PaymentMethod $paymentMethod = null): Payment
     {
         $this->paymentMethod = $paymentMethod ? (string)$paymentMethod : null;
         return $this;
@@ -442,7 +442,7 @@ final class Payment extends DateAwareEntity
         return $this->tags;
     }
 
-    public function changeTags(TagIds $tagIds = null): Payment
+    public function changeTags(?TagIds $tagIds = null): Payment
     {
         $this->tags = $tagIds;
         return $this;

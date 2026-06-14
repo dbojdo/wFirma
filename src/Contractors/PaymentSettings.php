@@ -24,7 +24,7 @@ final class PaymentSettings
      * @param float $discountPercent
      * @param bool $remind
      */
-    public function __construct($days = null, PaymentMethod $method = null, $discountPercent = null, $remind = false)
+    public function __construct($days = null, ?PaymentMethod $method = null, $discountPercent = null, $remind = false)
     {
         $this->days = $days;
         $this->method = $method;

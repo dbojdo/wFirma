@@ -10,7 +10,7 @@ class CompanyIdRequiredException extends ApiException
     /**
      * @inheritdoc
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
         return 'Your account is bound to more than one company. Please provide the company ID.';
     }

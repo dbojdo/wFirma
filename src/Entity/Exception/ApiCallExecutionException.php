@@ -10,7 +10,7 @@ class ApiCallExecutionException extends ApiException
     /**
      * @inheritdoc
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
         return 'Error during API call execution.';
     }

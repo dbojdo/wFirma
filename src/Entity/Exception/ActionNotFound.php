@@ -10,7 +10,7 @@ class ActionNotFound extends ApiException
     /**
      * @inheritdoc
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
         return 'Required action does not exist.';
     }
