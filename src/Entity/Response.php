@@ -36,7 +36,7 @@ final class Response
      * @param Status $status
      * @param Entity $entity
      */
-    public function __construct(Status $status, Entity $entity = null)
+    public function __construct(Status $status, ?Entity $entity = null)
     {
         $this->status = $status;
         $this->entityWrapper = new EntityWrapper($entity);

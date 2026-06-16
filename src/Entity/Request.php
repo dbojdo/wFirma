@@ -48,8 +48,8 @@ final class Request
         Module $module,
         $action,
         $entityId = null,
-        Entity $entity = null,
-        Parameters $parameters = null
+        ?Entity $entity = null,
+        ?Parameters $parameters = null
     ) {
         $this->module = $module;
         $this->action = $action;
@@ -64,7 +64,7 @@ final class Request
      * @param Parameters|null $parameters
      * @return Request
      */
-    public static function entityRequest(Module $module, $action, Entity $entity, Parameters $parameters = null)
+    public static function entityRequest(Module $module, $action, Entity $entity, ?Parameters $parameters = null)
     {
         return new self($module, $action, $entity->id(), $entity, $parameters);
     }
@@ -75,7 +75,7 @@ final class Request
      * @param Parameters|null $parameters
      * @return Request
      */
-    public static function addRequest(Module $module, Entity $entity, Parameters $parameters = null)
+    public static function addRequest(Module $module, Entity $entity, ?Parameters $parameters = null)
     {
         return new self($module, 'add', null, $entity, $parameters);
     }
@@ -86,7 +86,7 @@ final class Request
      * @param Parameters|null $parameters
      * @return Request
      */
-    public static function editRequest(Module $module, Entity $entity, Parameters $parameters = null)
+    public static function editRequest(Module $module, Entity $entity, ?Parameters $parameters = null)
     {
         return new self($module, 'edit', $entity->id(), $entity, $parameters);
     }
@@ -116,7 +116,7 @@ final class Request
      * @param Parameters $parameters
      * @return Request
      */
-    public static function findRequest(Module $module, Parameters $parameters = null)
+    public static function findRequest(Module $module, ?Parameters $parameters = null)
     {
         return new self($module, 'find', null,null, $parameters);
     }
@@ -126,7 +126,7 @@ final class Request
      * @param Parameters|null $parameters
      * @return Request
      */
-    public static function countRequest(Module $module, Parameters $parameters = null)
+    public static function countRequest(Module $module, ?Parameters $parameters = null)
     {
         return self::findRequest($module, $parameters->withPagination(new Pagination(0, 1)));
     }
@@ -138,7 +138,7 @@ final class Request
      * @param Parameters|null $parameters
      * @return Request
      */
-    public static function actionRequest(Module $module, $action, $entityId = null, Parameters $parameters = null)
+    public static function actionRequest(Module $module, $action, $entityId = null, ?Parameters $parameters = null)
     {
         return new self($module, $action, $entityId, null, $parameters);
     }

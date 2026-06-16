@@ -10,7 +10,7 @@ class AccessDenied extends ApiException
     /**
      * @inheritdoc
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
         return 'You are not authorise to do execute given action.';
     }

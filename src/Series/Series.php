@@ -93,9 +93,9 @@ final class Series extends AbstractEntity
     public function __construct(
         $name,
         $template,
-        Type $type = null,
+        ?Type $type = null,
         $initNumber = 1,
-        ResetMode $resetMode = null
+        ?ResetMode $resetMode = null
     ) {
         $this->name = $name;
         $this->template = $template;

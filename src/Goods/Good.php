@@ -247,12 +247,12 @@ final class Good extends DateAwareEntity
         string $name,
         string $unit,
         Price $price,
-        string $code = null,
-        Type $type = null,
-        string $classification = null,
-        string $description = null,
-        Dimensions $dimensions = null,
-        Stock $stock = null
+        ?string $code = null,
+        ?Type $type = null,
+        ?string $classification = null,
+        ?string $description = null,
+        ?Dimensions $dimensions = null,
+        ?Stock $stock = null
     ) {
         $this->name = $name;
         $this->unit = $unit;

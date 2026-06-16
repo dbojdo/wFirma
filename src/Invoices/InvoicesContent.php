@@ -152,8 +152,8 @@ final class InvoicesContent extends DateAwareEntity
         $unit,
         $count,
         $price,
-        GoodId $good = null,
-        Discount $discount = null,
+        ?GoodId $good = null,
+        ?Discount $discount = null,
         $lumpcode,
         $classification = null
     ) {
@@ -186,7 +186,7 @@ final class InvoicesContent extends DateAwareEntity
      * @param string $lumpcode
      * @return InvoicesContent
      */
-    public static function fromGoodId(GoodId $id, $count = 1, $price = null, $vat = null, Discount $discount = null, $lumpcode = null)
+    public static function fromGoodId(GoodId $id, $count = 1, $price = null, $vat = null, ?Discount $discount = null, $lumpcode = null)
     {
         return new self(
             null,
@@ -217,7 +217,7 @@ final class InvoicesContent extends DateAwareEntity
         $count,
         $price,
         $vat,
-        Discount $discount = null,
+        ?Discount $discount = null,
         $lumpcode = null,
         $classification = null
     ) {

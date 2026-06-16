@@ -20,9 +20,9 @@ final class BuzzRequestExecutorFactory implements RequestExecutorFactory
     private $logger;
 
     public function __construct(
-        BrowserFactory $browserFactory = null,
-        ApiSerialiserFactory $apiSerialiserFactory = null,
-        LoggerInterface $logger = null
+        ?BrowserFactory $browserFactory = null,
+        ?ApiSerialiserFactory $apiSerialiserFactory = null,
+        ?LoggerInterface $logger = null
     ) {
         $this->browserFactory = $browserFactory ?: new BrowserFactory();
         $this->apiSerialiserFactory = $apiSerialiserFactory ?: new ApiSerialiserFactory();

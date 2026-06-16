@@ -166,7 +166,7 @@ final class Tag extends DateAwareEntity
      */
     public function __construct(
         $name,
-        Colour $colour = null,
+        ?Colour $colour = null,
         $invoice,
         $expanse,
         $good,
@@ -235,7 +235,7 @@ final class Tag extends DateAwareEntity
     /**
      * @param Colour|null $colour
      */
-    public function changeColour(Colour $colour = null)
+    public function changeColour(?Colour $colour = null)
     {
         if ($colour) {
             $this->color = $colour->text();

@@ -66,10 +66,10 @@ final class Parameters
     private $parameters = [];
 
     private function __construct(
-        Conditions $conditions = null,
-        Fields $fields = null,
-        Order $order = null,
-        Pagination $pagination = null,
+        ?Conditions $conditions = null,
+        ?Fields $fields = null,
+        ?Order $order = null,
+        ?Pagination $pagination = null,
         array $parameters = []
     ) {
         $this->conditions = $conditions ? $conditions->ensureContainer() : null;
@@ -96,10 +96,10 @@ final class Parameters
      * @return Parameters
      */
     public static function findParameters(
-        Conditions $condition = null,
-        Order $order = null,
-        Pagination $pagination = null,
-        Fields $fields = null
+        ?Conditions $condition = null,
+        ?Order $order = null,
+        ?Pagination $pagination = null,
+        ?Fields $fields = null
     ): Parameters {
         return new self(
             $condition,

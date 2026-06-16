@@ -10,7 +10,7 @@ class TotalExecutionTimeLimitExceededException extends ApiException
     /**
      * @inheritdoc
      */
-    protected static function message(Request $request, Response $response = null)
+    protected static function message(Request $request, ?Response $response = null)
     {
         return 'Total execution time limit for API calls has been exceeded.';
     }

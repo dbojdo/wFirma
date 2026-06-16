@@ -22,7 +22,7 @@ class VatCodesApi
      * @param Parameters|null $parameters
      * @return VatCode[]|Entity[]
      */
-    public function find(Parameters $parameters = null)
+    public function find(?Parameters $parameters = null)
     {
         return $this->entityApi->find(Module::vatCodes(), $parameters);
     }
@@ -31,7 +31,7 @@ class VatCodesApi
      * @param Parameters|null $parameters
      * @return EntityIterator|Entity[]
      */
-    public function findAll(Parameters $parameters = null)
+    public function findAll(?Parameters $parameters = null)
     {
         return $this->entityApi->findAll(Module::vatCodes(), $parameters);
     }
@@ -49,7 +49,7 @@ class VatCodesApi
      * @param Parameters|null $parameters
      * @return int
      */
-    public function count(Parameters $parameters = null)
+    public function count(?Parameters $parameters = null)
     {
         return $this->entityApi->count(Module::vatCodes(), $parameters);
     }

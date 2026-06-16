@@ -32,7 +32,7 @@ final class BuzzRequestExecutor implements RequestExecutor
      * @param ApiSerialiser $serialiser
      * @param LoggerInterface|null $logger
      */
-    public function __construct(Browser $browser, ApiSerialiser $serialiser, LoggerInterface $logger = null)
+    public function __construct(Browser $browser, ApiSerialiser $serialiser, ?LoggerInterface $logger = null)
     {
         $this->browser = $browser;
         $this->serialiser = $serialiser;

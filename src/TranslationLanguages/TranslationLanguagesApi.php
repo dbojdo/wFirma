@@ -20,7 +20,7 @@ class TranslationLanguagesApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|TranslationLanguage[]
      */
-    public function find(Parameters $parameters = null)
+    public function find(?Parameters $parameters = null)
     {
         return $this->entityApi->find(Module::translationLanguages(), $parameters);
     }
@@ -29,7 +29,7 @@ class TranslationLanguagesApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|\Webit\WFirmaSDK\Entity\EntityIterator|TranslationLanguage[]
      */
-    public function findAll(Parameters $parameters = null)
+    public function findAll(?Parameters $parameters = null)
     {
         return $this->entityApi->findAll(Module::translationLanguages(), $parameters);
     }
@@ -47,7 +47,7 @@ class TranslationLanguagesApi
      * @param Parameters|null $parameters
      * @return int
      */
-    public function count(Parameters $parameters = null)
+    public function count(?Parameters $parameters = null)
     {
         return $this->entityApi->count(Module::translationLanguages(), $parameters);
     }

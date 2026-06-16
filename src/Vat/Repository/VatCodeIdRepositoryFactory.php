@@ -7,7 +7,7 @@ use Webit\WFirmaSDK\Vat\VatCodesApi;
 
 final class VatCodeIdRepositoryFactory
 {
-    public static function createWithApi(VatCodesApi $api, CacheInterface $cache = null): VatCodeIdRepository
+    public static function createWithApi(VatCodesApi $api, ?CacheInterface $cache = null): VatCodeIdRepository
     {
         $provider = new VatCodeIdApiMapProvider($api);
         if ($cache) {

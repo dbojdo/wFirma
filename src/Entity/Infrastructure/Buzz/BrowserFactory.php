@@ -23,7 +23,7 @@ final class BrowserFactory
      * @param string|null $baseUrl
      * @param array $curlOptions
      */
-    public function __construct(string $baseUrl = null, array $curlOptions = [])
+    public function __construct(?string $baseUrl = null, array $curlOptions = [])
     {
         $this->baseUrl = $baseUrl;
         $this->curlOptions = $curlOptions;

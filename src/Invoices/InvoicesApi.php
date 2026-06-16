@@ -59,7 +59,7 @@ class InvoicesApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|Invoice[]
      */
-    public function find(Parameters $parameters = null)
+    public function find(?Parameters $parameters = null)
     {
         return $this->entityApi->find(Module::invoices(), $parameters);
     }
@@ -68,12 +68,12 @@ class InvoicesApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|\Webit\WFirmaSDK\Entity\EntityIterator|Invoice[]
      */
-    public function findAll(Parameters $parameters = null)
+    public function findAll(?Parameters $parameters = null)
     {
         return $this->entityApi->findAll(Module::invoices(), $parameters);
     }
 
-    public function send(InvoiceId $id, SendParameters $parameters = null)
+    public function send(InvoiceId $id, ?SendParameters $parameters = null)
     {
         $parameters = $parameters ?: new SendParameters();
         $this->entityApi->executeAction(
@@ -89,7 +89,7 @@ class InvoicesApi
      * @param DownloadParameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\File
      */
-    public function download(InvoiceId $id, DownloadParameters $parameters = null)
+    public function download(InvoiceId $id, ?DownloadParameters $parameters = null)
     {
         $parameters = $parameters ?: new DownloadParameters();
         $response = $this->entityApi->executeAction(

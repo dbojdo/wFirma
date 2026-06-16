@@ -35,7 +35,7 @@ final class InvoiceDelivery extends DateAwareEntity
      * @param InvoiceId $invoiceId
      * @param \DateTime $date
      */
-    public function __construct(InvoiceId $invoiceId, \DateTime $date = null)
+    public function __construct(InvoiceId $invoiceId, ?\DateTime $date = null)
     {
         $this->invoiceId = $invoiceId;
         $this->date = $date ?: new \DateTime();

@@ -22,7 +22,7 @@ class DeclarationCountriesApi
      * @param Parameters|null $parameters
      * @return DeclarationCountry[]|Entity[]
      */
-    public function find(Parameters $parameters = null) {
+    public function find(?Parameters $parameters = null) {
         return $this->entityApi->find(Module::declarationCountries(), $parameters);
     }
 
@@ -30,7 +30,7 @@ class DeclarationCountriesApi
      * @param Parameters|null $parameters
      * @return DeclarationCountry[]|Entity[]|EntityIterator
      */
-    public function findAll(Parameters $parameters = null)
+    public function findAll(?Parameters $parameters = null)
     {
         return $this->entityApi->findAll(Module::declarationCountries(), $parameters);
     }
@@ -48,7 +48,7 @@ class DeclarationCountriesApi
      * @param Parameters|null $parameters
      * @return int
      */
-    public function count(Parameters $parameters = null)
+    public function count(?Parameters $parameters = null)
     {
         return $this->entityApi->count(Module::declarationCountries(), $parameters);
     }

@@ -75,8 +75,8 @@ final class VatMossDetails extends DateAwareEntity
     public function __construct(
         $objectId,
         ServiceCode $code,
-        Evidence $evidence1 = null,
-        Evidence $evidence2 = null
+        ?Evidence $evidence1 = null,
+        ?Evidence $evidence2 = null
     ) {
         $this->objectName = 'Invoice';
         $this->objectId = $objectId;
@@ -136,7 +136,7 @@ final class VatMossDetails extends DateAwareEntity
     /**
      * @param Evidence|null $evidence
      */
-    public function changeEvidence1(Evidence $evidence = null)
+    public function changeEvidence1(?Evidence $evidence = null)
     {
         $this->evidence1Type = $evidence ? $evidence->type() : null;
         $this->evidence1Description = $evidence ? $evidence->description() : null;
@@ -153,7 +153,7 @@ final class VatMossDetails extends DateAwareEntity
     /**
      * @param Evidence|null $evidence
      */
-    public function changeEvidence2(Evidence $evidence = null)
+    public function changeEvidence2(?Evidence $evidence = null)
     {
         $this->evidence2Type = $evidence ? $evidence->type() : null;
         $this->evidence2Description = $evidence ? $evidence->description() : null;

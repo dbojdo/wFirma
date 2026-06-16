@@ -15,7 +15,7 @@ class SerialisationException extends ApiSerialiserException
      * @param \Exception|null $previous
      * @return SerialisationException
      */
-    public static function createForRequest(Request $request, $code = 0, \Exception $previous = null)
+    public static function createForRequest(Request $request, $code = 0, ?\Exception $previous = null)
     {
         $e = new self('Error during Request serialisation', $code, $previous);
         $e->request = $request;

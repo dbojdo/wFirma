@@ -26,7 +26,7 @@ final class DownloadParameters
      * @param bool $duplicate
      */
     public function __construct(
-        InvoicePage $page = null,
+        ?InvoicePage $page = null,
         $printAddress = false,
         $paymentLeaflet = false,
         $duplicate = false

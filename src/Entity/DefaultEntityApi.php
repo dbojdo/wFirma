@@ -73,7 +73,7 @@ final class DefaultEntityApi implements EntityApi
     /**
      * @inheritdoc
      */
-    public function find(Module $module, Parameters $parameters = null)
+    public function find(Module $module, ?Parameters $parameters = null)
     {
         $request = Request::findRequest($module, $parameters);
 
@@ -85,7 +85,7 @@ final class DefaultEntityApi implements EntityApi
     /**
      * @inheritdoc
      */
-    public function findAll(Module $module, Parameters $parameters = null)
+    public function findAll(Module $module, ?Parameters $parameters = null)
     {
         $request = Request::findRequest($module, $parameters);
         return new EntityIterator(
@@ -97,7 +97,7 @@ final class DefaultEntityApi implements EntityApi
     /**
      * @inheritdoc
      */
-    public function count(Module $module, Parameters $parameters = null)
+    public function count(Module $module, ?Parameters $parameters = null)
     {
         $parameters = $parameters ?: Parameters::findParameters();
         $parameters = $parameters->withPagination(new Pagination(0, 1));
@@ -112,7 +112,7 @@ final class DefaultEntityApi implements EntityApi
     /**
      * @inheritdoc
      */
-    public function executeAction(Module $module, $action, $id = null, Parameters $parameters = null)
+    public function executeAction(Module $module, $action, $id = null, ?Parameters $parameters = null)
     {
         $request = Request::actionRequest($module, $action, $id, $parameters);
 

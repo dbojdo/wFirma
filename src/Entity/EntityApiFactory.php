@@ -11,7 +11,7 @@ class EntityApiFactory
     /** @var RequestExecutorFactory */
     private $executorFactory;
 
-    public function __construct(RequestExecutorFactory $executorFactory = null)
+    public function __construct(?RequestExecutorFactory $executorFactory = null)
     {
         $this->executorFactory = $executorFactory ?: new BuzzRequestExecutorFactory();
     }

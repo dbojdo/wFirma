@@ -14,7 +14,7 @@ use Webit\WFirmaSDK\Series\SeriesId;
  */
 trait InvoiceStubTrait
 {
-    private function newInvoice(SeriesId $seriesId = null, ?string $currency = null): Invoice
+    private function newInvoice(?SeriesId $seriesId = null, ?string $currency = null): Invoice
     {
         $invoice = Invoice::forContractor(
             $this->newContractor(),

@@ -58,7 +58,7 @@ class TagsApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|Tag[]
      */
-    public function find(Parameters $parameters = null)
+    public function find(?Parameters $parameters = null)
     {
         return $this->entityApi->find(Module::tags(), $parameters);
     }
@@ -67,7 +67,7 @@ class TagsApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|\Webit\WFirmaSDK\Entity\EntityIterator|Tag[]
      */
-    public function findAll(Parameters $parameters = null)
+    public function findAll(?Parameters $parameters = null)
     {
         return $this->entityApi->findAll(Module::tags(), $parameters);
     }
@@ -76,7 +76,7 @@ class TagsApi
      * @param Parameters|null $parameters
      * @return int
      */
-    public function count(Parameters $parameters = null)
+    public function count(?Parameters $parameters = null)
     {
         return $this->entityApi->count(Module::tags(), $parameters);
     }

@@ -20,7 +20,7 @@ class CompanyAccountsApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|CompanyAccount[]
      */
-    public function find(Parameters $parameters = null)
+    public function find(?Parameters $parameters = null)
     {
         return $this->entityApi->find(Module::companyAccounts(), $parameters);
     }
@@ -29,7 +29,7 @@ class CompanyAccountsApi
      * @param Parameters|null $parameters
      * @return \Webit\WFirmaSDK\Entity\Entity[]|\Webit\WFirmaSDK\Entity\EntityIterator|CompanyAccount[]
      */
-    public function findAll(Parameters $parameters = null)
+    public function findAll(?Parameters $parameters = null)
     {
         return $this->entityApi->findAll(Module::companyAccounts(), $parameters);
     }
@@ -47,7 +47,7 @@ class CompanyAccountsApi
      * @param Parameters|null $parameters
      * @return int
      */
-    public function count(Parameters $parameters = null)
+    public function count(?Parameters $parameters = null)
     {
         return $this->entityApi->count(Module::companyAccounts(), $parameters);
     }

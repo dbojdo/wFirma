@@ -59,7 +59,7 @@ class PaymentsApi
     /**
      * @return Payment[]
      */
-    public function find(Parameters $parameters = null): array
+    public function find(?Parameters $parameters = null): array
     {
         return $this->entityApi->find(Module::payments(), $parameters);
     }
@@ -67,7 +67,7 @@ class PaymentsApi
     /**
      * @return Payment[]|EntityIterator
      */
-    public function findAll(Parameters $parameters = null): EntityIterator
+    public function findAll(?Parameters $parameters = null): EntityIterator
     {
         return $this->entityApi->findAll(Module::payments(), $parameters);
     }

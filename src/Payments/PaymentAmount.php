@@ -35,7 +35,7 @@ final class PaymentAmount
      * @param string|null $nbpLabel
      * @param \DateTime|null $rateDate
      */
-    public function __construct(float $value, ?string $account = null, ?float $valuePln = null, ?float $exchangeRate = null, ?string $nbpLabel = null, \DateTime $rateDate = null)
+    public function __construct(float $value, ?string $account = null, ?float $valuePln = null, ?float $exchangeRate = null, ?string $nbpLabel = null, ?\DateTime $rateDate = null)
     {
         $this->value = round($value, 2);
         $this->account = $account;
