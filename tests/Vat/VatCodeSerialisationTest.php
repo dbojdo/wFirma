@@ -2,11 +2,11 @@
 
 namespace Webit\WFirmaSDK\Vat;
 
-use Webit\WFirmaSDK\AbstractSerialisationTest;
+use Webit\WFirmaSDK\AbstractSerialisationTestCase;
 use Webit\WFirmaSDK\DeclarationCountries\DeclarationCountryId;
 use Webit\WFirmaSDK\Module;
 
-class VatCodeSerialisationTest extends AbstractSerialisationTest
+class VatCodeSerialisationTest extends AbstractSerialisationTestCase
 {
     /**
      * @inheritdoc

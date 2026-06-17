@@ -8,7 +8,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Webit\WFirmaSDK\AbstractTestCase;
 use Webit\WFirmaSDK\Auth\ApiKeysAuth;
-use Webit\WFirmaSDK\Auth\BasicAuth;
 use Webit\WFirmaSDK\Auth\CompanyId;
 use Webit\WFirmaSDK\Entity\Infrastructure\Buzz\BuzzRequestExecutorFactory;
 use Webit\WFirmaSDK\Invoices\InvoicesApi;
@@ -33,7 +32,7 @@ abstract class AbstractApiTestCase extends AbstractTestCase
             throw new \RuntimeException('Cannot create EntityApiFactory', 0, $e);
         }
 
-        return $factory->create($this->basicAuth());
+        return $factory->create($this->apiKeysAuth());
     }
 
     private function logger(bool $logMessages): LoggerInterface
@@ -48,17 +47,6 @@ abstract class AbstractApiTestCase extends AbstractTestCase
                 new StreamHandler('php://stdout')
             )
         );
-    }
-
-    private function basicAuth(): BasicAuth
-    {
-        $username = getenv('wFirma.username');
-        $password = getenv('wFirma.password');
-        if (!($username && $password)) {
-            $this->markTestSkipped('Set wFirma.username and wFirma.password in your phpunit.xml file.');
-        }
-
-        return new BasicAuth(getenv('wFirma.username'), getenv('wFirma.password'), $this->companyId());
     }
 
     private function apiKeysAuth(): ApiKeysAuth

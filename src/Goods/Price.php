@@ -25,7 +25,7 @@ final class Price
     /** @var VatRate */
     private $vatRate;
 
-    /** @var VatCodeId */
+    /** @var ?VatCodeId */
     private $vatCodePurchaseId;
 
     /**
@@ -136,9 +136,9 @@ final class Price
     }
 
     /**
-     * @return VatCodeId
+     * @return ?VatCodeId
      */
-    public function vatCodePurchaseId(): VatCodeId
+    public function vatCodePurchaseId(): ?VatCodeId
     {
         return $this->vatCodePurchaseId;
     }

@@ -43,7 +43,7 @@ class VatCodeIdRepositoryTest extends TestCase
         $this->assertEquals($expectedVatCodeId, $this->repository->getByVatRate($vatRate));
     }
 
-    public function codes()
+    public static function codes()
     {
         return [
             ['23', new VatCodeId(self::CODE_MAP['23'])],
@@ -62,7 +62,7 @@ class VatCodeIdRepositoryTest extends TestCase
         );
     }
 
-    public function vatRates()
+    public static function vatRates()
     {
         return [
             [VatRate::fromCode('23'), new VatCodeId(self::CODE_MAP['23'])],

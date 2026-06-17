@@ -2,6 +2,7 @@
 
 namespace Webit\WFirmaSDK\Entity\Infrastructure\Buzz;
 
+use Faker\Factory;
 use Nyholm\Psr7\Request;
 use Webit\WFirmaSDK\AbstractTestCase;
 
@@ -22,17 +23,19 @@ class CompanyIdMiddlewareTest extends AbstractTestCase
         $this->assertEquals($expectedResource, (string)$newRequest->getUri());
     }
 
-    public function resources()
+    public static function resources()
     {
+        $faker = Factory::create('pl_PL');
+
         return array(
             array(
                 '/some/resource/without-query-string',
-                $id = $this->faker()->randomNumber(),
+                $id = $faker->randomNumber(),
                 sprintf('/some/resource/without-query-string?company_id=%s', $id),
             ),
             array(
                 '/some/resource/with-query-string?some=value',
-                $id = $this->faker()->randomNumber(),
+                $id = $faker->randomNumber(),
                 sprintf('/some/resource/with-query-string?some=value&company_id=%s', $id),
             )
         );
