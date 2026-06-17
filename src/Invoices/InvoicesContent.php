@@ -93,6 +93,14 @@ final class InvoicesContent extends DateAwareEntity
     private $brutto;
 
     /**
+     * @var float
+     * @JMS\Type("double")
+     * @JMS\SerializedName("tax")
+     * @JMS\Groups({"response"})
+     */
+    private $tax;
+
+    /**
      * @var string
      * @JMS\Type("string")
      * @JMS\SerializedName("vat")
@@ -304,6 +312,22 @@ final class InvoicesContent extends DateAwareEntity
     public function brutto()
     {
         return $this->brutto;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function tax()
+    {
+        return $this->tax;
+    }
+
+    /**
+     * @return VatCodeId|null
+     */
+    public function vatCodeId(): ?VatCodeId
+    {
+        return $this->vatCodeId;
     }
 
     /**

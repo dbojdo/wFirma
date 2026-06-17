@@ -28,8 +28,8 @@ final class VatContent extends DateAwareEntity
 
     /**
      * @var VatCodeId
-     * @JMS\Type("\Webit\WFirmaSDK\Vat\VatCodeId")
-     * @JMS\SerializedName("modified")
+     * @JMS\Type("Webit\WFirmaSDK\Vat\VatCodeId")
+     * @JMS\SerializedName("vat_code")
      * @JMS\Groups({"request", "response"})
      */
     private $vatCodeId;

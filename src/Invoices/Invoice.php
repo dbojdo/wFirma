@@ -548,6 +548,15 @@ final class Invoice extends DateAwareEntity
     private $invoiceContents;
 
     /**
+     * @var \Webit\WFirmaSDK\Vat\VatContent[]
+     * @JMS\SerializedName("vat_contents")
+     * @JMS\Type("array<Webit\WFirmaSDK\Vat\VatContent>")
+     * @JMS\XmlList(entry="vat_content")
+     * @JMS\Groups({"response"})
+     */
+    private $vatContents;
+
+    /**
      * @var SeriesId
      * @JMS\SerializedName("series")
      * @JMS\Type("Webit\WFirmaSDK\Series\SeriesId")
@@ -649,6 +658,7 @@ final class Invoice extends DateAwareEntity
         $this->tags = $tags;
         $this->priceType = (string)$priceType;
         $this->invoiceContents = array();
+        $this->vatContents = array();
         $this->seriesId = $seriesId;
         $this->companyAccountId = $companyAccountId;
         $this->translationLanguageId = $translationLanguageId;
@@ -1143,6 +1153,14 @@ final class Invoice extends DateAwareEntity
     public function invoiceContents()
     {
         return $this->invoiceContents;
+    }
+
+    /**
+     * @return \Webit\WFirmaSDK\Vat\VatContent[]
+     */
+    public function vatContents()
+    {
+        return $this->vatContents ?: array();
     }
 
     /**
