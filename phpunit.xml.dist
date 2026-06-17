@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-        backupGlobals               = "false"
-        backupStaticAttributes      = "false"
-        colors                      = "true"
-        convertErrorsToExceptions   = "true"
-        convertNoticesToExceptions  = "true"
-        convertWarningsToExceptions = "true"
-        processIsolation            = "false"
-        stopOnFailure               = "false"
-        bootstrap                   = "tests/bootstrap.php" >
-
-    <php>
-        <env name="wFirma.username" value=""/>
-        <env name="wFirma.password" value=""/>
-        <env name="wFirma.company_id" value=""/> <!-- optional -->
-        <env name="debug_api_messages" value="0" /> <!-- set to "1" to print request / response XML message to the console -->
-    </php>
-
-    <testsuites>
-        <testsuite name="Main">
-            <directory>tests/</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./src</directory>
-        </whitelist>
-    </filter>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" colors="true" processIsolation="false" stopOnFailure="false" bootstrap="tests/bootstrap.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+  <php>
+    <env name="wFirma.access_key" value=""/>
+    <env name="wFirma.secret_key" value=""/>
+    <env name="wFirma.app_key" value=""/>
+    <env name="wFirma.company_id" value=""/>
+    <!-- optional -->
+    <env name="debug_api_messages" value="0"/>
+    <!-- set to "1" to print request / response XML message to the console -->
+  </php>
+  <testsuites>
+    <testsuite name="Main">
+      <directory>tests/</directory>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <directory>./src</directory>
+    </include>
+  </source>
 </phpunit>
