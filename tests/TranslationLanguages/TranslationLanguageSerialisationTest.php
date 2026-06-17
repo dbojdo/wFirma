@@ -2,10 +2,10 @@
 
 namespace Webit\WFirmaSDK\TranslationLanguages;
 
-use Webit\WFirmaSDK\AbstractSerialisationTest;
+use Webit\WFirmaSDK\AbstractSerialisationTestCase;
 use Webit\WFirmaSDK\Module;
 
-class TranslationLanguageSerialisationTest extends AbstractSerialisationTest
+class TranslationLanguageSerialisationTest extends AbstractSerialisationTestCase
 {
     /**
      * @inheritdoc

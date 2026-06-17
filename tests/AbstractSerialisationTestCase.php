@@ -6,7 +6,7 @@ use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\SerializationContext;
 use Webit\WFirmaSDK\Entity\Entity;
 
-abstract class AbstractSerialisationTest extends AbstractTestCase
+abstract class AbstractSerialisationTestCase extends AbstractTestCase
 {
     /**
      * @return Module

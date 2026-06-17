@@ -154,7 +154,7 @@ final class InvoicesContent extends DateAwareEntity
         $price,
         ?GoodId $good = null,
         ?Discount $discount = null,
-        $lumpcode,
+        $lumpcode = null,
         $classification = null
     ) {
         $this->name = $name;
