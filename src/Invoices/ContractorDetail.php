@@ -217,13 +217,15 @@ final class ContractorDetail extends DateAwareEntity
     }
 
     /**
-     * @param Contractor $contractor
+     * @param Contractor|null $contractor
      * @return ContractorDetail
      */
-    public static function fromContractor(Contractor $contractor)
+    public static function fromContractor(?Contractor $contractor)
     {
         $detail = new self();
-        $detail->updateWith($contractor);
+        if ($contractor !== null) {
+            $detail->updateWith($contractor);
+        }
 
         return $detail;
     }
