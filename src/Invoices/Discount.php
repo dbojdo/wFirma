@@ -7,40 +7,27 @@ final class Discount
     /** @var float */
     private $percent;
 
-    /** @var float */
-    private $amount;
-
     /**
      * @param float $percent
      * @param float $amount
      */
-    public function __construct($percent, $amount)
+    public function __construct($percent)
     {
         $this->percent = $percent;
-        $this->amount = $amount;
     }
 
-    /**
-     * @param float $amount
-     * @return Discount
-     */
-    public static function amountDiscount($amount)
+    public function isDiscount()
     {
-        return new self(null, $amount);
+        return $this->percent > 0;
     }
-
+    
     /**
      * @param float $percent
      * @return Discount
      */
     public static function percentDiscount($percent)
     {
-        return new self($percent, null);
-    }
-
-    public function amount()
-    {
-        return $this->amount;
+        return new self($percent);
     }
 
     public function percent()
